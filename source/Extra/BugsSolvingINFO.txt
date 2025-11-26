@@ -1,0 +1,4 @@
+1. Command PhaseScriptExecution failed with a nonzero exit code
+==>> https://github.com/facebook/react-native/issues/36762#issuecomment-1867077943
+
+==>> also check with change EXCLUDED_ARCHS = arm64
