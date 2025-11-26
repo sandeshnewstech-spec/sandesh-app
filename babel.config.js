@@ -5,18 +5,17 @@ module.exports = {
       "root": ['./source'],
       "extensions": [".tsx", ".ts", ".js", ".jsx", ".json", ".jsonc"],
       "alias": { "*": "./source/", }
-    },
-      ["module:react-native-dotenv", {
-        "envName": "APP_ENV",
-        "moduleName": "@env",
-        "path": ".env",
-        "blocklist": null,
-        "allowlist": null,
-        "safe": true,
-        "allowUndefined": false,
-        "verbose": false
-      }],
-      'react-native-worklets/plugin',
-    ]
+    }],
+    ["module:react-native-dotenv", {
+      "envName": "APP_ENV",
+      "moduleName": "@env",
+      "path": ".env",
+      "blocklist": null,
+      "allowlist": null,
+      "safe": true,
+      "allowUndefined": false,
+      "verbose": false
+    }],
+    'react-native-worklets/plugin',
   ]
 };

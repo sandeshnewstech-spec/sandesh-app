@@ -8,13 +8,11 @@ const AppRoute = () => {
     /** SHOW/HIDE SPLACE SCREEN */
     const [isSp, setIsSp] = useState<boolean>(true);
 
-    return <NavigationContainer>
-        <AppStack.Navigator screenOptions={{
-            headerShown: false
-        }} >
+    return (<NavigationContainer>
+        <AppStack.Navigator screenOptions={{ headerShown: false }} >
             <AppStack.Screen name='HomeScr' component={HomeScr} />
         </AppStack.Navigator>
-    </NavigationContainer>
+    </NavigationContainer>)
 }
 
 export default AppRoute
