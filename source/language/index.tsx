@@ -7,8 +7,8 @@ export type strType = typeof en;
 
 const useString = () => {
     const idx = 0;
-    const _str = useMemo(() => ([en])[idx], [idx, en]);
-    return _str
+    const str = useMemo(() => ([en])[idx], [idx, en]);
+    return str
 }
 
 export default useString

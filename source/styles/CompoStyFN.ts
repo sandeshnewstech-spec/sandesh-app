@@ -28,7 +28,7 @@ const CompoStyFN = ({ font, col, bottom }: defStyObjType) => StyleSheet.create({
     inputSty1: {
 
         height: "100%",
-        fontSize: Size(18),
+        fontSize: Size(16),
         color: col.BLACK,
         fontFamily: font.REGULAR,
 
@@ -79,7 +79,6 @@ const CompoStyFN = ({ font, col, bottom }: defStyObjType) => StyleSheet.create({
         fontFamily: font.REGULAR,
         fontWeight: '400',
         fontSize: Size(13),
-        paddingLeft: 10,
         color: col.TOAST_TEXT,
         maxWidth: _WIDTH * .7
     },
@@ -94,6 +93,7 @@ const CompoStyFN = ({ font, col, bottom }: defStyObjType) => StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+
 });
 
 export default CompoStyFN;

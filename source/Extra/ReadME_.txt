@@ -1,13 +1,12 @@
-/* ADD SCRIPTS */
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-"startRC": "bun start --reset-cache",
+/* ADD SCRIPTS */ -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
+"startRC": "yarn start --reset-cache",
 "adb": "adb reverse tcp:8081 tcp:8081",
 "adbKill": "adb kill-server",
 "adbStart": "adb start-server"
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
-/* All Dependencies */ 
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+/* All Dependencies */ -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
 "devDependencies": {
   "babel-plugin-module-resolver": "^5.0.0",
   "react-native-svg-transformer": "^1.1.0",
@@ -27,39 +26,41 @@
   "react-native-responsive-fontsize": "^0.5.1",
   "react-native-fast-image": "^8.6.3",
 },
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
+
 
 ------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------
-1. bun add @react-navigation/native
-2. bun add @react-navigation/native-stack
-3. bun add react-native-screens react-native-safe-area-context
+------------------------------------------------------------------------------------------
+1. yarn add @react-navigation/native
+2. yarn add @react-navigation/native-stack
+3. yarn add react-native-screens react-native-safe-area-context
 
-/* Config In Android */ 
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-https://reactnavigation.org/docs/getting-started/?framework=community-cli#configuring-react-native-screens-on-android
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+/* Config In Android */ -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
-import android.os.Bundle
-import com.swmansion.rnscreens.fragment.restoration.RNScreensFragmentFactory
+import android.os.Bundle;
 
-// ...
+//// 1.java
 
-class MainActivity: ReactActivity() {
+public class MainActivity extends ReactActivity {
   // ...
-  override fun onCreate(savedInstanceState: Bundle?) {
-    supportFragmentManager.fragmentFactory = RNScreensFragmentFactory()
-    super.onCreate(savedInstanceState)
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(null);
   }
   // ...
 }
 
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-------------------------------------------------------------------------------------------
-4. bun add react-native-svg
+//// 2.kt
 
-/* MAKE :: declarations.d.ts */
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(null)
+}
+
+------------------------------------------------------------------------------------------
+4. yarn add react-native-svg
+
+/* MAKE :: declarations.d.ts */ -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
 declare module "*.svg" {
   import React from "react";
@@ -68,17 +69,15 @@ declare module "*.svg" {
   export default content;
 }
 
-
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 ------------------------------------------------------------------------------------------
-5. bun add --dev react-native-svg-transformer
+5. yarn add --dev react-native-svg-transformer
 
-/* SETUP :: metro.config.js */ 
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+/* setup metro.config.js */ -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
 const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
 const defaultAssetExts = require('metro-config/src/defaults/defaults').assetExts;
 const defaultSourceExts = require('metro-config/src/defaults/defaults').sourceExts;
+
 /**
  * Metro configuration
  * https://facebook.github.io/metro/docs/configuration
@@ -96,13 +95,10 @@ const config = {
 };
 module.exports = mergeConfig(getDefaultConfig(__dirname), config);
 
-
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 ------------------------------------------------------------------------------------------
-7. bun add --dev babel-plugin-module-resolver
+7. yarn add --dev babel-plugin-module-resolver
 
-/* CONFIG :: babel.config.js */ 
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+/* CONFIG :: babel.config.js */ -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
 "plugins": [
     ["module-resolver", {
@@ -113,40 +109,21 @@ module.exports = mergeConfig(getDefaultConfig(__dirname), config);
     ]
 ]
 
-/* CONFIG :: tsconfig.json */ 
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-{
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "*": ["src/*"],
-      "test/*": ["test/*"],
-      "underscore": ["lodash"]
-    }
-  }
-}
-
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 ------------------------------------------------------------------------------------------
-8. bun add react-native-reanimated
+8. yarn add react-native-reanimated
 
 /* CONFIG :: babel.config.js */ -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-
 /* add this line in plugin on babel.config */
+
 'react-native-reanimated/plugin'
 
-
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 ------------------------------------------------------------------------------------------
-9. bun add react-native-gesture-handler
+9. yarn add react-native-gesture-handler
 
-/* add this line in "index.js" */ 
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+/* add this line in "index.js" */ -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 import 'react-native-gesture-handler';
 
-
-/* CONFIG :: App.tsx */ 
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+/* CONFIG :: App.tsx */ -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 /* wrap all code with GestureHandlerRootView */
 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -158,28 +135,24 @@ export default function App() {
   );
 }
 
-
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 ------------------------------------------------------------------------------------------
-10. bun add react-native-safe-area-context
+10. yarn add react-native-safe-area-context
  
-/* CONFIG :: App.tsx */ 
-/* wrap all code with GestureHandlerRootView */
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+/* add this line in "index.js" */ -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
+
+/* CONFIG :: App.tsx */ -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+/* wrap all code with GestureHandlerRootView */
 
 <SafeAreaProvider initialMetrics={initialWindowMetrics}>
 {.....}
 </SafeAreaProvider>
 
-
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 ------------------------------------------------------------------------------------------
-11. bun add -D react-native-dotenv
+11. yarn add -D react-native-dotenv
 
-/* CONFIG :: babel.config.js */ 
+/* CONFIG :: babel.config.js */ -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 /* add this pugin in this file */
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
     ["module:react-native-dotenv", {
     "envName": "APP_ENV",
@@ -192,22 +165,19 @@ import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-c
     "verbose": false
     }],
 
-
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 ------------------------------------------------------------------------------------------
 
-12. bun add react-native-mmkv 
-13. bun add zustand 
-14. bun add react-native-responsive-fontsize
-15. bun add react-native-fast-image
+12. yarn add react-native-mmkv 
+13. yarn add zustand 
+14. yarn add react-native-responsive-fontsize
+15. yarn add react-native-fast-image
 
->> bun add react-native-mmkv zustand react-native-responsive-fontsize react-native-fast-image
-
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 ------------------------------------------------------------------------------------------
-
 /* MAKE :: react-native.config.js */
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
+/* for this => add fonts */
+/* config font path */
+
 module.exports = {
     project: {
         ios:{},
@@ -218,12 +188,8 @@ module.exports = {
 
 INFO : add fonts with thhis cmd => /* npx react-native-asset */
 
-
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 ------------------------------------------------------------------------------------------
-
 /* CONFIG :: tsconfig.json */
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
   "compilerOptions": {
     "baseUrl": "./",                /* Base directory to resolve non-absolute module names. */
@@ -232,6 +198,4 @@ INFO : add fonts with thhis cmd => /* npx react-native-asset */
     }                               /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
   }
 
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 ------------------------------------------------------------------------------------------
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-

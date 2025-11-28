@@ -5,10 +5,12 @@ import useString from "../language";
 import { useMemo } from "react";
 import { _COL } from "../colors";
 import { CompoStyFN, HeaderStyFN } from "../styles";
+import { useMMKVStore } from ".";
 
 const useThemeXSty = () => {
 
-    const _str = useString();
+    const { setToast } = useMMKVStore();
+    const str = useString();
     const sAI: EdgeInsets = useSafeAreaInsets();
 
     const col: colorType = useMemo((): any => (_COL), [_COL]);
@@ -18,12 +20,13 @@ const useThemeXSty = () => {
         col, font, ...sAI
     }), [col, font, sAI]);
 
+    // const compSty = compStyleFunc(defStyOBJ);
     const hdSty = HeaderStyFN(defStyOBJ);
     const cpSty = CompoStyFN(defStyOBJ);
 
     return {
-        ...sAI, col, _str, font, defStyOBJ,
-        hdSty, cpSty
+        ...sAI, col, str, font, defStyOBJ,
+        hdSty, cpSty, setToast
     };
 };
 

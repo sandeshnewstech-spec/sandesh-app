@@ -1,3 +1,5 @@
-import HomeScr from "./HomeController"
+import HomeScreen from "./HomeController"
 
-export { HomeScr }
+
+
+export { HomeScreen }

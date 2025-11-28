@@ -2,13 +2,13 @@ import React from "react";
 import { kBehavior, setZuStandInitStoreType, zuStandInitStoreType, zuStandStoreOBJType } from "../types";
 import { Platform, StatusBar } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-const _isDEV = false;
+const _isDEV = true;
 const _isPUBLISH_MODE = false;
 
 const AppStack = createNativeStackNavigator();
-// const BottomTabStack = createBottomTabNavigator();
+const BottomTabStack = createBottomTabNavigator();
 
 const isIOS = Platform.OS === 'ios' ? true : false;
 const isANDROID = Platform.OS === 'android' ? true : false;
@@ -24,11 +24,14 @@ const sbH = StatusBar.currentHeight || 0;
 const onStateChange: any = React.createRef<any>();
 
 const zuStandInitStore: zuStandInitStoreType = {
-
+    taskListData: {},
+    videoListData: {},
 };
 
 const setZuStandInitStore: setZuStandInitStoreType = {
-    // setProducts(by) { },
+    setTaskListData(by) { },
+    setResetTaskListData(by) { },
+    setVideoListData(by) { },
 }
 
 const zuStandStoreOBJ: zuStandStoreOBJType = { ...zuStandInitStore, ...setZuStandInitStore };
@@ -36,5 +39,5 @@ const zuStandStoreOBJ: zuStandStoreOBJType = { ...zuStandInitStore, ...setZuStan
 export {
     _isDEV, _isPUBLISH_MODE, AppStack, isIOS, isANDROID, androidAPIVersion,
     bSpace, headerHeight, btnHeight, kAvoidSty, sbH, btnRadius,
-    zuStandInitStore, setZuStandInitStore, zuStandStoreOBJ, /* BottomTabStack */
+    zuStandInitStore, setZuStandInitStore, zuStandStoreOBJ, BottomTabStack
 }

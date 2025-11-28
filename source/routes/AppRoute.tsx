@@ -1,18 +1,50 @@
-import React, { useState } from 'react'
-import { NavigationContainer } from '@react-navigation/native'
-import { AppStack } from '../utils';
-import { HomeScr } from '../screens';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { AppStack } from 'utils';
+import { ToastAlert } from 'components';
+import { useDebounce, useMMKVStore } from '../hooks';
+import { useNetInfoInstance } from "@react-native-community/netinfo";
+import { HomeScreen } from 'screens';
+import useString from 'language';
 
 const AppRoute = () => {
 
-    /** SHOW/HIDE SPLACE SCREEN */
-    const [isSp, setIsSp] = useState<boolean>(true);
+    const str = useString();
+    const { toast, setToast } = useMMKVStore();
+    const { refresh, netInfo: { isConnected } } = useNetInfoInstance();
+    const isFirstRender = useRef(true);
 
-    return (<NavigationContainer>
-        <AppStack.Navigator screenOptions={{ headerShown: false }} >
-            <AppStack.Screen name='HomeScr' component={HomeScr} />
-        </AppStack.Navigator>
-    </NavigationContainer>)
-}
+    const [isSplashScreenVisible, setIsSplashScreenVisible] = useState(true);
 
-export default AppRoute
+    const isConnectedDebounced = useDebounce(isConnected, 1000);
+
+    useEffect(() => {
+        // Skip the effect on the very first render
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+        }
+        // If debounced connection status is false (offline), show a toast message
+        if (!isConnectedDebounced) {
+            setToast({ show: true, msg: str.YOUR_INTERNET_CONNCTIONS_IS_NOT_CONNECTED });
+        }
+    }, [isConnectedDebounced, setToast]);
+
+    return (
+        <Fragment>
+            <NavigationContainer
+                onStateChange={() => {
+                    if (!isConnected) {
+                        setToast({ show: true, msg: str.YOUR_INTERNET_CONNCTIONS_IS_NOT_CONNECTED });
+                    }
+                }}>
+                <AppStack.Navigator>
+                    <AppStack.Screen name={"HomeScreen"} component={HomeScreen} options={{ headerShown: false }} />
+                </AppStack.Navigator>
+            </NavigationContainer>
+            <ToastAlert {...toast} setToast={setToast} />
+        </Fragment>
+    );
+};
+
+export default AppRoute;

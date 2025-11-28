@@ -40,8 +40,7 @@ const ToastAlertCompo = ({ msg, show, showIC = true, setToast = () => { },
                 },
                 cSty ? cSty : {},
             ]}>
-            {children ? children : (<View style={{ justifyContent: 'center', flex: 1 }} >
-                {/* {showIC ? <WARNING_IC color={icCol} /> : null} */}
+            {children ? children : (<View style={{ justifyContent: 'center' }} >
                 <TextXCompo text={msg} tSty={{ ...cpSty.alertBanner_msg_tSty, ...msg_tSty }} />
             </View>)}
         </AnimatedTouchableOpacity>

@@ -34,7 +34,6 @@ const ScrLoaderCompo = ({ absolute, loading = false }: P) => {
                     backgroundColor: absolute ? col.BLACK05 : undefined,
                     zIndex: 9999
                 }]}>
-            {/* <CircleLoaderCompo scale={.6} vSty={{ height: 10 }} /> */}
             <ActivityIndicator color={absolute ? col.WHITE : col.PRIMARY} />
         </Animated.View>
     )

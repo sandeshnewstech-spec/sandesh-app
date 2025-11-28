@@ -9,7 +9,7 @@ interface P { }
 
 const usePermissionHook = ({ }: P) => {
 
-    const _str = useString();
+    const str = useString();
     const isAndroid = Platform.OS === 'android' ? true : false;
 
     type alertType = { title: string; message: string; };
@@ -21,24 +21,24 @@ const usePermissionHook = ({ }: P) => {
         switch (result) {
             case RESULTS.UNAVAILABLE: {
                 if (!checkUNAVAILABLE) return true;
-                Alert.alert(U?.title || "", U?.message || _str.PERMISSIONS_UNAVAILABLE_MSG, [{ text: _str.OKAY, style: 'cancel' }]);
+                Alert.alert(U?.title || "", U?.message || str.PERMISSIONS_UNAVAILABLE_MSG, [{ text: str.OKAY, style: 'cancel' }]);
                 return true;
             }
             case RESULTS.DENIED: {
                 if (!checkDENIED) return true;
-                Alert.alert(D?.title || "", D?.message || _str.PERMISSIONS_DENIED_MSG,
-                    [{ text: _str.OKAY, style: 'cancel' }, { text: _str.OPEN_SETTING, style: 'default', onPress: () => openSettings() },]);
+                Alert.alert(D?.title || "", D?.message || str.PERMISSIONS_DENIED_MSG,
+                    [{ text: str.OKAY, style: 'cancel' }, { text: str.OPEN_SETTING, style: 'default', onPress: () => openSettings() },]);
                 return false;
             }
             case RESULTS.LIMITED: {
                 if (!checkLIMITED) return true;
-                Alert.alert(L?.title || "", L?.message || _str.PERMISSIONS_LIMITED_MSG,
-                    [{ text: _str.OKAY, style: 'cancel' }, { text: _str.OPEN_SETTING, style: 'default', onPress: () => openSettings() },]);
+                Alert.alert(L?.title || "", L?.message || str.PERMISSIONS_LIMITED_MSG,
+                    [{ text: str.OKAY, style: 'cancel' }, { text: str.OPEN_SETTING, style: 'default', onPress: () => openSettings() },]);
                 return false;
             }
             case RESULTS.BLOCKED: {
-                Alert.alert(B?.title || "", B?.message || _str.PERMISSIONS_BLOCKED_MSG,
-                    [{ text: _str.OKAY, style: 'cancel' }, { text: _str.OPEN_SETTING, style: 'default', onPress: () => openSettings() },]);
+                Alert.alert(B?.title || "", B?.message || str.PERMISSIONS_BLOCKED_MSG,
+                    [{ text: str.OKAY, style: 'cancel' }, { text: str.OPEN_SETTING, style: 'default', onPress: () => openSettings() },]);
                 return false;
             }
             case RESULTS.GRANTED: return true;

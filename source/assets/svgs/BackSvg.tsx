@@ -18,13 +18,15 @@ function BackSvg({ color, ...props }: P) {
       height={24}
       viewBox="0 0 24 24"
       fill="none"
-      {...props}>
+      {...props}
+    >
       <G
         clipPath="url(#clip0_1027_3562)"
         stroke={color ? color : col.PRIMARY}
         strokeWidth={1.5}
         strokeLinecap="round"
-        strokeLinejoin="round">
+        strokeLinejoin="round"
+      >
         <Path d="M5 12h14M5 12l6 6M5 12l6-6" />
       </G>
       <Defs>

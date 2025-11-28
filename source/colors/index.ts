@@ -1,3 +1,5 @@
 import colors from "./colors.json"
 
-export const _COL = colors;
+const _COL = colors;
+
+export { _COL }

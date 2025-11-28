@@ -1,14 +1,15 @@
 import React, { memo } from 'react'
-import { PressXType } from '../../Types'
+import { PressableScaleXCompoProps } from '../../Types'
 import { useThemeX } from '../../hooks'
 import { Size } from '../../functions'
-import PressXCompo from './PressXCompo'
 import { btnRadius } from '../../utils'
+import PressableScaleXCompo from './PressableScaleXCompo'
 
-const ButtonXCompo = (porps: PressXType & { transparent?: boolean }) => {
+const ButtonXCompo = (porps: PressableScaleXCompoProps & { transparent?: boolean }) => {
     const { transparent } = porps;
     const { col, font } = useThemeX();
-    return (<PressXCompo
+    return (<PressableScaleXCompo
+        rippleColor={col.WHITE03}
         {...porps}
         tSty={{
             color: transparent ? col.BTN_BGCOL : col.BTN_TEXT_COL,
@@ -16,17 +17,16 @@ const ButtonXCompo = (porps: PressXType & { transparent?: boolean }) => {
             fontSize: Size(15),
             ...porps?.tSty,
         }}
-        cSty={{
-            flex: 1,
+        style={{
+            height: 55, width: "100%", flex: 1,
+            overflow: 'hidden', borderRadius: btnRadius,
+            backgroundColor: transparent ? col?.TRANSPARENT : col.BTN_BGCOL,
             borderWidth: 1,
             borderColor: col.BTN_BGCOL,
-            borderRadius: btnRadius,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: transparent ? col?.TRANSPARENT : col.BTN_BGCOL,
-            ...porps?.cSty
+            ...porps?.style,
         }}
-        mSty={{ height: 55, flex: 1, ...porps?.mSty }}
     />)
 }
 

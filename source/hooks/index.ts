@@ -1,10 +1,11 @@
+
+import useAPIs from "./useAPIsHook"
 // import useCompressor from "./useCompressorHook"
 // import usePermission from "./usePermissionHook"
-import useAPIs from "./useAPIsHook"
 import useDebounce from "./useDebounce"
 import useThemeX from "./useThemeSty"
+import useMMKVStore from "./useMMKVStoreHook"
 
 export {
-    /* useCompressor, usePermission, */
-    useThemeX, useAPIs, useDebounce,
+    useThemeX, useAPIs, useDebounce, useMMKVStore
 }

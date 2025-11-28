@@ -1,32 +1,32 @@
 import { ActivityIndicatorProps, AlertType, ColorValue, DimensionValue, FlexAlignType, GestureResponderEvent, KeyboardTypeOptions, NativeSyntheticEvent, ReturnKeyTypeOptions, ScrollViewProps, StatusBarStyle, StyleProp, TextInputFocusEventData, TextInputProps, TextInputSubmitEditingEventData, TextStyle, ViewStyle } from "react-native";
 import { PressableProps } from "react-native-gesture-handler";
 import { PressableAndroidRippleConfig } from "react-native-gesture-handler/lib/typescript/components/Pressable/PressableProps";
-import Animated, { AnimateProps, Animation, SharedValue } from "react-native-reanimated";
+import { SharedValue } from "react-native-reanimated";
 import { TextProps } from "react-native-svg";
 import { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
 import { _COL } from "../colors";
 import { EdgeInsets } from "react-native-safe-area-context";
 import { FONT } from "../assets";
 import { ReactNode } from "react";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackScreenProps } from "@react-navigation/stack";
 import { AndroidPermission, IOSPermission } from "react-native-permissions";
 
-type zuStandInitStoreType = {
+export type zuStandInitStoreType = {
+    // taskListData: taskListDataOBJType;
 }
 
-type setZuStandInitStoreType = {
-    // setProducts: (by: productsDyOBJType) => void;
+export type setZuStandInitStoreType = {
+    // setTaskListData: (by: taskListDataOBJType) => void;
 }
 
-type zuStandStoreOBJType = zuStandInitStoreType & setZuStandInitStoreType;
+export type zuStandStoreOBJType = zuStandInitStoreType & setZuStandInitStoreType;
 
-type kBehavior = 'height' | 'position' | 'padding' | undefined;
+export type kBehavior = 'height' | 'position' | 'padding' | undefined;
 
-type ApiCallType = {
+export type ApiCallType = {
     endPath?: string;
     body?: any | FormData;
     token?: string;
-    shopifyXToken?: string;
     urlencoded?: boolean;
     isFormData?: boolean;
     multipart?: boolean;
@@ -36,7 +36,7 @@ type ApiCallType = {
     apiURI?: string;
 }
 
-type ApiResType = {
+export type ApiResType = {
     code: number;
     res: any;
     url: string;
@@ -46,7 +46,7 @@ type ApiResType = {
     setProgress?: (i: number) => void;
 }
 
-type PressXType = {
+export type PressXType = {
     children?: React.ReactNode;
     type?: 'p' | 't' | 'wT';
     text?: string | number | undefined | boolean | null;
@@ -59,8 +59,8 @@ type PressXType = {
     cSty?: ViewStyle;
     mSty?: ViewStyle;
     hitSlop?: number;
-    mProps?: AnimateProps<ViewProps>;
-    // cProps?: PressableProps;
+    mProps?: ViewProps;
+    cProps?: PressableProps;
     tProps?: TextProps;
     lProps?: ActivityIndicatorProps;
     pStyIdx?: number;
@@ -74,38 +74,16 @@ type PressXType = {
     onLongPress?: () => void;
 }
 
-type colorType = typeof _COL;
+export type colorType = typeof _COL;
 
-type fontType = typeof FONT;
-// type fontType = {
-//     BLACK: string;
-//     BLACK_ITALIC: string;
-//     BOLD: string;
-//     BOLD_ITALIC: string;
-//     EXTRA_BOLD: string;
-//     EXTRA_BOLD_ITALIC: string;
-//     EXTRA_LIGHT: string;
-//     EXTRA_LIGHT_ITALIC: string;
-//     ITALIC: string;
-//     LIGHT: string;
-//     LIGHT_ITALIC: string;
-//     MEDIUM: string;
-//     MEDIUM_ITALIC: string;
-//     REGULAR: string;
-//     SEMI_BOLD: string;
-//     SEMI_BOLD_ITALIC: string;
-//     THIN: string;
-//     THIN_ITALIC: string;
-//     RUFINA_BOLD: string;
-//     RUFINA_REGULAR: string;
-// }
+export type fontType = typeof FONT;
 
-type defStyObjType = {
+export type defStyObjType = {
     col: colorType;
     font: fontType;
 } & EdgeInsets;
 
-type headerType = {
+export type headerType = {
     hHeight?: number;
     hBgColor?: ColorValue;
     alignText?: FlexAlignType | undefined;
@@ -124,7 +102,7 @@ type headerType = {
     hTextBgCol?: ColorValue | string;
 } & statusBarType;
 
-type statusBarType = {
+export type statusBarType = {
     sbShow?: boolean;
     sbColor?: string | undefined;
     barStyle?: StatusBarStyle;
@@ -132,8 +110,12 @@ type statusBarType = {
 }
 
 
-type MasterViewType = {
+export type MasterViewType = {
     children?: ReactNode | React.JSX.Element;
+    scrollViewRef?: any;
+    bounces?: boolean;
+    scrollEnabled?: boolean;
+    onScroll?: ScrollViewProps['onScroll'];
     pT?: number;
     pB?: number;
     pH?: number;
@@ -163,7 +145,7 @@ type MasterViewType = {
     scrLoader?: boolean;
 } & headerType;
 
-type ToastType = {
+export type ToastType = {
     show?: boolean;
     msg?: string;
     isTimeOut?: boolean;
@@ -182,7 +164,7 @@ type ToastType = {
     ctr?: boolean;
 }
 
-type TextInputXType = {
+export type TextInputXType = {
     touchable?: boolean;
     BSInput?: boolean;
     lable?: string;
@@ -242,12 +224,12 @@ type TextInputXType = {
     onBoxLayout?: ViewProps['onLayout'];
 };
 
-type TextXType = {
+export type TextXType = {
     text?: string | number;
     lChild?: ReactNode;
     rChild?: ReactNode;
     tSty?: TextStyle;
-    tProps?: AnimateProps<TextProps>;
+    tProps?: TextProps;
     children?: any;
     fColor?: ColorValue;
     fFamily?: string;
@@ -261,15 +243,15 @@ type TextXType = {
     exiting?: any;
 }
 
-type AppStackParamListType = {
+export type AppStackParamListType = {
     BottomTab: any;
 };
 
-type StackProps<RouteName extends keyof AppStackParamListType> = (
-    NativeStackScreenProps<AppStackParamListType, RouteName, "AppStack">
+export type StackProps<RouteName extends keyof AppStackParamListType> = (
+    StackScreenProps<AppStackParamListType, RouteName, "AppStack">
 );
 
-type getImageMetaDataType = {
+export type getImageMetaDataType = {
     ImageWidth: number;
     ImageHeight: number;
     Orientation: number;
@@ -278,32 +260,47 @@ type getImageMetaDataType = {
     exif: { [key: string]: string };
 };
 
-type checkPermissionType = {
+export type checkPermissionType = {
     checkDENIED?: boolean;
     checkUNAVAILABLE?: boolean;
     checkLIMITED?: boolean;
 }
 
-type PermissionResultType = 'unavailable' | 'denied' | 'limited' | 'granted' | 'blocked';
+export type PermissionResultType = 'unavailable' | 'denied' | 'limited' | 'granted' | 'blocked';
 
-type permissionsType = {
+export type permissionsType = {
     i?: IOSPermission | undefined;
     a?: AndroidPermission | undefined;
     rationale?: rationaleType;
 } & checkPermissionType;
 
-type rationaleType = {
+export type rationaleType = {
     title?: string,
     message?: string,
     buttonPositive?: string,
     buttonNegative?: string,
 }
 
-
-export type {
-    setZuStandInitStoreType, zuStandInitStoreType, zuStandStoreOBJType,
-    kBehavior, ApiCallType, ApiResType, PressXType, colorType, fontType,
-    defStyObjType, headerType, statusBarType, MasterViewType, ToastType,
-    TextInputXType, TextXType, StackProps, getImageMetaDataType,
-    checkPermissionType, PermissionResultType, permissionsType, rationaleType
+export type PressableScaleXCompoProps = {
+    children?: React.ReactNode
+    text?: string | number | boolean | null
+    disabled?: boolean
+    loading?: boolean
+    lCol?: ColorValue
+    lSize?: number | 'small' | 'large' | undefined
+    style?: ViewStyle;
+    tSty?: TextStyle;
+    tProps?: TextProps;
+    lProps?: ActivityIndicatorProps;
+    onPress?: () => void
+    onPressIn?: () => void
+    onPressOut?: () => void
+    onLongPress?: () => void
+    hitSlop?: number
+    activeScale?: number
+    rippleRadius?: number
+    rippleColor?: ColorValue
+    springConfig?: any
+    activeOpacity?: number
+    feedbackMode?: 'scale' | 'opacity' | 'both'
 }

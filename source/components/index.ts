@@ -1,4 +1,3 @@
-// import BottomSheetX from "./XCompos/BottomSheetXCompo";
 import ToastAlert from "./XCompos/ToastAlertCompo"
 import StatusBarX from "./XCompos/StatusBarXCompo";
 import HeaderX from "./XCompos/HeaderXCompo";
@@ -8,8 +7,11 @@ import TextX from "./XCompos/TextXCompo";
 import TextInputX from "./XCompos/TextInputXCompo";
 import ButtonX from "./XCompos/ButtonXCompo";
 import ScrLoader from "./XCompos/ScrLoaderCompo";
+import SwitchX from "./XCompos/SwitchXCompo";
+import VideoX from "./XCompos/VideoXCompo";
 
 export {
     PressX, MasterView, HeaderX, StatusBarX, TextX, TextInputX, ButtonX,
-    ScrLoader, ToastAlert
+    ScrLoader, ToastAlert, SwitchX, VideoX,
+
 }

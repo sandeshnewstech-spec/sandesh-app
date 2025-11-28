@@ -1,4 +1,4 @@
-import { Pressable, Platform, PressableAndroidRippleConfig, ActivityIndicator } from 'react-native'
+import { Pressable, Platform, PressableAndroidRippleConfig, ActivityIndicator, TouchableOpacity } from 'react-native'
 import React, { memo, useCallback, useState } from 'react'
 import { PressXType, } from '../../Types'
 import { useThemeX } from '../../hooks';
@@ -8,7 +8,7 @@ import { _WIDTH } from '../../functions';
 
 const PressXCompo = ({
     cSty, mSty, children, lCol,
-    type = 'p', mProps, tProps,
+    type = 'p', cProps, mProps, tProps,
     disabled, hitSlop, text, tSty, lProps, loading = false, lSize,
     onPress = () => { }, onPressIn = () => { }, onPressOut = () => { }, onLongPress = () => { },
     rStyIdx = 0, pStyIdx = 1, dStyIdx = 0,
@@ -24,18 +24,18 @@ const PressXCompo = ({
 
     const pressedStyX = useAnimatedStyle(() => {
         if (disabled) return {};
-        // if (Platform.OS === 'android') return [
-        //     {},
-        //     { transform: [{ scale: scale_V.value }] },
-        //     { opacity: opacity_V.value },
-        //     { opacity: opacity_V.value, transform: [{ scale: scale_V.value }] },
-        // ][pStyIdx];
-        // if (Platform.OS === 'ios') return [
-        //     {},
-        //     { transform: [{ scale: scale_V.value }] },
-        //     { opacity: opacity_V.value },
-        //     { opacity: opacity_V.value, transform: [{ scale: scale_V.value }] },
-        // ][pStyIdx];
+        if (Platform.OS === 'android') return [
+            {},
+            { transform: [{ scale: scale_V.value }] },
+            { opacity: opacity_V.value },
+            { opacity: opacity_V.value, transform: [{ scale: scale_V.value }] },
+        ][pStyIdx];
+        if (Platform.OS === 'ios') return [
+            {},
+            { transform: [{ scale: scale_V.value }] },
+            { opacity: opacity_V.value },
+            { opacity: opacity_V.value, transform: [{ scale: scale_V.value }] },
+        ][pStyIdx];
         return [
             {},
             { transform: [{ scale: scale_V.value }] },
@@ -62,7 +62,7 @@ const PressXCompo = ({
         //     {},
         //     { opacity: withTiming(disabled ? 1 : 0, { duration: 500, easing: Easing.ease }) },
         // ][dStyIdx];
-        return [{ opacity: disbaled_V.value }][dStyIdx];
+        return { opacity: disbaled_V.value };
     });
 
     const textView = useCallback(() => <TextXCompo tSty={tSty} {...tProps} >{text}</TextXCompo>, [text, tProps, tSty])
@@ -84,6 +84,7 @@ const PressXCompo = ({
             hitSlop={hitSlop ?? 5}
             disabled={disabled || loading}
             android_ripple={{ borderless: false, foreground: true, radius: _WIDTH / 2, ...rippleStyX() }}
+            // {...cProps}
             style={[{ overflow: 'hidden' }, cSty]}
         >{loading ? loadingView : children ? children : text ? textView : <></>}</Pressable>
     </Animated.View >
