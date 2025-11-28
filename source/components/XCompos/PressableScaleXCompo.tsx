@@ -1,4 +1,4 @@
-import { StyleSheet, ActivityIndicator } from 'react-native'
+import { ActivityIndicator } from 'react-native'
 import React, { memo, useCallback, useMemo } from 'react'
 import { PressableScale } from 'pressto'
 import { useThemeX } from '../../hooks'
@@ -84,10 +84,4 @@ const PressableScaleXCompo = memo(({
 
 PressableScaleXCompo.displayName = 'PressableScaleXCompo'
 
-export default PressableScaleXCompo
-
-const styles = StyleSheet.create({
-    container: {
-        overflow: 'hidden',
-    },
-})
+export default PressableScaleXCompo;

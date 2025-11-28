@@ -37,9 +37,6 @@ const HeaderStyFN = ({ col, font, }: defStyObjType) => StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    hBtnMSty: {
-
-    },
 
 });
 

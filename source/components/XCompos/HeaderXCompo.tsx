@@ -2,7 +2,6 @@ import { View } from 'react-native'
 import React, { memo, useMemo, useCallback, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { headerType } from '../../types'
-import PressXCompo from './PressXCompo'
 import StatusBarXCompo from './StatusBarXCompo'
 import { headerHeight } from '../../utils'
 import { useThemeX } from '../../hooks'
@@ -13,6 +12,7 @@ import Animated, {
     useAnimatedStyle,
     withSpring,
 } from 'react-native-reanimated'
+import PressableScaleXCompo from './PressableScaleXCompo'
 
 const HeaderXCompo = ({
     title, bPress, backBtn = true, lSvg, rSvg, tSty, hHeight, hBgColor,
@@ -103,16 +103,15 @@ const HeaderXCompo = ({
                         hdSty?.hSty,
                         { backgroundColor: hBgColor || hdSty?.hSty?.backgroundColor },
                         headerAnimatedStyle,
-                    ]}
-                >
+                    ]}>
                     <View onLayout={(event) => { setLH(event.nativeEvent.layout.width) }} >
                         {backBtn && (
                             <Animated.View style={backButtonAnimatedStyle}>
-                                <PressXCompo
+                                <PressableScaleXCompo
                                     children={<BACK_IC color={bIcCol ?? col.HEADER_SVG_COL} />}
                                     onPress={handleBackPress}
-                                    cSty={{ ...hdSty.hBtnCSty, backgroundColor: bIcBgCol ?? col.HEADER_SVG_BGCOL }}
-                                    mSty={hdSty.hBtnMSty}
+                                    rippleColor={col.TRANSPARENT}
+                                    style={{ ...hdSty.hBtnCSty, backgroundColor: bIcBgCol ?? col.HEADER_SVG_BGCOL }}
                                 />
                             </Animated.View>
                         )}
