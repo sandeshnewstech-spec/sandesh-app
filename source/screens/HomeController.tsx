@@ -1,15 +1,20 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import React from 'react'
-import { MasterView } from 'components'
+import { ButtonX, MasterView } from 'components'
 
-const HomeController = () => {
+const HomeController = ({ }) => {
     return (
-        <MasterView title='hellow' backBtn={false} >
-
+        <MasterView title='hellow' >
+            <View style={{ padding: 10 }}>
+                {Array.from({ length: 100 }).map((_, i) => (
+                    <View key={i} style={{ height: 100, marginBottom: 10, backgroundColor: 'red' }}>
+                        <Text>Item {i + 1}</Text>
+                    </View>
+                ))}
+            </View>
+            <ButtonX text='Click Me' />
         </MasterView>
     )
 }
 
 export default HomeController
-
-const styles = StyleSheet.create({})

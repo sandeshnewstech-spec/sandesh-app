@@ -3,6 +3,7 @@ import React from 'react'
 import Animated, { Easing, FadeOut, ReduceMotion, useDerivedValue, withTiming } from 'react-native-reanimated'
 import { _isDEV } from '../../utils';
 import useThemeXSty from '../../hooks/useThemeSty';
+import Loader from './Loaders';
 
 interface P {
     loading?: boolean;
@@ -34,7 +35,8 @@ const ScrLoaderCompo = ({ absolute, loading = false }: P) => {
                     backgroundColor: absolute ? col.BLACK05 : undefined,
                     zIndex: 9999
                 }]}>
-            <ActivityIndicator color={absolute ? col.WHITE : col.PRIMARY} />
+            {/* <ActivityIndicator color={absolute ? col.WHITE : col.PRIMARY} /> */}
+            <Loader type='samsung' size={65} color={absolute ? col.WHITE : col.PRIMARY} secondaryColor='red' />
         </Animated.View>
     )
 }

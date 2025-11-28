@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import { PressableScaleXCompoProps } from '../../Types'
 import { useThemeX } from '../../hooks'
 import { Size } from '../../functions'
-import { btnRadius } from '../../utils'
+import { btnHeight, btnRadius } from '../../utils'
 import PressableScaleXCompo from './PressableScaleXCompo'
 
 const ButtonXCompo = (porps: PressableScaleXCompoProps & { transparent?: boolean }) => {
@@ -18,11 +18,11 @@ const ButtonXCompo = (porps: PressableScaleXCompoProps & { transparent?: boolean
             ...porps?.tSty,
         }}
         style={{
-            height: 55, width: "100%", flex: 1,
+            height: btnHeight, width: "100%",
             overflow: 'hidden', borderRadius: btnRadius,
             backgroundColor: transparent ? col?.TRANSPARENT : col.BTN_BGCOL,
-            borderWidth: 1,
-            borderColor: col.BTN_BGCOL,
+            // borderWidth: 1,
+            // borderColor: col.BTN_BGCOL,
             justifyContent: 'center',
             alignItems: 'center',
             ...porps?.style,
