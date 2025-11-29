@@ -1,5 +1,7 @@
 import HomeScreen from "./HomeController"
+import InterestScreen from "./InterestController"
+import LanguageSelectionScreen from "./LanguageSelectionController"
 
 
 
-export { HomeScreen }
+export { HomeScreen, InterestScreen, LanguageSelectionScreen }

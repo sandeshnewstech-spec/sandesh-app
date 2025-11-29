@@ -1,41 +1,51 @@
 import React from "react";
 import { kBehavior, setZuStandInitStoreType, zuStandInitStoreType, zuStandStoreOBJType } from "../types";
-import { Platform, StatusBar } from "react-native";
+import { Dimensions, Platform, StatusBar } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-const _isDEV = true;
-const _isPUBLISH_MODE = false;
+export const _isDEV = true;
+export const _isPUBLISH_MODE = false;
 
-const AppStack = createNativeStackNavigator();
-const BottomTabStack = createBottomTabNavigator();
+export const _WIDTH = Dimensions.get('window').width;
+export const _HEIGHT = Dimensions.get('window').height;
 
-const isIOS = Platform.OS === 'ios' ? true : false;
-const isANDROID = Platform.OS === 'android' ? true : false;
-const androidAPIVersion = (typeof Platform?.Version === 'number') ? Platform?.Version : parseInt(Platform?.Version);
+export const AppStack = createNativeStackNavigator();
+export const BottomTabStack = createBottomTabNavigator();
 
-const bSpace = 15;
-const headerHeight = 50;
-const btnHeight = 45;
-const btnRadius = 45;
-const kAvoidSty: kBehavior = isIOS ? "padding" : undefined;
-const sbH = StatusBar.currentHeight || 0;
+export const isIOS = Platform.OS === 'ios' ? true : false;
+export const isANDROID = Platform.OS === 'android' ? true : false;
+export const androidAPIVersion = (typeof Platform?.Version === 'number') ? Platform?.Version : parseInt(Platform?.Version);
 
-const onStateChange: any = React.createRef<any>();
+export const bSpace = 15;
+export const headerHeight = 50;
+export const btnHeight = 45;
+export const btnRadius = 45;
+export const kAvoidSty: kBehavior = isIOS ? "padding" : undefined;
+export const sbH = StatusBar.currentHeight || 0;
 
-const zuStandInitStore: zuStandInitStoreType = {
+export const onStateChange: any = React.createRef<any>();
+
+export const zuStandInitStore: zuStandInitStoreType = {
     taskListData: {},
     videoListData: {},
 };
 
-const setZuStandInitStore: setZuStandInitStoreType = {
+export const setZuStandInitStore: setZuStandInitStoreType = {
     // setTaskListData(by) { },
 }
 
-const zuStandStoreOBJ: zuStandStoreOBJType = { ...zuStandInitStore, ...setZuStandInitStore };
+export const zuStandStoreOBJ: zuStandStoreOBJType = { ...zuStandInitStore, ...setZuStandInitStore };
 
-export {
-    _isDEV, _isPUBLISH_MODE, AppStack, isIOS, isANDROID, androidAPIVersion,
-    bSpace, headerHeight, btnHeight, kAvoidSty, sbH, btnRadius,
-    zuStandInitStore, setZuStandInitStore, zuStandStoreOBJ, BottomTabStack
-}
+export const LANGUAGES = [
+    { code: "EN", name: "English" },
+    { code: "HI", name: "Hindi" },
+    { code: "GU", name: "Gujarati" },
+    { code: "MR", name: "Marathi" },
+    { code: "PA", name: "Punjabi" },
+    { code: "BN", name: "Bengali" },
+    { code: "TA", name: "Tamil" },
+    { code: "TE", name: "Telugu" },
+    { code: "KN", name: "Kannada" },
+    { code: "ML", name: "Malayalam" },
+];

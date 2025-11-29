@@ -15,6 +15,7 @@ import Animated, {
     interpolate,
     Extrapolate,
 } from 'react-native-reanimated'
+import LinearGradient from 'react-native-linear-gradient'
 
 const MasterViewCompo = ({
     children, fixed = false, gScroll = false, scrollViewRef, bounces, onScroll, scrollEnabled,
@@ -24,7 +25,7 @@ const MasterViewCompo = ({
     title, bPress, backBtn = true, lSvg, rSvg, tSty, hHeight, hBgColor,
 }: MasterViewType) => {
 
-    const { col, bottom } = useThemeX()
+    const { col, bottom, GRADIANTS_COLORS } = useThemeX()
 
     // Animated shared values for scroll-driven effects
     const scrollY = useSharedValue(0)
@@ -126,23 +127,29 @@ const MasterViewCompo = ({
     </>), [scrLoader, tSvg, fixed, children, style, gScroll, scrollViewRef, bounces, scrollHandler, bgCol, contentAnimatedStyle, keyboardShouldPersistTaps, scrollEnabled, autoAdujKeyInsets, bSvg, abLoader])
 
     return (
-        <View style={{ backgroundColor: bgCol ? bgCol : col.SCR_BGCOL, flex: 1 }}>
-            {(header ? header : <HeaderXCompo {...headerProps} />)}
-            <KeyboardAvoidingView
-                behavior={kAvoidSty}
-                style={{ flex: 1, backgroundColor: bgCol2 ? bgCol2 : bgCol, overflow: 'hidden' }}
-            >
-                {renderContent()}
-            </KeyboardAvoidingView>
-            {
-                (bottomBarColor) && <SafeAreaView
-                    style={{ backgroundColor: bottomBarColor ? bottomBarColor : 'black', height: bottom }}
-                />
-            }
-            {modals && modals}
-            <ScrLoaderCompo loading={abScrLoader} absolute />
-            <ToastAlertCompo {...toast} setToast={setToast} />
-        </View>
+        <LinearGradient
+            colors={GRADIANTS_COLORS.background}
+            style={{ flex: 1 }}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}>
+            <View style={{ backgroundColor: bgCol ? bgCol : col.SCR_BGCOL, flex: 1 }}>
+                {(header ? header : <HeaderXCompo {...headerProps} />)}
+                <KeyboardAvoidingView
+                    behavior={kAvoidSty}
+                    style={{ flex: 1, backgroundColor: bgCol2 ? bgCol2 : bgCol, overflow: 'hidden' }}>
+                    {renderContent()}
+                </KeyboardAvoidingView>
+                {
+                    (bottomBarColor) && <SafeAreaView
+                        style={{ backgroundColor: bottomBarColor ? bottomBarColor : 'black', height: bottom }}
+                    />
+                }
+                {modals && modals}
+                <ScrLoaderCompo loading={abScrLoader} absolute />
+                <ToastAlertCompo {...toast} setToast={setToast} />
+            </View>
+        </LinearGradient>
+
     )
 }
 

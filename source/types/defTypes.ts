@@ -4,7 +4,7 @@ import { PressableAndroidRippleConfig } from "react-native-gesture-handler/lib/t
 import { SharedValue } from "react-native-reanimated";
 import { TextProps } from "react-native-svg";
 import { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
-import { _COL } from "../colors";
+import { _COL, _GRADIANTS_COLORS } from "../colors";
 import { EdgeInsets } from "react-native-safe-area-context";
 import { FONT } from "../assets";
 import { ReactNode } from "react";
@@ -81,6 +81,7 @@ export type fontType = typeof FONT;
 export type defStyObjType = {
     col: colorType;
     font: fontType;
+    GRADIANTS_COLORS: typeof _GRADIANTS_COLORS;
 } & EdgeInsets;
 
 export type headerType = {
@@ -108,7 +109,6 @@ export type statusBarType = {
     barStyle?: StatusBarStyle;
     sbTransition?: "none" | "fade" | "slide" | null | undefined;
 }
-
 
 export type MasterViewType = {
     children?: ReactNode | React.JSX.Element;

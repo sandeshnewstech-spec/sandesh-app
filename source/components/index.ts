@@ -10,8 +10,11 @@ import ScrLoader from "./XCompos/ScrLoaderCompo";
 import SwitchX from "./XCompos/SwitchXCompo";
 import VideoX from "./XCompos/VideoXCompo";
 import PressableScaleX from "./XCompos/PressableScaleXCompo";
+import ButtonOne from "./ButtonOneCompo";
+import SelectionItemCard from "./SelectionItemCardCompo";
 
 export {
     PressX, MasterView, HeaderX, StatusBarX, TextX, TextInputX, ButtonX,
-    ScrLoader, ToastAlert, SwitchX, VideoX, PressableScaleX,
+    ScrLoader, ToastAlert, SwitchX, VideoX, PressableScaleX, ButtonOne,
+    SelectionItemCard
 }

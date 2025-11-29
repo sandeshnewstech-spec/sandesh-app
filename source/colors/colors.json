@@ -27,7 +27,7 @@
     "SECONDARY": "#E6E6FA",
     "BTN_BGCOL": "#FF7F50",
     "BTN_TEXT_COL": "#FFFFFF",
-    "SCR_BGCOL": "#FFFFFF",
+    "SCR_BGCOL": "transparent",
     "HEADER_BGCOL": "#015756",
     "HEADER_TEXT_COL": "#FFFFFF",
     "HEADER_TEXT_BG_COL": "white",
