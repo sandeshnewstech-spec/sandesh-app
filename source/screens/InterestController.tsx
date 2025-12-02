@@ -8,7 +8,7 @@ import {
 import LinearGradient from "react-native-linear-gradient";
 import { defStyObjType } from "types";
 import { useThemeX } from "hooks";
-import { _WIDTH, bSpace, isIOS } from "utils";
+import { _WIDTH, bSpace } from "utils";
 import { ButtonOne, MasterView, SelectionItemCard, TextX } from "components";
 import { IC_FONT_AWESOME6, IC_MATERIAL } from "assets";
 
@@ -33,7 +33,6 @@ export default function InterestScreen({ navigation }: any) {
     const styles = styleFN(defStyOBJ);
 
     const [selected, setSelected] = useState<string[]>([]);
-    const fadeAnim = useRef(new Animated.Value(0)).current;
 
     const toggleSelect = (item: string) => {
         if (selected.includes(item)) {
@@ -52,11 +51,7 @@ export default function InterestScreen({ navigation }: any) {
 
     return (
         <MasterView fixed hShow={false} style={{ flex: 1 }} sbShow={false} >
-            <LinearGradient
-                colors={GRADIANTS_COLORS.primary}
-                style={{ height: top }}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }} />
+            <View style={{ height: top }} />
 
             <View style={styles.main_ic_container} >
                 <LinearGradient
@@ -90,12 +85,11 @@ export default function InterestScreen({ navigation }: any) {
                     item={item} selected={selected} isInterestScreen
                     onPress={() => { toggleSelect(item?.name) }}
                     isSelected={!!selected.includes(item?.name)}
-                />)}
-            />
+                />)} />
 
             {/* FLOATING ACTION BUTTON */}
             <Animated.View style={[styles.buttonContainer]}>
-                <ButtonOne linearStyle={{ opacity: selected.length < 3 ? 0.3 : undefined }} >
+                <ButtonOne disabled={selected.length < 3} linearStyle={{ opacity: selected.length < 3 ? 0.3 : undefined }} onPress={() => navigation.navigate("LocationScreen")} >
                     <TextX tSty={styles.buttonText}>
                         {getButtonText()}
                     </TextX>
@@ -108,9 +102,9 @@ export default function InterestScreen({ navigation }: any) {
     );
 }
 
-const styleFN = ({ col, font, GRADIANTS_COLORS }: defStyObjType) => StyleSheet.create({
+const styleFN = ({ col, font, GRADIANTS_COLORS, bottom }: defStyObjType) => StyleSheet.create({
     main_ic_container: {
-        padding: bSpace
+        padding: bSpace,
     },
 
     /* HEADER STYLES */
@@ -156,8 +150,8 @@ const styleFN = ({ col, font, GRADIANTS_COLORS }: defStyObjType) => StyleSheet.c
 
     /* LIST STYLES */
     listContent: {
-        paddingHorizontal: 20,
-        paddingVertical: 20,
+        paddingHorizontal: bSpace,
+        paddingVertical: bSpace,
         paddingBottom: 100
     },
 
@@ -169,9 +163,9 @@ const styleFN = ({ col, font, GRADIANTS_COLORS }: defStyObjType) => StyleSheet.c
     /* BUTTON STYLES */
     buttonContainer: {
         position: "absolute",
-        bottom: 30,
-        left: 20,
-        right: 20,
+        width: "100%",
+        bottom: bottom + bSpace,
+        paddingHorizontal: bSpace,
         shadowColor: col.WHITE,
         shadowOffset: { width: 20, height: 10 },
         shadowOpacity: 0,

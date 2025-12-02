@@ -1,5 +1,5 @@
 import React from "react";
-import { kBehavior, setZuStandInitStoreType, zuStandInitStoreType, zuStandStoreOBJType } from "../types";
+import { defStyObjType, kBehavior, setZuStandInitStoreType, zuStandInitStoreType, zuStandStoreOBJType } from "../types";
 import { Dimensions, Platform, StatusBar } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -17,7 +17,7 @@ export const isIOS = Platform.OS === 'ios' ? true : false;
 export const isANDROID = Platform.OS === 'android' ? true : false;
 export const androidAPIVersion = (typeof Platform?.Version === 'number') ? Platform?.Version : parseInt(Platform?.Version);
 
-export const bSpace = 15;
+export const bSpace = 17;
 export const headerHeight = 50;
 export const btnHeight = 45;
 export const btnRadius = 45;
@@ -27,11 +27,11 @@ export const sbH = StatusBar.currentHeight || 0;
 export const onStateChange: any = React.createRef<any>();
 
 export const zuStandInitStore: zuStandInitStoreType = {
-    taskListData: {},
-    videoListData: {},
+    isAppStartFlow: true,
 };
 
 export const setZuStandInitStore: setZuStandInitStoreType = {
+    setIsAppStartFlow(by) { },
     // setTaskListData(by) { },
 }
 
@@ -49,3 +49,33 @@ export const LANGUAGES = [
     { code: "KN", name: "Kannada" },
     { code: "ML", name: "Malayalam" },
 ];
+
+export const defTheme = ({ col, font, isDarkMode }: defStyObjType): ReactNavigation.Theme => ({
+    "dark": true,
+    "colors": {
+        "primary": col.PRIMARY,
+        "background": "rgb(255, 59, 48)",
+        "card": "rgb(255, 59, 48)",
+        "text": col.TEXT_COL,
+        "border": col.TOAST_OUTLINE,
+        "notification": "rgb(255, 59, 48)"
+    },
+    "fonts": {
+        "regular": {
+            "fontFamily": font.REGULAR,
+            "fontWeight": "normal"
+        },
+        "medium": {
+            "fontFamily": font.MEDIUM,
+            "fontWeight": "normal"
+        },
+        "bold": {
+            "fontFamily": font.BOLD,
+            "fontWeight": "600"
+        },
+        "heavy": {
+            "fontFamily": font.EXTRA_BOLD,
+            "fontWeight": "700"
+        }
+    }
+})

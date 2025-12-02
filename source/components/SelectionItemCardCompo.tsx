@@ -4,7 +4,8 @@ import { useThemeX } from 'hooks';
 import LinearGradient from 'react-native-linear-gradient';
 import { IC_FONT_AWESOME6, IC_MATERIAL } from 'assets';
 import { defStyObjType } from 'types';
-import { _WIDTH } from 'utils';
+import { _WIDTH, bSpace } from 'utils';
+import { Size } from 'functions';
 
 type P = {
     item: { code?: string; name?: string, icon?: any };
@@ -128,17 +129,17 @@ const stylesFN = ({ col, GRADIANTS_COLORS }: defStyObjType) => StyleSheet.create
     },
 
     card: {
-        width: (_WIDTH - 60) / 2,
-        height: (_WIDTH - 60) / 2 * 0.9,
+        width: _WIDTH / 2 - (bSpace + bSpace / 2),
+        aspectRatio: 1,
         borderRadius: 18,
         padding: 18,
         borderWidth: 2,
-        borderColor: "rgba(255, 255, 255, 0.9)",
+        borderColor: col.WHITE03,
         overflow: "hidden",
     },
 
     cardSelected: {
-        borderColor: "rgba(255, 255, 255, 0.3)",
+        borderColor: col.TRANSPARENT,
         shadowColor: col.PRIMARY,
         shadowOffset: { width: 0, height: 12 },
         shadowOpacity: 0.4,
@@ -155,7 +156,7 @@ const stylesFN = ({ col, GRADIANTS_COLORS }: defStyObjType) => StyleSheet.create
     },
 
     code: {
-        fontSize: 28,
+        fontSize: Size(28),
         fontWeight: "900",
         color: col.TEXT_COL,
         marginBottom: 8,
@@ -165,7 +166,7 @@ const stylesFN = ({ col, GRADIANTS_COLORS }: defStyObjType) => StyleSheet.create
     },
 
     name: {
-        fontSize: 14,
+        fontSize: Size(14),
         fontWeight: "700",
         color: col.TEXT_COL,
         textAlign: "center",
@@ -174,7 +175,7 @@ const stylesFN = ({ col, GRADIANTS_COLORS }: defStyObjType) => StyleSheet.create
 
     textSelected: {
         color: col.WHITE,
-        textShadowColor: 'rgba(0, 0, 0, 0.2)',
+        textShadowColor: col.BLACK02,
         textShadowOffset: { width: 1, height: 1 },
         textShadowRadius: 3,
     },
@@ -186,10 +187,10 @@ const stylesFN = ({ col, GRADIANTS_COLORS }: defStyObjType) => StyleSheet.create
         width: 26,
         height: 26,
         borderRadius: 13,
-        backgroundColor: "rgba(255, 255, 255, 0.95)",
+        backgroundColor: col.WHITE,
         justifyContent: "center",
         alignItems: "center",
-        shadowColor: "#000",
+        shadowColor: col.BLACK,
         shadowOffset: { width: 0, height: 3 },
         shadowOpacity: 0.2,
         shadowRadius: 5,
@@ -208,7 +209,7 @@ const stylesFN = ({ col, GRADIANTS_COLORS }: defStyObjType) => StyleSheet.create
         width: 40,
         height: 40,
         borderRadius: 20,
-        backgroundColor: "rgba(255, 255, 255, 0.3)",
+        backgroundColor: col.WHITE02,
         opacity: 0.8,
     },
 
@@ -219,11 +220,11 @@ const stylesFN = ({ col, GRADIANTS_COLORS }: defStyObjType) => StyleSheet.create
         justifyContent: "center",
         alignItems: "center",
         marginBottom: 10,
-        backgroundColor: "rgba(255, 65, 108, 0.1)",
+        backgroundColor: col.BLACK005,
     },
 
     iconWrapperSelected: {
-        backgroundColor: "rgba(255, 255, 255, 0.2)",
+        backgroundColor: col.BLACK02,
     },
 
     selectionBadge: {
@@ -233,10 +234,10 @@ const stylesFN = ({ col, GRADIANTS_COLORS }: defStyObjType) => StyleSheet.create
         width: 24,
         height: 24,
         borderRadius: 12,
-        backgroundColor: "rgba(255, 255, 255, 0.95)",
+        backgroundColor: col.WHITE09,
         justifyContent: "center",
         alignItems: "center",
-        shadowColor: "#000",
+        shadowColor: col.BLACK,
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 3,
@@ -245,7 +246,7 @@ const stylesFN = ({ col, GRADIANTS_COLORS }: defStyObjType) => StyleSheet.create
 
     selectionBadgeText: {
         color: GRADIANTS_COLORS.primary[0],
-        fontSize: 12,
+        fontSize: Size(12),
         fontWeight: "800",
     },
 })

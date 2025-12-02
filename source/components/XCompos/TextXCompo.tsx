@@ -20,7 +20,7 @@ const TextXCompo = ({
                 textAlign: tAlign,
             },
             tSty,
-            { includeFontPadding: false }
+            { includeFontPadding: false },
         ]}
             onLayout={onLayout}
             entering={entering}

@@ -6,22 +6,20 @@ import { _WIDTH, bSpace, isIOS, LANGUAGES } from "utils";
 import { useThemeX } from "hooks";
 import { ButtonOne, MasterView, SelectionItemCard, TextX } from "components";
 import { IC_FONT_AWESOME6 } from "assets";
-import { _GRADIANTS_COLORS } from "colors";
+import { Size } from "functions";
+import { useTheme } from "@react-navigation/native";
 
 export default function LanguageSelectionController({ navigation }: any) {
     const { defStyOBJ, col, top, GRADIANTS_COLORS } = useThemeX();
     const styles = stylesFN(defStyOBJ);
 
     const [selected, setSelected] = useState("EN");
+    const theme = useTheme();
+    console.log("theme:", theme)
 
     return (
         <MasterView fixed hShow={false} style={{ flex: 1 }} sbShow={false}  >
-            <LinearGradient
-                colors={GRADIANTS_COLORS.primary}
-                style={{ height: top }}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-            />
+            <View style={{ height: top }} />
             <View style={styles.main_ic_container} >
                 <LinearGradient
                     colors={GRADIANTS_COLORS.primary}
@@ -70,7 +68,7 @@ export default function LanguageSelectionController({ navigation }: any) {
     );
 }
 
-const stylesFN = ({ col }: defStyObjType) => StyleSheet.create({
+const stylesFN = ({ col, GRADIANTS_COLORS, bottom }: defStyObjType) => StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: isIOS ? 60 : 40,
@@ -103,7 +101,7 @@ const stylesFN = ({ col }: defStyObjType) => StyleSheet.create({
     },
 
     title: {
-        fontSize: 34,
+        fontSize: Size(34),
         fontWeight: "900",
         color: col.TEXT_COL,
         marginBottom: 8,
@@ -114,46 +112,16 @@ const stylesFN = ({ col }: defStyObjType) => StyleSheet.create({
     },
 
     subtitle: {
-        fontSize: 16,
+        fontSize: Size(16),
         color: col.TEXT_COL,
         lineHeight: 22,
         fontWeight: "500",
     },
 
-    progressContainer: {
-        marginVertical: bSpace,
-        backgroundColor: 'rgba(255, 255, 255, 0.8)',
-        padding: 16,
-        borderRadius: 16,
-        borderWidth: 1,
-        borderColor: 'rgba(255, 65, 108, 0.1)',
-    },
-
-    progressBar: {
-        height: 8,
-        backgroundColor: "#F8D7DA",
-        // borderRadius: 4,
-        overflow: "hidden",
-        marginBottom: 10,
-    },
-
-    progressFill: {
-        height: "100%",
-        width: "33%",
-        borderRadius: 4,
-    },
-
-    progressText: {
-        fontSize: 14,
-        color: col.TEXT_COL,
-        fontWeight: "600",
-        textAlign: "center",
-    },
-
     /* LIST STYLES */
     listContent: {
-        paddingHorizontal: 20,
-        paddingVertical: 20,
+        paddingHorizontal: bSpace,
+        paddingVertical: bSpace,
         paddingBottom: 100
     },
 
@@ -165,10 +133,10 @@ const stylesFN = ({ col }: defStyObjType) => StyleSheet.create({
     /* BUTTON STYLES */
     buttonContainer: {
         position: "absolute",
-        bottom: 30,
-        left: 20,
-        right: 20,
-        shadowColor: _GRADIANTS_COLORS.primary[0],
+        width: "100%",
+        bottom: bottom + bSpace,
+        paddingHorizontal: bSpace,
+        shadowColor: GRADIANTS_COLORS.primary[0],
         shadowOffset: { width: 0, height: 10 },
         shadowOpacity: 0.4,
         shadowRadius: 20,
@@ -177,7 +145,7 @@ const stylesFN = ({ col }: defStyObjType) => StyleSheet.create({
 
     buttonText: {
         color: col.WHITE,
-        fontSize: 18,
+        fontSize: Size(18),
         fontWeight: "800",
         letterSpacing: 0.8,
         textShadowColor: 'rgba(0, 0, 0, 0.2)',

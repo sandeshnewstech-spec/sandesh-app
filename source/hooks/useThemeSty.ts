@@ -5,20 +5,20 @@ import useString from "../language";
 import { useMemo } from "react";
 import { _COL, _GRADIANTS_COLORS } from "../colors";
 import { CompoStyFN, HeaderStyFN } from "../styles";
-import { useMMKVStore } from ".";
+import { useColors, useMMKVStore } from ".";
 
 const useThemeXSty = () => {
 
+    const isDark = 1;
     const { setToast } = useMMKVStore();
     const str = useString();
+    const { col, GRADIANTS_COLORS } = useColors();
     const sAI: EdgeInsets = useSafeAreaInsets();
-    const GRADIANTS_COLORS = _GRADIANTS_COLORS
 
-    const col: colorType = useMemo((): any => (_COL), [_COL]);
     const font = useMemo(() => FONT, [FONT]);
 
     const defStyOBJ: defStyObjType = useMemo(() => ({
-        col, font, ...sAI, GRADIANTS_COLORS
+        col, font, isDarkMode: isDark, ...sAI, GRADIANTS_COLORS
     }), [col, font, sAI, GRADIANTS_COLORS]);
 
     // const compSty = compStyleFunc(defStyOBJ);

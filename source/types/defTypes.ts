@@ -12,10 +12,12 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { AndroidPermission, IOSPermission } from "react-native-permissions";
 
 export type zuStandInitStoreType = {
+    isAppStartFlow: boolean;
     // taskListData: taskListDataOBJType;
 }
 
 export type setZuStandInitStoreType = {
+    setIsAppStartFlow: (by: boolean) => void;
     // setTaskListData: (by: taskListDataOBJType) => void;
 }
 
@@ -74,14 +76,15 @@ export type PressXType = {
     onLongPress?: () => void;
 }
 
-export type colorType = typeof _COL;
+export type colorType = typeof _COL[0];
 
 export type fontType = typeof FONT;
 
 export type defStyObjType = {
+    isDarkMode: boolean;
     col: colorType;
     font: fontType;
-    GRADIANTS_COLORS: typeof _GRADIANTS_COLORS;
+    GRADIANTS_COLORS: typeof _GRADIANTS_COLORS[0];
 } & EdgeInsets;
 
 export type headerType = {
@@ -228,7 +231,7 @@ export type TextXType = {
     text?: string | number;
     lChild?: ReactNode;
     rChild?: ReactNode;
-    tSty?: TextStyle;
+    tSty?: StyleProp<TextStyle>;
     tProps?: TextProps;
     children?: any;
     fColor?: ColorValue;

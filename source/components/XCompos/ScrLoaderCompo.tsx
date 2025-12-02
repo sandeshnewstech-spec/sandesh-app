@@ -36,7 +36,7 @@ const ScrLoaderCompo = ({ absolute, loading = false }: P) => {
                     zIndex: 9999
                 }]}>
             {/* <ActivityIndicator color={absolute ? col.WHITE : col.PRIMARY} /> */}
-            <Loader type='samsung' size={65} color={absolute ? col.WHITE : col.PRIMARY} secondaryColor='red' />
+            <Loader type='samsung' size={65} color={absolute ? col.WHITE : col.PRIMARY} secondaryColor={col.SECONDARY} />
         </Animated.View>
     )
 }

@@ -5,7 +5,8 @@ import useAPIs from "./useAPIsHook"
 import useDebounce from "./useDebounce"
 import useThemeX from "./useThemeSty"
 import useMMKVStore from "./useMMKVStoreHook"
+import useColors from "./useColorsHook"
 
 export {
-    useThemeX, useAPIs, useDebounce, useMMKVStore
+    useThemeX, useAPIs, useDebounce, useMMKVStore, useColors
 }
