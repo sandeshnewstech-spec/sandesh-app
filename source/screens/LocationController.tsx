@@ -14,7 +14,7 @@ import { useThemeX } from "hooks";
 import { defStyObjType } from "types";
 import { bSpace, isIOS } from "utils";
 import { ButtonOne, MasterView, TextX } from "components";
-import { IC_MATERIAL } from "assets";
+import { IC_MATERIAL_COMMUNITY } from "assets";
 import { Size } from "functions";
 import useZuStore from "store/useZuStore";
 
@@ -96,7 +96,7 @@ export default function LocationController({ navigation }: any) {
                                     </TextX>
                                 </View>
                                 <View style={styles.selectedIndicator}>
-                                    <IC_MATERIAL
+                                    <IC_MATERIAL_COMMUNITY
                                         name="check" size={14}
                                         color={GRADIANTS_COLORS.primary[0]}
                                         style={styles.checkIcon}
@@ -136,7 +136,7 @@ export default function LocationController({ navigation }: any) {
                 style={styles.iconContainer}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}>
-                <IC_MATERIAL name="map-marker-radius" size={24} color={col.WHITE} />
+                <IC_MATERIAL_COMMUNITY name="map-marker-radius" size={24} color={col.WHITE} />
             </LinearGradient>
         </View>
 
@@ -163,7 +163,7 @@ export default function LocationController({ navigation }: any) {
         {selectedState !== "" && (<Animated.View style={[styles.buttonContainer]}>
             <ButtonOne onPress={() => setIsAppStartFlow(false)}>
                 <TextX tSty={styles.buttonText}>Finish Setup</TextX>
-                <IC_MATERIAL name="check-all" size={18} color={GRADIANTS_COLORS.textLight} style={styles.buttonIcon} />
+                <IC_MATERIAL_COMMUNITY name="check-all" size={18} color={GRADIANTS_COLORS.textLight} style={styles.buttonIcon} />
             </ButtonOne>
         </Animated.View>)}
     </MasterView>);

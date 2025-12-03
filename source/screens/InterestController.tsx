@@ -10,7 +10,7 @@ import { defStyObjType } from "types";
 import { useThemeX } from "hooks";
 import { _WIDTH, bSpace } from "utils";
 import { ButtonOne, MasterView, SelectionItemCard, TextX } from "components";
-import { IC_FONT_AWESOME6, IC_MATERIAL } from "assets";
+import { IC_FONT_AWESOME6, IC_MATERIAL_COMMUNITY } from "assets";
 
 const categories = [
     { name: "Entertainment", icon: "movie-open" },
@@ -94,7 +94,7 @@ export default function InterestScreen({ navigation }: any) {
                         {getButtonText()}
                     </TextX>
                     {selected.length >= 3 && (
-                        <IC_MATERIAL name="arrow-right" size={16} color={col.WHITE} style={styles.buttonIcon} />
+                        <IC_MATERIAL_COMMUNITY name="arrow-right" size={16} color={col.WHITE} style={styles.buttonIcon} />
                     )}
                 </ButtonOne>
             </Animated.View>

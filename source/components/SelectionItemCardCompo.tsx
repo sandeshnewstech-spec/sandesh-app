@@ -2,7 +2,7 @@ import { Animated, Easing, StyleSheet, Text, TouchableOpacity, View } from 'reac
 import React, { useRef } from 'react'
 import { useThemeX } from 'hooks';
 import LinearGradient from 'react-native-linear-gradient';
-import { IC_FONT_AWESOME6, IC_MATERIAL } from 'assets';
+import { IC_FONT_AWESOME6, IC_MATERIAL_COMMUNITY } from 'assets';
 import { defStyObjType } from 'types';
 import { _WIDTH, bSpace } from 'utils';
 import { Size } from 'functions';
@@ -68,7 +68,7 @@ const SelectionItemCardCompo = ({ item, isSelected, onPress, selected = [], isIn
                     end={{ x: 1, y: 1 }}>
                     <View style={styles.cardContent}>
                         {isInterestScreen && <View style={[styles.iconWrapper, styles.iconWrapperSelected]}>
-                            <IC_MATERIAL
+                            <IC_MATERIAL_COMMUNITY
                                 name={item.icon} size={26}
                                 color={GRADIANTS_COLORS.textLight}
                             />
@@ -101,7 +101,7 @@ const SelectionItemCardCompo = ({ item, isSelected, onPress, selected = [], isIn
                     end={{ x: 1, y: 1 }}>
                     <View style={styles.cardContent}>
                         {(isInterestScreen) && <View style={[styles.iconWrapper]}>
-                            <IC_MATERIAL
+                            <IC_MATERIAL_COMMUNITY
                                 name={item?.icon} size={26}
                                 color={GRADIANTS_COLORS.primary[0]}
                             />

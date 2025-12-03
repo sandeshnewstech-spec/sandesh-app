@@ -28,11 +28,6 @@ const PressableScaleXCompo = memo(({
             {...lProps} />
     ), [lCol, lSize, lProps, col.WHITE01])
 
-    const computedRippleColor = useMemo(
-        () => rippleColor ?? lCol ?? col.PRIMARY ?? 'rgba(0, 0, 0, 0.12)',
-        [rippleColor, lCol, col.PRIMARY]
-    )
-
     const computedSpringConfig = useMemo(
         () => springConfig || { damping: 0.8, mass: 1, stiffness: 100 },
         [springConfig]
@@ -68,12 +63,12 @@ const PressableScaleXCompo = memo(({
             onPressIn={handlePressIn}
             onPressOut={handlePressOut}
             onLongPress={handleLongPress}
-            activeScale={feedbackMode === 'opacity' ? 1 : activeScale}
-            activeOpacity={feedbackMode === 'scale' ? 1 : activeOpacity}
+            activeScale={activeScale}
+            activeOpacity={activeOpacity}
             springConfig={computedSpringConfig}
             disabled={isDisabled}
             rippleRadius={rippleRadius}
-            rippleColor={computedRippleColor}
+            rippleColor={rippleColor || col.TRANSPARENT}
             hitSlop={hitSlop}
             accessibilityRole="button"
             accessibilityState={{ disabled: isDisabled }}>
