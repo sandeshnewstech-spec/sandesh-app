@@ -6,6 +6,7 @@ import { ApiCallType, ApiResType, } from '../types';
 import { isErr } from '../functions';
 import useZuStore from '../store/useZuStore';
 import { useMMKVStore } from '.';
+import { API_END_POINTS } from 'utils';
 
 const useAPIsHook = () => {
 
@@ -13,6 +14,10 @@ const useAPIsHook = () => {
   const { setToast } = useMMKVStore();
   const { abort, signal } = new AbortController();
   const { } = useZuStore();
+
+  const BASE_URL = "https://mapi.sandesh.com";
+  const API_V = "v1";
+  const FINAL_BASE_URL = `${BASE_URL}/api/${API_V}/`;
 
   const headR = (token?: string, urlencoded?: boolean, multipart?: boolean) => {
 
@@ -26,16 +31,6 @@ const useAPIsHook = () => {
     return Header;
   };
 
-  /**
-   * @param props.endPath for api end path
-   * @param props.body for parms to send to the server
-   * @param props.isFormData check params is passed or not
-   * @param props.toText for get return responce on toText() 
-   * @param props.token for token passed
-   * @param props.method for api method like POST or PUT or PATCH or DELETE or PATCH
-   * Todo return response is based on api response
-   * Todo return response is as a Object.
-   */
   async function fetchREQ({ endPath, body, toText, token, method = 'POST', urlencoded = false, params,
     multipart, apiURI }: ApiCallType): Promise<ApiResType> {
 
@@ -53,11 +48,11 @@ const useAPIsHook = () => {
       let resJSON;
 
       let res: any = await fetch(url, raw);
-      // console.log(`res:::`, isIOS, "::", endPath, "::", await res?.text(), JSON.stringify(res, null, 5));
+      // console.log(`res:::`, Platform.OS, "::", url);
 
       if (res !== undefined && (res.status === 200 || res.status === 202)) resJSON = toText ? await res?.text() : await res?.json();
       else resJSON = toText ? await res?.text() : await res?.json();
-      // console.log(`res:::`, isIOS, "::", endPath, "::", JSON.stringify(res, null, 5));
+      console.log(`responce:::`, Platform.OS, "::", url, ":::", resJSON);
       // console.log(`resJSON:::`, isIOS, "::", endPath, "::", JSON.stringify(resJSON, null, 5));
 
       return {
@@ -76,13 +71,21 @@ const useAPIsHook = () => {
     }
   }
 
-  // async function getVideoListAPI(pageNO = 1) {
-  //   return fetchREQ({
-  //     apiURI: `https://api.pexels.com/videos/search?query=nature&per_page=${pageNO}`,
-  //     method: 'GET',
-  //     token: "jb14cKNctP4fR0c9SbI696b2nel6Mlj700RQJNQBbcfemp7xzCZIPbTa",
-  //   });
-  // }
+  async function getHomeSecondaryDataAPI() {
+    return fetchREQ({
+      method: 'GET',
+      apiURI: FINAL_BASE_URL,
+      endPath: API_END_POINTS.homeSecondary,
+    });
+  }
+
+  async function getHomeTopMenuAPI() {
+    return fetchREQ({
+      method: 'GET',
+      apiURI: FINAL_BASE_URL,
+      endPath: API_END_POINTS.homeTopMenu,
+    });
+  }
 
   function abortAPI() { try { abort(); } catch (e) { /* LOG(e, "ERROR :: abortAPI =>>"); */ } }
   useEffect(() => {
@@ -92,7 +95,7 @@ const useAPIsHook = () => {
   useEffect(() => { if (!isFocused) runOnJS(abortAPI)(); }, [isFocused]);
 
   return {
-    abortAPI
+    abortAPI, getHomeSecondaryDataAPI, getHomeTopMenuAPI
   };
 
 }

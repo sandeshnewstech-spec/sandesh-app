@@ -43,13 +43,13 @@
         "TOAST_TEXT": "white",
         "TEXT_COL": "black",
         "ROOT_SCR_BG": "#ffffff",
-        "BOTTOM_TAB_SELECTED_ITEM_IC": "#FF416C",
+        "BOTTOM_TAB_SELECTED_ITEM_IC": "#ffffff",
         "BOTTOM_TAB_SELECTED_ITEM_TITLE": "#ffffff",
         "BOTTOM_TAB_SELECTED_ITEM_BG": "#FF416C",
-        "BOTTOM_TAB_ITEM_IC": "#ffffff",
+        "BOTTOM_TAB_ITEM_IC": "black",
         "BOTTOM_TAB_ITEM_TITLE": "black",
-        "BOTTOM_TAB_ITEM_BG": "black",
-        "BOTTOM_TAB_BG": ""
+        "BOTTOM_TAB_ITEM_BG": "rgba(0,0,0,.05)",
+        "BOTTOM_TAB_BG": "transparent"
     },
     {
         "TRANSPARENT": "transparent",

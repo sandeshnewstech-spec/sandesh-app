@@ -13,12 +13,12 @@ import { AndroidPermission, IOSPermission } from "react-native-permissions";
 
 export type zuStandInitStoreType = {
     isAppStartFlow: boolean;
-    // taskListData: taskListDataOBJType;
+    appServices: appServicesType;
 }
 
 export type setZuStandInitStoreType = {
     setIsAppStartFlow: (by: boolean) => void;
-    // setTaskListData: (by: taskListDataOBJType) => void;
+    setAppServices: (by: appServicesType) => void;
 }
 
 export type zuStandStoreOBJType = zuStandInitStoreType & setZuStandInitStoreType;
@@ -306,4 +306,9 @@ export type PressableScaleXCompoProps = {
     springConfig?: any
     activeOpacity?: number
     feedbackMode?: 'scale' | 'opacity' | 'both'
+}
+
+export type appServicesType = {
+    appLogo?: string;
+    placeholderLogo?: string;
 }

@@ -12,9 +12,11 @@ import VideoX from "./XCompos/VideoXCompo";
 import PressableScaleX from "./XCompos/PressableScaleXCompo";
 import ButtonOne from "./ButtonOneCompo";
 import SelectionItemCard from "./SelectionItemCardCompo";
+import ImageX from "./XCompos/ImageXCompo";
+import HomeTopMenu from "./Home/HomeTopMenuCompo";
 
 export {
     PressX, MasterView, HeaderX, StatusBarX, TextX, TextInputX, ButtonX,
     ScrLoader, ToastAlert, SwitchX, VideoX, PressableScaleX, ButtonOne,
-    SelectionItemCard
+    SelectionItemCard, ImageX, HomeTopMenu
 }

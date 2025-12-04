@@ -28,11 +28,12 @@ export const onStateChange: any = React.createRef<any>();
 
 export const zuStandInitStore: zuStandInitStoreType = {
     isAppStartFlow: true,
+    appServices: {},
 };
 
 export const setZuStandInitStore: setZuStandInitStoreType = {
     setIsAppStartFlow(by) { },
-    // setTaskListData(by) { },
+    setAppServices(by) { },
 }
 
 export const zuStandStoreOBJ: zuStandStoreOBJType = { ...zuStandInitStore, ...setZuStandInitStore };
@@ -79,3 +80,8 @@ export const defTheme = ({ col, font, isDarkMode }: defStyObjType): ReactNavigat
         }
     }
 })
+
+export const API_END_POINTS = {
+    homeSecondary: "home/secondary",
+    homeTopMenu: "menu/web-menu"
+}

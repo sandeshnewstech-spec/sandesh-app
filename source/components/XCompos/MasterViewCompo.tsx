@@ -8,12 +8,8 @@ import ToastAlertCompo from './ToastAlertCompo'
 import ScrLoaderCompo from './ScrLoaderCompo'
 import { kAvoidSty } from '../../utils'
 import Animated, {
-    useSharedValue,
-    useAnimatedStyle,
-    withSpring,
-    useAnimatedScrollHandler,
-    interpolate,
-    Extrapolate,
+    useSharedValue, useAnimatedStyle, withSpring, useAnimatedScrollHandler,
+    interpolate, Extrapolate,
 } from 'react-native-reanimated'
 import LinearGradient from 'react-native-linear-gradient'
 

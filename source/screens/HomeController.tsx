@@ -1,8 +1,9 @@
 import { Text, View } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ButtonX, MasterView } from 'components'
 
 const HomeController = ({ }) => {
+
     return (
         <MasterView title='hellow' >
             <View style={{ padding: 10 }}>

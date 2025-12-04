@@ -1,10 +1,9 @@
 import { View, StyleSheet } from 'react-native';
-import React, { Fragment, ReactNode, useCallback } from 'react';
+import React, { ReactNode, useCallback } from 'react';
 import { useThemeX } from 'hooks';
-import { PressableScaleX, PressX, TextX } from 'components';
+import { PressableScaleX, TextX } from 'components';
 import { defStyObjType } from 'types';
-import { IC_FONT_AWESOME6, IC_MATERIAL, IC_MATERIAL_COMMUNITY, LIST_IC } from 'assets';
-import { GestureDetector } from 'react-native-gesture-handler';
+import { IC_MATERIAL, IC_MATERIAL_COMMUNITY } from 'assets';
 import { Size } from 'functions';
 
 const CustomizeBottomTabBar = ({ state, descriptors, navigation }: any) => {
@@ -44,7 +43,7 @@ const CustomizeBottomTabBar = ({ state, descriptors, navigation }: any) => {
                                 color={isFocused ? col.BOTTOM_TAB_SELECTED_ITEM_IC : col.BOTTOM_TAB_ITEM_IC} size={30} />
                         });
                     default:
-                        return { svg: <></> };
+                        return { svg: <></>, title: "" };
                 }
             }
 
@@ -85,8 +84,8 @@ export default CustomizeBottomTabBar;
 
 const styFN = ({ col, font, bottom }: defStyObjType) => StyleSheet.create({
     mainContainer: {
-        height: 70,
-        paddingBottom: 10,
+        height: 70 + bottom - 2,
+        paddingBottom: bottom / 2 + 5,
         justifyContent: 'center',
         backgroundColor: col.BOTTOM_TAB_BG,
     },

@@ -15,7 +15,6 @@ const AppRoute = () => {
     const { isConnected } = useConnection();
 
     useInit();
-
     return (
         <Fragment>
             <NavigationContainer
@@ -24,14 +23,14 @@ const AppRoute = () => {
                         setToast({ show: true, msg: str.YOUR_INTERNET_CONNCTIONS_IS_NOT_CONNECTED });
                     }
                 }}>
-                {isAppStartFlow ? <AppStack.Navigator screenOptions={{ animation: 'slide_from_right' }} >
+                {isAppStartFlow ? (<AppStack.Navigator screenOptions={{ animation: 'slide_from_right' }} >
                     <AppStack.Screen name={"LanguageSelectionScreen"} component={LanguageSelectionScreen} options={{ headerShown: false, }} />
                     <AppStack.Screen name={"InterestScreen"} component={InterestScreen} options={{ headerShown: false }} />
                     <AppStack.Screen name={"LocationScreen"} component={LocationScreen} options={{ headerShown: false }} />
-                </AppStack.Navigator>
-                    : <AppStack.Navigator>
+                </AppStack.Navigator>)
+                    : (<AppStack.Navigator>
                         <AppStack.Screen name={"BottomTab"} component={BottomTab} options={{ headerShown: false }} />
-                    </AppStack.Navigator>}
+                    </AppStack.Navigator>)}
             </NavigationContainer>
             <ToastAlert {...toast} setToast={setToast} />
         </Fragment>
