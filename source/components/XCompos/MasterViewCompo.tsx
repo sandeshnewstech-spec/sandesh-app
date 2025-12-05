@@ -18,7 +18,8 @@ const MasterViewCompo = ({
     style, bgCol, bgCol2, header, bottomBarColor, autoAdujKeyInsets, modals, bSvg, tSvg,
     alignText = 'center', lHeight, rHeight, hShow = true, barStyle, sbColor, sbShow = true, sbTransition,
     keyboardShouldPersistTaps, setToast, toast, topNODE, btmNODE, abScrLoader, abLoader, scrLoader,
-    title, bPress, backBtn = true, lSvg, rSvg, tSty, hHeight, hBgColor,
+    title, bPress, backBtn = true, lSvg, rSvg, tSty, hHeight, hBgColor, scrollViewProps,
+    bIcCol, bIcBgCol
 }: MasterViewType) => {
 
     const { col, bottom, GRADIANTS_COLORS } = useThemeX()
@@ -32,8 +33,9 @@ const MasterViewCompo = ({
     // Memoized header props
     const headerProps = useMemo(() => ({
         title, bPress, backBtn, lSvg, rSvg, tSty, hHeight, hBgColor, alignText, lHeight, rHeight, hShow,
-        barStyle, sbColor, sbShow, sbTransition
-    }), [title, bPress, backBtn, lSvg, rSvg, tSty, hHeight, hBgColor, alignText, lHeight, rHeight, hShow, barStyle, sbColor, sbShow, sbTransition])
+        barStyle, sbColor, sbShow, sbTransition, bIcCol, bIcBgCol
+    }), [title, bPress, backBtn, lSvg, rSvg, tSty, hHeight, hBgColor, alignText, lHeight, rHeight, hShow,
+        barStyle, sbColor, sbShow, sbTransition, bIcCol, bIcBgCol])
 
     // Scroll event handler for smooth animations
     const scrollHandler = useAnimatedScrollHandler({
@@ -95,7 +97,9 @@ const MasterViewCompo = ({
                     { width: "100%" },
                     style
                 ]}
-                scrollEventThrottle={16}>
+                scrollEventThrottle={16}
+            // {...scrollViewProps}
+            >
                 {children}
             </ScrollViewG>
         ) : (
@@ -114,6 +118,7 @@ const MasterViewCompo = ({
                     style
                 ]}
                 scrollEventThrottle={16}
+                {...scrollViewProps}
             >
                 {children}
             </Animated.ScrollView>

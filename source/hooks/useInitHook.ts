@@ -9,7 +9,6 @@ const useInitHook = () => {
         setAppServices({
             appLogo: "https://s3-symbol-logo.tradingview.com/sandesh-ltd--600.png"
         });
-
     }, []);
     return ({})
 }

@@ -8,8 +8,10 @@ import HomeTabScreen from "./BottomTab/HomeTabController"
 import VideosTabScreen from "./BottomTab/VideosTabController"
 import SearchTabScreen from "./BottomTab/SearchTabController"
 import ProfileTabScreen from "./BottomTab/ProfileTabController"
+import LiveTVScreen from "./LiveTVController"
 
 export {
     HomeScreen, InterestScreen, LanguageSelectionScreen, LocationScreen,
-    HomeTabScreen, ProfileTabScreen, SearchTabScreen, VideosTabScreen
+    HomeTabScreen, ProfileTabScreen, SearchTabScreen, VideosTabScreen,
+    LiveTVScreen
 }

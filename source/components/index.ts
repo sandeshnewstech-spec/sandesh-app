@@ -14,9 +14,11 @@ import ButtonOne from "./ButtonOneCompo";
 import SelectionItemCard from "./SelectionItemCardCompo";
 import ImageX from "./XCompos/ImageXCompo";
 import HomeTopMenu from "./Home/HomeTopMenuCompo";
+import HomePage from "./Home/HomePageCompo";
+import LiveButton from "./Home/LiveButtonCompo";
 
 export {
     PressX, MasterView, HeaderX, StatusBarX, TextX, TextInputX, ButtonX,
     ScrLoader, ToastAlert, SwitchX, VideoX, PressableScaleX, ButtonOne,
-    SelectionItemCard, ImageX, HomeTopMenu
+    SelectionItemCard, ImageX, HomeTopMenu, HomePage, LiveButton
 }

@@ -5,6 +5,7 @@ import { PressableScaleX, TextX } from 'components';
 import { defStyObjType } from 'types';
 import { IC_MATERIAL, IC_MATERIAL_COMMUNITY } from 'assets';
 import { Size } from 'functions';
+import { ICON_SIZE } from 'utils';
 
 const CustomizeBottomTabBar = ({ state, descriptors, navigation }: any) => {
 
@@ -22,25 +23,25 @@ const CustomizeBottomTabBar = ({ state, descriptors, navigation }: any) => {
                         return ({
                             title: "Home",
                             svg: <IC_MATERIAL name='home'
-                                color={isFocused ? col.BOTTOM_TAB_SELECTED_ITEM_IC : col.BOTTOM_TAB_ITEM_IC} size={30} />
+                                color={isFocused ? col.BOTTOM_TAB_SELECTED_ITEM_IC : col.BOTTOM_TAB_ITEM_IC} size={ICON_SIZE} />
                         });
                     case 'VideosTabScreen':
                         return ({
                             title: "Videos",
                             svg: <IC_MATERIAL_COMMUNITY name='play-circle'
-                                color={isFocused ? col.BOTTOM_TAB_SELECTED_ITEM_IC : col.BOTTOM_TAB_ITEM_IC} size={30} />
+                                color={isFocused ? col.BOTTOM_TAB_SELECTED_ITEM_IC : col.BOTTOM_TAB_ITEM_IC} size={ICON_SIZE} />
                         });
                     case 'SearchTabScreen':
                         return ({
                             title: "Search",
                             svg: <IC_MATERIAL_COMMUNITY name='cloud-search'
-                                color={isFocused ? col.BOTTOM_TAB_SELECTED_ITEM_IC : col.BOTTOM_TAB_ITEM_IC} size={30} />
+                                color={isFocused ? col.BOTTOM_TAB_SELECTED_ITEM_IC : col.BOTTOM_TAB_ITEM_IC} size={ICON_SIZE} />
                         });
                     case 'ProfileTabScreen':
                         return ({
                             title: "Profile",
                             svg: <IC_MATERIAL name='person-pin'
-                                color={isFocused ? col.BOTTOM_TAB_SELECTED_ITEM_IC : col.BOTTOM_TAB_ITEM_IC} size={30} />
+                                color={isFocused ? col.BOTTOM_TAB_SELECTED_ITEM_IC : col.BOTTOM_TAB_ITEM_IC} size={ICON_SIZE} />
                         });
                     default:
                         return { svg: <></>, title: "" };

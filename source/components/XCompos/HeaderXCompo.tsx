@@ -108,7 +108,7 @@ const HeaderXCompo = ({
                         {backBtn && (
                             <Animated.View style={backButtonAnimatedStyle}>
                                 <PressableScaleXCompo
-                                    children={<BACK_IC color={bIcCol ?? col.HEADER_SVG_COL} />}
+                                    children={<BACK_IC color={bIcCol || col.HEADER_SVG_COL} />}
                                     onPress={handleBackPress}
                                     rippleColor={col.TRANSPARENT}
                                     style={{ ...hdSty.hBtnCSty, backgroundColor: bIcBgCol ?? col.HEADER_SVG_BGCOL }}

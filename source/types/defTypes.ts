@@ -1,7 +1,7 @@
 import { ActivityIndicatorProps, AlertType, ColorValue, DimensionValue, FlexAlignType, GestureResponderEvent, KeyboardTypeOptions, NativeSyntheticEvent, ReturnKeyTypeOptions, ScrollViewProps, StatusBarStyle, StyleProp, TextInputFocusEventData, TextInputProps, TextInputSubmitEditingEventData, TextStyle, ViewStyle } from "react-native";
-import { PressableProps } from "react-native-gesture-handler";
+import { PressableProps, ScrollView } from "react-native-gesture-handler";
 import { PressableAndroidRippleConfig } from "react-native-gesture-handler/lib/typescript/components/Pressable/PressableProps";
-import { SharedValue } from "react-native-reanimated";
+import { AnimatedScrollViewProps, SharedValue } from "react-native-reanimated";
 import { TextProps } from "react-native-svg";
 import { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
 import { _COL, _GRADIANTS_COLORS } from "../colors";
@@ -146,6 +146,7 @@ export type MasterViewType = {
     abScrLoader?: boolean;
     abLoader?: boolean;
     scrLoader?: boolean;
+    scrollViewProps?: AnimatedScrollViewProps;
 } & headerType;
 
 export type ToastType = {

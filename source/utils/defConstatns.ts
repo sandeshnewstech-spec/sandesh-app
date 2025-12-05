@@ -3,6 +3,7 @@ import { defStyObjType, kBehavior, setZuStandInitStoreType, zuStandInitStoreType
 import { Dimensions, Platform, StatusBar } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Size } from "functions";
 
 export const _isDEV = true;
 export const _isPUBLISH_MODE = false;
@@ -17,6 +18,7 @@ export const isIOS = Platform.OS === 'ios' ? true : false;
 export const isANDROID = Platform.OS === 'android' ? true : false;
 export const androidAPIVersion = (typeof Platform?.Version === 'number') ? Platform?.Version : parseInt(Platform?.Version);
 
+export const ICON_SIZE = Size(27);
 export const bSpace = 17;
 export const headerHeight = 50;
 export const btnHeight = 45;
