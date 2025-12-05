@@ -6,6 +6,7 @@ import { isValidUrl, regex } from '../../functions';
 
 interface Props extends FastImageProps {
     img: string | any;
+    imgSource?: any;
     imgSty?: ImageStyle | StyleProp<any>;
     defIMG?: any;
     noDefImg?: boolean;
@@ -13,7 +14,7 @@ interface Props extends FastImageProps {
     sharedTransitionTag?: string;
 }
 
-const ImageXCompo = ({ sharedTransitionTag, img, noDefImg, defIMG = DEF1S_IMG, imgSty, ...imgProps }: Props) => {
+const ImageXCompo = ({ imgSource, sharedTransitionTag, img, noDefImg, defIMG = DEF1S_IMG, imgSty, ...imgProps }: Props) => {
 
     const placeholder_image_base64 = undefined, placeholder_image = undefined;
     const imgUriSource = img && typeof img === 'string' ? img : "";
@@ -23,7 +24,7 @@ const ImageXCompo = ({ sharedTransitionTag, img, noDefImg, defIMG = DEF1S_IMG, i
 
     const Image = useCallback(() => {
         return (<FastImage
-            source={{ uri: img, cache: 'immutable' }}
+            source={imgSource ? imgSource : { uri: img, cache: 'immutable' }}
             style={{
                 width: "100%", height: "100%",
                 // backgroundColor: (imgERR == null || imgERR == true) ? undefined : col.WHITE,
@@ -33,7 +34,7 @@ const ImageXCompo = ({ sharedTransitionTag, img, noDefImg, defIMG = DEF1S_IMG, i
             onLoadEnd={() => { !imgERR && setImgERR(false); }}
             {...imgProps}
         />);
-    }, [imgUriSource, img, imgERR, shERR, placeholder_image_base64,
+    }, [imgUriSource, img, imgERR, shERR, placeholder_image_base64, imgSource,
         placeholder_image, imgProps, imgSty]);
 
     return (<ImageBackground
@@ -53,9 +54,9 @@ const ImageXCompo = ({ sharedTransitionTag, img, noDefImg, defIMG = DEF1S_IMG, i
                     // backgroundColor: (shERR == null || shERR) ? undefined : 'white',
                     ...imgSty
                 }}>
-                {isValidUrl(imgUriSource) && Image()}
+                {(isValidUrl(imgUriSource) || imgSource) && Image()}
             </ImageBackground>)
-            : (isValidUrl(imgUriSource) && Image())
+            : ((isValidUrl(imgUriSource) || imgSource) && Image())
         }
     </ImageBackground>);
 }

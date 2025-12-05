@@ -8,7 +8,7 @@ const App = () => {
   const { col, GRADIANTS_COLORS } = useColors();
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-      <GestureHandlerRootView style={{ flex: 1, backgroundColor: col.ROOT_SCR_BG }}>
+      <GestureHandlerRootView style={{ flex: 1, backgroundColor: col.ROOT_SCR_BG }}  >
         <AppRoute />
       </GestureHandlerRootView>
     </SafeAreaProvider>

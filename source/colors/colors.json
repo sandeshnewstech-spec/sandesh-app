@@ -49,7 +49,10 @@
         "BOTTOM_TAB_ITEM_IC": "black",
         "BOTTOM_TAB_ITEM_TITLE": "black",
         "BOTTOM_TAB_ITEM_BG": "rgba(0,0,0,.05)",
-        "BOTTOM_TAB_BG": "transparent"
+        "BOTTOM_TAB_BG": "transparent",
+        "HOME_TOP_TAB_BG": "rgba(256,256,256,.3)",
+        "HOME_TOP_TAB_ITEM_TITLE": "white",
+        "HOME_TOP_TAB_SELECTED_ITEM_INDICATORE": "#FF416C",
     },
     {
         "TRANSPARENT": "transparent",
@@ -101,6 +104,9 @@
         "BOTTOM_TAB_ITEM_IC": "#64748B",
         "BOTTOM_TAB_ITEM_TITLE": "#94A3B8",
         "BOTTOM_TAB_ITEM_BG": "#1E293B",
-        "BOTTOM_TAB_BG": "#0F172A"
+        "BOTTOM_TAB_BG": "#0F172A",
+        "HOME_TOP_TAB_BG": "rgba(256,256,256,.0)",
+        "HOME_TOP_TAB_ITEM_TITLE": "white",
+        "HOME_TOP_TAB_SELECTED_ITEM_INDICATORE": "#FF416C",
     }
 ]
