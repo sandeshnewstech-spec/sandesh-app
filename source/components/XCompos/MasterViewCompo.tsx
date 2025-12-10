@@ -77,10 +77,8 @@ const MasterViewCompo = ({
     })
 
     // Memoized content render
-    const renderContent = useCallback(() => (<>
-        <ScrLoaderCompo loading={scrLoader} />
-        {tSvg && tSvg}
-        {fixed ? (
+    const renderContent = useCallback(() => {
+        return (fixed ? (
             <View style={[{ flex: 1 }, style]} children={children} />
         ) : gScroll ? (
             <ScrollViewG
@@ -122,10 +120,8 @@ const MasterViewCompo = ({
             >
                 {children}
             </Animated.ScrollView>
-        )}
-        {bSvg && bSvg}
-        <ScrLoaderCompo loading={abLoader} absolute />
-    </>), [scrLoader, tSvg, fixed, children, style, gScroll, scrollViewRef, bounces, scrollHandler, bgCol, contentAnimatedStyle, keyboardShouldPersistTaps, scrollEnabled, autoAdujKeyInsets, bSvg, abLoader])
+        ))
+    }, [scrLoader, tSvg, fixed, children, style, gScroll, scrollViewRef, bounces, scrollHandler, bgCol, contentAnimatedStyle, keyboardShouldPersistTaps, scrollEnabled, autoAdujKeyInsets, bSvg, abLoader])
 
     return (
         <LinearGradient
@@ -138,7 +134,11 @@ const MasterViewCompo = ({
                 <KeyboardAvoidingView
                     behavior={kAvoidSty}
                     style={{ flex: 1, backgroundColor: bgCol2 ? bgCol2 : bgCol, overflow: 'hidden' }}>
+                    <ScrLoaderCompo loading={scrLoader} />
+                    {tSvg && tSvg}
                     {renderContent()}
+                    {bSvg && bSvg}
+                    <ScrLoaderCompo loading={abLoader} absolute />
                 </KeyboardAvoidingView>
                 {
                     (bottomBarColor) && <SafeAreaView

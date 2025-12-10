@@ -1,78 +1,14 @@
 import { StyleSheet, View } from 'react-native'
-import React, { useRef, useState, useCallback, useMemo } from 'react'
+import React from 'react'
 import { useThemeX } from 'hooks'
 import { defStyObjType } from 'types'
-import { MasterView, PressableScaleX } from 'components'
-import TextXCompo from 'components/XCompos/TextXCompo'
-import WebView from 'react-native-webview'
-import ScrLoaderCompo from 'components/XCompos/ScrLoaderCompo'
-import Animated, {
-    useSharedValue,
-    useAnimatedStyle,
-    withTiming,
-    Easing,
-    FadeIn,
-    FadeOut,
-} from 'react-native-reanimated'
+import { MasterView, VideoFrame } from 'components'
 import { _WIDTH } from 'utils'
 import { Size } from 'functions'
-
-interface WebViewErrorState {
-    hasError: boolean
-    errorMessage: string
-}
 
 const LiveTVController = () => {
     const { defStyOBJ, col } = useThemeX()
     const style = styleFN(defStyOBJ)
-    const webViewRef = useRef<WebView>(null)
-
-    // State management
-    const [loading, setLoading] = useState(true)
-    const [errorState, setErrorState] = useState<WebViewErrorState>({
-        hasError: false,
-        errorMessage: '',
-    })
-
-    // WebView load start handler
-    const handleLoadStart = useCallback(() => {
-        setLoading(true)
-        setErrorState({ hasError: false, errorMessage: '' })
-    }, [])
-
-    // WebView error handler
-    const handleWebViewError = useCallback((event: any) => {
-        const errorMsg = event.nativeEvent.description || 'Failed to load video'
-
-        setErrorState({
-            hasError: true,
-            errorMessage: errorMsg,
-        })
-        setLoading(false)
-
-    }, [])
-
-    // Retry handler
-    const handleRetry = useCallback(() => {
-        setErrorState({ hasError: false, errorMessage: '' })
-        setLoading(true)
-        webViewRef.current?.reload()
-    }, [])
-
-    // Message handler for additional error logging
-    const handleMessage = useCallback((event: any) => {
-        try {
-            const message = JSON.parse(event.nativeEvent.data)
-            if (message.type === 'error') {
-                setErrorState({
-                    hasError: true,
-                    errorMessage: message.error || 'An error occurred',
-                })
-            }
-        } catch (e) {
-            // Silent fail for message parsing
-        }
-    }, [])
 
     return (
         <MasterView
@@ -84,54 +20,13 @@ const LiveTVController = () => {
             bgCol={col.BLACK}
             bgCol2={col.BLACK}
             bIcCol={col.WHITE}
-            bIcBgCol={col.WHITE02}
-            abLoader={loading}
-        >
+            bIcBgCol={col.WHITE02}>
             <View style={[style.container]}>
-                <WebView
-                    ref={webViewRef}
+                <VideoFrame
+                    yt_video_id='mHUhh0WFuu4'
                     style={{ backgroundColor: col.BLACK, flex: 1, width: _WIDTH }}
-                    source={{
-                        uri: `https://www.youtube.com/embed/mHUhh0WFuu4?autoplay=1&playsinline=1`,
-                        headers: { Referer: 'https://sandesh.com' },
-                    }}
-                    scrollEnabled={false}
-                    allowsInlineMediaPlayback
-                    mediaPlaybackRequiresUserAction={false}
-                    javaScriptEnabled
-                    domStorageEnabled
-                    originWhitelist={['*']}
-                    allowsFullscreenVideo
-                    cacheEnabled
-                    setSupportMultipleWindows={false}
-                    androidLayerType="hardware"
-                    onLoadStart={handleLoadStart}
-                    onLoadEnd={() => setLoading(false)}
-                    onError={handleWebViewError}
-                    onMessage={handleMessage}
+                    yt_params={{ autoplay: 1, controls: 0, rel: 1, iv_load_policy: 3, }}
                 />
-
-                {/* Error display */}
-                {errorState?.hasError && (
-                    <Animated.View
-                        entering={FadeIn.duration(300)}
-                        exiting={FadeOut.duration(300)}
-                        style={[style.errorContainer]}>
-                        <TextXCompo
-                            tSty={[style.errorTitle]}
-                            text="⚠️ Error Loading Video" />
-                        <TextXCompo
-                            tSty={[style.errorMessage]}
-                            text={errorState.errorMessage} />
-                        <PressableScaleX style={style.errorActionsBtn} >
-                            <TextXCompo
-                                tSty={style.errorActionsBtnTitle}
-                                text="Retry"
-                                onPress={handleRetry}
-                            />
-                        </PressableScaleX>
-                    </Animated.View>
-                )}
             </View>
         </MasterView>
     )

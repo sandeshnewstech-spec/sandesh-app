@@ -16,9 +16,13 @@ import ImageX from "./XCompos/ImageXCompo";
 import HomeTopMenu from "./Home/HomeTopMenuCompo";
 import HomePage from "./Home/HomePageCompo";
 import LiveButton from "./Home/LiveButtonCompo";
+import VideoItem from "./VideoItemCompo";
+import YoutubeIFramePlayer from "./YoutubeIFramePlayerCompo";
+import VideoFrame from "./VideoFrameCompo";
 
 export {
     PressX, MasterView, HeaderX, StatusBarX, TextX, TextInputX, ButtonX,
     ScrLoader, ToastAlert, SwitchX, VideoX, PressableScaleX, ButtonOne,
-    SelectionItemCard, ImageX, HomeTopMenu, HomePage, LiveButton
+    SelectionItemCard, ImageX, HomeTopMenu, HomePage, LiveButton, VideoItem,
+    YoutubeIFramePlayer, VideoFrame
 }

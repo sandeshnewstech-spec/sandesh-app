@@ -1,6 +1,7 @@
 import { Dimensions } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { _isDEV, _isPUBLISH_MODE } from "../utils";
+import { allTypesOfPostOBJType, allTypesOfPostItemType, postDetailTopTenNewsType } from "types";
 
 export const _HEIGHT = Dimensions.get('window').height;
 export const _WIDTH = Dimensions.get('window').width;
@@ -110,3 +111,32 @@ export const formatDurationFN = (secondsInput: number) => {
     // return `${hours > 0 ? `${hours}:` : ''}${String(minutes).padStart(2, '0')}:${String(secondsRemaining).padStart(2, '0')}`;
     return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secondsRemaining).padStart(2, '0')}`;
 };
+
+export const updateOBJFN = (state: allTypesOfPostOBJType = {}, updatedState: allTypesOfPostOBJType): { obj: allTypesOfPostOBJType, IDs: Array<string> } => {
+    const tempOBJ: allTypesOfPostOBJType = {};
+    const tempIDs: Array<string> = [];
+    for (let item of Object.values(updatedState)) {
+        const ID = item?.id;
+        if (!ID) continue;
+        tempIDs.push(item?.id);
+        if (state[ID]?.id) {
+            const tempItem: allTypesOfPostItemType = state[ID];
+            tempOBJ[ID] = { ...tempItem, ...updatedState };
+        } else {
+            tempOBJ[ID] = item;
+        }
+    };
+    return { IDs: tempIDs, obj: tempOBJ };
+}
+
+export const makeOBJFN = (updatedState: allTypesOfPostOBJType = {}): { obj: allTypesOfPostOBJType, IDs: Array<string> } => {
+    const tempOBJ: allTypesOfPostOBJType = {};
+    const tempIDs: Array<string> = [];
+    for (let item of Object.values(updatedState)) {
+        const ID = item?.id;
+        if (!ID) continue;
+        tempIDs.push(item?.id);
+        tempOBJ[ID] = item;
+    };
+    return { IDs: tempIDs, obj: tempOBJ };
+}

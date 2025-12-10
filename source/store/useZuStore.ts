@@ -3,6 +3,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 import { zuStandStoreOBJType } from '../types';
 import { zuStandStoreOBJ } from '../utils';
 import zuStandStorage from './zustandStorage';
+import { updateOBJFN } from 'functions';
 
 /**
 * Local Storage,
@@ -13,12 +14,13 @@ const useZuStore = create<zuStandStoreOBJType>()(
         ...zuStandStoreOBJ,
         setIsAppStartFlow: by => set((state) => ({ isAppStartFlow: by })),
         setAppServices: by => set((state) => ({ appServices: { ...state?.appServices, ...by } })),
+        setPosts: by => set((state) => ({ posts: by })),
+        setUpdatePosts: by => set((state) => ({ posts: updateOBJFN(state?.posts, by)?.obj })),
     }), {
         "name": '@AppForStore',
         "storage": createJSONStorage(() => zuStandStorage),
         partialize: (state) => <zuStandStoreOBJType>({
             ...state,
-            videoListData: {}
         }),
         onRehydrateStorage: (_/* state */) => {
             return async (state, error) => {

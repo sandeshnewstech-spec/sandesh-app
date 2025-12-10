@@ -1,14 +1,31 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
 import useZuStore from 'store/useZuStore'
+import { useAPIs } from 'hooks';
+import { appServicesType } from 'types';
 
 const useInitHook = () => {
-    const { setIsAppStartFlow, setAppServices } = useZuStore();
-    useEffect(() => {
-        // setIsAppStartFlow(true);
-        setAppServices({
-            appLogo: "https://s3-symbol-logo.tradingview.com/sandesh-ltd--600.png"
+    const { setIsAppStartFlow, setAppServices, setPosts } = useZuStore();
+    const { getSettingAPI } = useAPIs();
+
+    const bulkAPICalling = () => {
+        // setPosts({});
+        const tempOBJ: appServicesType = {};
+        tempOBJ['appLogo'] = "https://s3-symbol-logo.tradingview.com/sandesh-ltd--600.png"
+
+        getSettingAPI().then(({ res }) => {
+            if (res?.data) {
+                tempOBJ['assetURL'] = res?.data[21]?.value;
+            }
         });
+
+        // setIsAppStartFlow(true);
+        setAppServices(tempOBJ);
+    }
+
+    useEffect(() => {
+        bulkAPICalling();
+        // setIsAppStartFlow(true);
     }, []);
     return ({})
 }

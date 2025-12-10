@@ -33,7 +33,7 @@
         "HEADER_TEXT_BG_COL": "white",
         "HEADER_SVG_COL": "black",
         "HEADER_SVG_BGCOL": "rgba(256,256,256,.3)",
-        "SB_COL": "black",
+        "SB_COL": "white",
         "INPUT_TEXT_LABLE_COL": "white",
         "INPUT_TEXT_PH_COL": "rgba(0,0,0,.5)",
         "INPUT_TEXT_OUTLINE": "rgba(0,0,0,.5)",

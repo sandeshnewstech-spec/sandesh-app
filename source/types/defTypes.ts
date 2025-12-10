@@ -10,16 +10,23 @@ import { FONT } from "../assets";
 import { ReactNode } from "react";
 import { StackScreenProps } from "@react-navigation/stack";
 import { AndroidPermission, IOSPermission } from "react-native-permissions";
+import { allTypesOfPostOBJType } from "./apiTypes";
+import { YoutubeIframeRef } from "react-native-youtube-iframe";
 
 export type zuStandInitStoreType = {
     isAppStartFlow: boolean;
     appServices: appServicesType;
+    posts: allTypesOfPostOBJType;
 }
 
 export type setZuStandInitStoreType = {
     setIsAppStartFlow: (by: boolean) => void;
     setAppServices: (by: appServicesType) => void;
+    setPosts: (by: allTypesOfPostOBJType) => void;
+    setUpdatePosts: (by: allTypesOfPostOBJType) => void;
 }
+
+export type YoutubeIFramePlayerRefType = YoutubeIframeRef;
 
 export type zuStandStoreOBJType = zuStandInitStoreType & setZuStandInitStoreType;
 
@@ -288,18 +295,18 @@ export type rationaleType = {
 export type PressableScaleXCompoProps = {
     children?: React.ReactNode
     text?: string | number | boolean | null
-    disabled?: boolean
-    loading?: boolean
-    lCol?: ColorValue
-    lSize?: number | 'small' | 'large' | undefined
+    disabled?: boolean;
+    loading?: boolean;
+    lCol?: ColorValue;
+    lSize?: number | 'small' | 'large' | undefined;
     style?: ViewStyle;
     tSty?: TextStyle;
     tProps?: TextProps;
     lProps?: ActivityIndicatorProps;
-    onPress?: () => void
-    onPressIn?: () => void
-    onPressOut?: () => void
-    onLongPress?: () => void
+    onPress?: () => void;
+    onPressIn?: () => void;
+    onPressOut?: () => void;
+    onLongPress?: () => void;
     hitSlop?: number
     activeScale?: number
     rippleRadius?: number
@@ -312,4 +319,6 @@ export type PressableScaleXCompoProps = {
 export type appServicesType = {
     appLogo?: string;
     placeholderLogo?: string;
+    assetURL?: string;
 }
+

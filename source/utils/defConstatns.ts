@@ -8,6 +8,8 @@ import { Size } from "functions";
 export const _isDEV = true;
 export const _isPUBLISH_MODE = false;
 
+export const BOTTOM_TAB_HEIGHT = Size(70);
+
 export const _WIDTH = Dimensions.get('window').width;
 export const _HEIGHT = Dimensions.get('window').height;
 
@@ -31,11 +33,14 @@ export const onStateChange: any = React.createRef<any>();
 export const zuStandInitStore: zuStandInitStoreType = {
     isAppStartFlow: true,
     appServices: {},
+    posts: {},
 };
 
 export const setZuStandInitStore: setZuStandInitStoreType = {
     setIsAppStartFlow(by) { },
     setAppServices(by) { },
+    setPosts(by) { },
+    setUpdatePosts(by) { },
 }
 
 export const zuStandStoreOBJ: zuStandStoreOBJType = { ...zuStandInitStore, ...setZuStandInitStore };
@@ -85,5 +90,10 @@ export const defTheme = ({ col, font, isDarkMode }: defStyObjType): ReactNavigat
 
 export const API_END_POINTS = {
     homeSecondary: "home/secondary",
-    homeTopMenu: "menu/web-menu"
+    homeTopMenu: "menu/mobile-menu",
+    videos: "videopage",
+    setting: "setting",
+    postDetails: "post-details"
 }
+
+export const CUSTOM_USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36';

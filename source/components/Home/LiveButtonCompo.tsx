@@ -1,51 +1,34 @@
 import { StyleSheet, View } from 'react-native'
-import React, { useRef } from 'react'
+import React, { memo } from 'react'
 import { useThemeX } from 'hooks'
 import { defStyObjType } from 'types';
-import WebView from 'react-native-webview';
 import { IC_MATERIAL } from 'assets';
 import { Size } from 'functions';
 import PressableScaleXCompo from 'components/XCompos/PressableScaleXCompo';
 import { useNavigation } from '@react-navigation/native';
+import { VideoFrame } from 'components';
 
 const LiveButtonCompo = () => {
     const navigation: any = useNavigation();
     const { defStyOBJ, col } = useThemeX();
     const style = styleFN(defStyOBJ);
-    const webViewRef = useRef<WebView>(null);
-    return (
-        <PressableScaleXCompo onPress={() => navigation.navigate("LiveTVScreen")}>
-            <View style={style.mSty} >
-                <WebView
-                    ref={webViewRef}
-                    source={{
-                        uri: `https://www.youtube.com/embed/mHUhh0WFuu4?autoplay=1&mute=1&playsinline=1`,
-                        headers: { Referer: "https://sandesh.com" },
-                    }}
-                    // style={{ borderRadius: 100, overflow: 'hidden' }}
-                    scrollEnabled={false}
-                    allowsInlineMediaPlayback={false}
-                    mediaPlaybackRequiresUserAction={false}
-                    javaScriptEnabled={true}
-                    domStorageEnabled={true}
-                    originWhitelist={["*"]}
-                    allowsFullscreenVideo={true}
-                    cacheEnabled={true}
-                    setSupportMultipleWindows={false}
-                    androidLayerType="hardware"
-                />
-                <View style={style.live_btn_cSty} >
-                    <IC_MATERIAL
-                        name='connected-tv'
-                        size={Size(25)} color={col.WHITE09} />
-                </View>
+    return (<PressableScaleXCompo onPress={() => navigation.navigate("LiveTVScreen")}>
+        <View style={style.mSty}>
+            <VideoFrame
+                style={{ flex: 1 }}
+                yt_video_id="mHUhh0WFuu4"
+                yt_params={{ autoplay: 1, mute: 1, controls: 0, rel: 1, iv_load_policy: 3, }}
+            />
+            <View style={style.live_btn_cSty} >
+                <IC_MATERIAL
+                    name='connected-tv'
+                    size={Size(25)} color={col.WHITE09} />
             </View>
-        </PressableScaleXCompo>
-
-    )
+        </View>
+    </PressableScaleXCompo>)
 }
 
-export default LiveButtonCompo
+export default memo(LiveButtonCompo)
 
 const styleFN = ({ col }: defStyObjType) => StyleSheet.create({
     mSty: {

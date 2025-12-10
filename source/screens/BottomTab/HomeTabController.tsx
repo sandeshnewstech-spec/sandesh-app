@@ -9,7 +9,6 @@ import Animated from 'react-native-reanimated'
 import { Tabs, TabScreen, TabsProvider } from 'react-native-paper-tabs'
 import { IC_MATERIAL, SANDESH_LOGO_IMG } from 'assets'
 import type { MD3Theme } from 'react-native-paper';
-import { WebView } from 'react-native-webview';
 import { Size } from 'functions'
 
 const HomeTabController = ({ navigation }: any) => {

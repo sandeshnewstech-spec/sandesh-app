@@ -17,7 +17,7 @@ const useAPIsHook = () => {
 
   const BASE_URL = "https://mapi.sandesh.com";
   const API_V = "v1";
-  const FINAL_BASE_URL = `${BASE_URL}/api/${API_V}/`;
+  const FINAL_BASE_URL = `${BASE_URL}/mobile/api/${API_V}/`;
 
   const headR = (token?: string, urlencoded?: boolean, multipart?: boolean) => {
 
@@ -87,6 +87,32 @@ const useAPIsHook = () => {
     });
   }
 
+  async function getVideosAPI(pageNo = 1, numberOfItems = 20) {
+    return fetchREQ({
+      method: 'GET',
+      apiURI: FINAL_BASE_URL,
+      endPath: API_END_POINTS.videos,
+      params: `limit=${numberOfItems}&page=${pageNo}`
+    });
+  }
+
+  async function getSettingAPI() {
+    return fetchREQ({
+      method: 'GET',
+      apiURI: FINAL_BASE_URL,
+      endPath: API_END_POINTS.setting,
+    });
+  }
+
+  async function getPostDetailsAPI(url: string) {
+    return fetchREQ({
+      method: 'POST',
+      apiURI: FINAL_BASE_URL,
+      endPath: API_END_POINTS.setting,
+      body: { url: url, platform: Platform.OS }
+    });
+  }
+
   function abortAPI() { try { abort(); } catch (e) { /* LOG(e, "ERROR :: abortAPI =>>"); */ } }
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { runOnJS(abortAPI)(); return false; });
@@ -95,7 +121,8 @@ const useAPIsHook = () => {
   useEffect(() => { if (!isFocused) runOnJS(abortAPI)(); }, [isFocused]);
 
   return {
-    abortAPI, getHomeSecondaryDataAPI, getHomeTopMenuAPI
+    abortAPI, getHomeSecondaryDataAPI, getHomeTopMenuAPI, getVideosAPI,
+    getSettingAPI, getPostDetailsAPI
   };
 
 }

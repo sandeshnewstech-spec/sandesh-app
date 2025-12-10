@@ -5,7 +5,7 @@ import { PressableScaleX, TextX } from 'components';
 import { defStyObjType } from 'types';
 import { IC_MATERIAL, IC_MATERIAL_COMMUNITY } from 'assets';
 import { Size } from 'functions';
-import { ICON_SIZE } from 'utils';
+import { BOTTOM_TAB_HEIGHT, ICON_SIZE } from 'utils';
 
 const CustomizeBottomTabBar = ({ state, descriptors, navigation }: any) => {
 
@@ -85,7 +85,7 @@ export default CustomizeBottomTabBar;
 
 const styFN = ({ col, font, bottom }: defStyObjType) => StyleSheet.create({
     mainContainer: {
-        height: 70 + bottom - 2,
+        height: BOTTOM_TAB_HEIGHT + bottom,
         paddingBottom: bottom / 2 + 5,
         justifyContent: 'center',
         backgroundColor: col.BOTTOM_TAB_BG,
