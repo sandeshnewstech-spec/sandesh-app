@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { View, StyleSheet, ViewStyle } from 'react-native';
 import Animated, {
   useSharedValue,
@@ -30,6 +30,7 @@ interface LoaderProps {
   color?: string;
   secondaryColor?: string;
   style?: ViewStyle;
+  loading?: boolean;
 }
 
 const Loader: React.FC<LoaderProps> = ({
@@ -38,6 +39,7 @@ const Loader: React.FC<LoaderProps> = ({
   color = '#3b82f6',
   secondaryColor = '#8b5cf6',
   style,
+  loading = true,
 }) => {
   const renderLoader = () => {
     switch (type) {
@@ -66,7 +68,7 @@ const Loader: React.FC<LoaderProps> = ({
 
   return (
     <View style={[styles.loaderWrapper, style]}>
-      {renderLoader()}
+      {loading && renderLoader()}
     </View>
   );
 };
@@ -584,4 +586,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Loader;
+export default memo(Loader);

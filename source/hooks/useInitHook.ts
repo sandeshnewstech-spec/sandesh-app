@@ -1,5 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import useZuStore from 'store/useZuStore'
 import { useAPIs } from 'hooks';
 import { appServicesType } from 'types';

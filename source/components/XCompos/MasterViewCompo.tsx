@@ -136,7 +136,7 @@ const MasterViewCompo = ({
                     style={{ flex: 1, backgroundColor: bgCol2 ? bgCol2 : bgCol, overflow: 'hidden' }}>
                     <ScrLoaderCompo loading={scrLoader} />
                     {tSvg && tSvg}
-                    {renderContent()}
+                    {!scrLoader && renderContent()}
                     {bSvg && bSvg}
                     <ScrLoaderCompo loading={abLoader} absolute />
                 </KeyboardAvoidingView>

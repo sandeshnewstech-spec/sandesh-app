@@ -113,15 +113,14 @@ export const formatDurationFN = (secondsInput: number) => {
 };
 
 export const updateOBJFN = (state: allTypesOfPostOBJType = {}, updatedState: allTypesOfPostOBJType): { obj: allTypesOfPostOBJType, IDs: Array<string> } => {
-    const tempOBJ: allTypesOfPostOBJType = {};
+    const tempOBJ: allTypesOfPostOBJType = state;
     const tempIDs: Array<string> = [];
     for (let item of Object.values(updatedState)) {
         const ID = item?.id;
         if (!ID) continue;
-        tempIDs.push(item?.id);
         if (state[ID]?.id) {
             const tempItem: allTypesOfPostItemType = state[ID];
-            tempOBJ[ID] = { ...tempItem, ...updatedState };
+            tempOBJ[ID] = { ...tempItem, ...item };
         } else {
             tempOBJ[ID] = item;
         }
@@ -135,7 +134,7 @@ export const makeOBJFN = (updatedState: allTypesOfPostOBJType = {}): { obj: allT
     for (let item of Object.values(updatedState)) {
         const ID = item?.id;
         if (!ID) continue;
-        tempIDs.push(item?.id);
+        tempIDs.push(ID);
         tempOBJ[ID] = item;
     };
     return { IDs: tempIDs, obj: tempOBJ };

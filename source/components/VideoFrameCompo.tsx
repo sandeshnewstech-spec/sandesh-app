@@ -44,7 +44,7 @@ const VideoFrameCompo = ({ yt_video_id, style, webViewStyle, yt_params }: P) => 
     const yt_url = buildYouTubeUrl(yt_video_id, yt_params);
 
     return (
-        <View style={[style]} >
+        <View style={[style]}>
             {/* <Text style={{ color: 'white' }} >{buildYouTubeUrl(yt_video_id, yt_params)}</Text> */}
             <WebView
                 source={{
@@ -56,25 +56,26 @@ const VideoFrameCompo = ({ yt_video_id, style, webViewStyle, yt_params }: P) => 
                 indicatorStyle="white"
                 onShouldStartLoadWithRequest={onShouldStartLoadWithRequest}
                 userAgent={CUSTOM_USER_AGENT}
-                cacheMode='LOAD_CACHE_ONLY'
-                scrollEnabled={false}
-                allowsInlineMediaPlayback={false}
-                allowsAirPlayForMediaPlayback={false}
-                mediaPlaybackRequiresUserAction={false}
-                allowsPictureInPictureMediaPlayback={false}
-                javaScriptEnabled
-                domStorageEnabled
                 originWhitelist={[yt_url]}
-                allowsFullscreenVideo
-                cacheEnabled
-                setSupportMultipleWindows={false}
-                androidLayerType="hardware"
                 onLoadEnd={() => setLoading(false)}
                 onLoadSubResourceError={() => setLoading(false)}
                 onError={() => setLoading(false)}
                 onHttpError={() => setLoading(false)}
                 onMessage={() => setLoading(false)}
                 onNavigationStateChange={() => setLoading(false)}
+                cacheMode='LOAD_CACHE_ONLY'
+                scrollEnabled={false}
+                allowsInlineMediaPlayback={false}
+                allowsAirPlayForMediaPlayback={false}
+                mediaPlaybackRequiresUserAction={false}
+                allowsPictureInPictureMediaPlayback={false}
+                setSupportMultipleWindows={false}
+                renderToHardwareTextureAndroid={true}
+                androidLayerType="hardware"
+                javaScriptEnabled
+                domStorageEnabled
+                allowsFullscreenVideo
+                cacheEnabled
             />
             <ScrLoaderCompo loading={loading} />
         </View>

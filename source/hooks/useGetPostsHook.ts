@@ -9,6 +9,7 @@ const useGetPostsHook = ({ IDs = [] }: { IDs: Array<string> }) => {
 
     const postsData = useMemo(() => {
         const tempOBJ: Array<allTypesOfPostItemType> = [];
+        pLOG("postDATA::", { ids: [IDs], postlength: Object.keys(posts).length },)
         for (let id of IDs) {
             if (posts[id]?.id) {
                 tempOBJ.push(posts[id]);

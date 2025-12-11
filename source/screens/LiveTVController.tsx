@@ -25,7 +25,7 @@ const LiveTVController = () => {
                 <VideoFrame
                     yt_video_id='mHUhh0WFuu4'
                     style={{ backgroundColor: col.BLACK, flex: 1, width: _WIDTH }}
-                    yt_params={{ autoplay: 1, controls: 0, rel: 1, iv_load_policy: 3, }}
+                    yt_params={{ autoplay: 1, rel: 1, iv_load_policy: 3, }}
                 />
             </View>
         </MasterView>
