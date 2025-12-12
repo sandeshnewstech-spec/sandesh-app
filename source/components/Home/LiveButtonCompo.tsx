@@ -3,20 +3,22 @@ import React, { memo } from 'react'
 import { useThemeX } from 'hooks'
 import { defStyObjType } from 'types';
 import { IC_MATERIAL } from 'assets';
-import { Size } from 'functions';
+import { pLOG, Size } from 'functions';
 import PressableScaleXCompo from 'components/XCompos/PressableScaleXCompo';
 import { useNavigation } from '@react-navigation/native';
 import { VideoFrame } from 'components';
+import useZuStore from 'store/useZuStore';
 
 const LiveButtonCompo = () => {
     const navigation: any = useNavigation();
+    const { appServices } = useZuStore();
     const { defStyOBJ, col } = useThemeX();
     const style = styleFN(defStyOBJ);
     return (<PressableScaleXCompo onPress={() => navigation.navigate("LiveTVScreen")}>
         <View style={style.mSty}>
             <VideoFrame
                 style={{ flex: 1 }}
-                yt_video_id="mHUhh0WFuu4"
+                yt_video_id={appServices?.liveStreamYoutubeId || ""}
                 yt_params={{ autoplay: 1, mute: 1, controls: 0, rel: 1, iv_load_policy: 3, }}
             />
             <View style={style.live_btn_cSty} >

@@ -59,7 +59,7 @@ const HomeTabController = ({ navigation }: any) => {
                     </PressableScaleX>
                 </View>
             </Animated.View >
-            <TabsProvider defaultIndex={0} >
+            <TabsProvider defaultIndex={0}>
                 <Tabs
                     theme={{
                         colors: { primary: col.HOME_TOP_TAB_SELECTED_ITEM_INDICATORE }

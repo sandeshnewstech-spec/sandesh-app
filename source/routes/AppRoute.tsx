@@ -1,15 +1,13 @@
 import React, { Fragment } from 'react';
-import { NavigationContainer, } from '@react-navigation/native';
 import { AppStack, } from 'utils';
 import { ToastAlert } from 'components';
-import { useConnection, useInit, useMMKVStore, useThemeX } from '../hooks';
+import { useInit, useMMKVStore } from '../hooks';
 import { InterestScreen, LanguageSelectionScreen, LiveTVScreen, LocationScreen } from 'screens';
 import useZuStore from 'store/useZuStore';
 import BottomTab from './BottomTab';
 
 const AppRoute = () => {
 
-    const { str } = useThemeX();
     const { isAppStartFlow } = useZuStore();
     const { toast, setToast } = useMMKVStore();
 

@@ -3,16 +3,20 @@ import React from 'react'
 import { useThemeX } from 'hooks'
 import { defStyObjType } from 'types'
 import { MasterView, VideoFrame } from 'components'
-import { _WIDTH } from 'utils'
+import { _HEIGHT, _WIDTH } from 'utils'
 import { Size } from 'functions'
+import useZuStore from 'store/useZuStore'
 
 const LiveTVController = () => {
-    const { defStyOBJ, col } = useThemeX()
+    const { appServices } = useZuStore();
+    const { defStyOBJ, col, windowDimention } = useThemeX()
     const style = styleFN(defStyOBJ)
 
     return (
         <MasterView
             fixed
+            hShow={_HEIGHT !== windowDimention.width}
+            sbShow={_HEIGHT !== windowDimention.width}
             sbColor={col.BLACK}
             barStyle="light-content"
             bottomBarColor={col.BLACK}
@@ -23,8 +27,8 @@ const LiveTVController = () => {
             bIcBgCol={col.WHITE02}>
             <View style={[style.container]}>
                 <VideoFrame
-                    yt_video_id='mHUhh0WFuu4'
-                    style={{ backgroundColor: col.BLACK, flex: 1, width: _WIDTH }}
+                    yt_video_id={appServices?.liveStreamYoutubeId || ""}
+                    style={{ backgroundColor: col.BLACK, flex: 1, width: "100%" }}
                     yt_params={{ autoplay: 1, rel: 1, iv_load_policy: 3, }}
                 />
             </View>

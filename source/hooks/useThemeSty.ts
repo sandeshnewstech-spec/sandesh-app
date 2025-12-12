@@ -6,6 +6,7 @@ import { useMemo } from "react";
 import { _COL, _GRADIANTS_COLORS } from "../colors";
 import { CompoStyFN, HeaderStyFN } from "../styles";
 import { useColors, useMMKVStore } from ".";
+import { useWindowDimensions } from "react-native";
 
 const useThemeXSty = () => {
 
@@ -14,11 +15,12 @@ const useThemeXSty = () => {
     const str = useString();
     const { col, GRADIANTS_COLORS } = useColors();
     const sAI: EdgeInsets = useSafeAreaInsets();
+    const windowDimention = useWindowDimensions();
 
     const font = useMemo(() => FONT, [FONT]);
 
     const defStyOBJ: defStyObjType = useMemo(() => ({
-        col, font, isDarkMode: isDark, ...sAI, GRADIANTS_COLORS
+        col, font, isDarkMode: isDark, ...sAI, GRADIANTS_COLORS, windowDimention
     }), [col, font, sAI, GRADIANTS_COLORS]);
 
     // const compSty = compStyleFunc(defStyOBJ);
@@ -26,8 +28,8 @@ const useThemeXSty = () => {
     const cpSty = CompoStyFN(defStyOBJ);
 
     return {
-        ...sAI, col, str, font, defStyOBJ,
-        hdSty, cpSty, setToast, GRADIANTS_COLORS
+        ...sAI, col, str, font, defStyOBJ, windowDimention,
+        hdSty, cpSty, setToast, GRADIANTS_COLORS,
     };
 };
 

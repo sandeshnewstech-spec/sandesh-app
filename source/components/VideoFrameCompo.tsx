@@ -5,6 +5,7 @@ import { ShouldStartLoadRequest } from "react-native-webview/lib/WebViewTypes";
 import { CUSTOM_USER_AGENT, isIOS } from "utils";
 import ScrLoaderCompo from "./XCompos/ScrLoaderCompo";
 import { buildYouTubeUrl, YouTubeParamsType } from "types";
+import { pLOG } from "functions";
 
 type P = {
     yt_video_id: string;

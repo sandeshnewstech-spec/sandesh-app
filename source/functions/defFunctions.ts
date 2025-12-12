@@ -112,14 +112,15 @@ export const formatDurationFN = (secondsInput: number) => {
     return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secondsRemaining).padStart(2, '0')}`;
 };
 
-export const updateOBJFN = (state: allTypesOfPostOBJType = {}, updatedState: allTypesOfPostOBJType): { obj: allTypesOfPostOBJType, IDs: Array<string> } => {
-    const tempOBJ: allTypesOfPostOBJType = state;
+export const updateOBJFN = (state: { [key: string]: any } = {}, updatedState: { [key: string]: any }): { obj: { [key: string]: any }, IDs: Array<string> } => {
+    const tempOBJ: { [key: string]: any } = state;
     const tempIDs: Array<string> = [];
-    for (let item of Object.values(updatedState)) {
+    for (let item of (Array.isArray(updatedState) ? updatedState : Object.values(updatedState))) {
         const ID = item?.id;
         if (!ID) continue;
+        tempIDs.push(ID);
         if (state[ID]?.id) {
-            const tempItem: allTypesOfPostItemType = state[ID];
+            const tempItem: { [key: string]: any } = state[ID];
             tempOBJ[ID] = { ...tempItem, ...item };
         } else {
             tempOBJ[ID] = item;
@@ -128,8 +129,8 @@ export const updateOBJFN = (state: allTypesOfPostOBJType = {}, updatedState: all
     return { IDs: tempIDs, obj: tempOBJ };
 }
 
-export const makeOBJFN = (updatedState: allTypesOfPostOBJType = {}): { obj: allTypesOfPostOBJType, IDs: Array<string> } => {
-    const tempOBJ: allTypesOfPostOBJType = {};
+export const makeOBJFN = (updatedState: { [key: string]: any } = {}): { obj: { [key: string]: any }, IDs: Array<string> } => {
+    const tempOBJ: { [key: string]: any } = {};
     const tempIDs: Array<string> = [];
     for (let item of Object.values(updatedState)) {
         const ID = item?.id;

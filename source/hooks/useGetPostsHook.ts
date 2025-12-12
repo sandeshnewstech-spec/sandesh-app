@@ -1,23 +1,32 @@
-import { pLOG } from 'functions';
+import { updateOBJFN } from 'functions';
 import { useMemo } from 'react';
 import useZuStore from 'store/useZuStore';
-import { allTypesOfPostItemType } from 'types';
+import { allTypesOfPostItemType, WebStoryItemType } from 'types';
 
-const useGetPostsHook = ({ IDs = [] }: { IDs: Array<string> }) => {
-    const { posts } = useZuStore();
-    const state = useZuStore();
+const useGetPostsHook = ({ _postsIDs = [], _webStoryIDs = [] }: { _postsIDs?: Array<string>; _webStoryIDs?: Array<string> }) => {
+    const { posts, webStory } = useZuStore();
 
     const postsData = useMemo(() => {
         const tempOBJ: Array<allTypesOfPostItemType> = [];
-        pLOG("postDATA::", { ids: [IDs], postlength: Object.keys(posts).length },)
-        for (let id of IDs) {
+        for (let id of _postsIDs) {
             if (posts[id]?.id) {
                 tempOBJ.push(posts[id]);
             }
         };
         return tempOBJ;
-    }, [posts, IDs]);
-    return ({ postsData });
+    }, [posts, _postsIDs]);
+
+    const webStoryData = useMemo((): Array<WebStoryItemType> => {
+        const tempOBJ: Array<WebStoryItemType> = [];
+        for (let id of _webStoryIDs) {
+            if (webStory[id]?.id) {
+                tempOBJ.push(webStory[id]);
+            }
+        };
+        return tempOBJ;
+    }, [webStory, _webStoryIDs]);
+
+    return ({ postsData, webStoryData });
 }
 
 export default useGetPostsHook;

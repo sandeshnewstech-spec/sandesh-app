@@ -113,6 +113,14 @@ const useAPIsHook = () => {
     });
   }
 
+  async function getHomePageWebStoryAPI() {
+    return fetchREQ({
+      method: 'GET',
+      apiURI: FINAL_BASE_URL,
+      endPath: API_END_POINTS.homePageWebStory,
+    });
+  }
+
   function abortAPI() { try { abort(); } catch (e) { /* LOG(e, "ERROR :: abortAPI =>>"); */ } }
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { runOnJS(abortAPI)(); return false; });
@@ -122,7 +130,7 @@ const useAPIsHook = () => {
 
   return {
     abortAPI, getHomeSecondaryDataAPI, getHomeTopMenuAPI, getVideosAPI,
-    getSettingAPI, getPostDetailsAPI
+    getSettingAPI, getPostDetailsAPI, getHomePageWebStoryAPI, BASE_URL
   };
 
 }

@@ -1,5 +1,9 @@
-import { ActivityIndicatorProps, AlertType, ColorValue, DimensionValue, FlexAlignType, GestureResponderEvent, KeyboardTypeOptions, NativeSyntheticEvent, ReturnKeyTypeOptions, ScrollViewProps, StatusBarStyle, StyleProp, TextInputFocusEventData, TextInputProps, TextInputSubmitEditingEventData, TextStyle, ViewStyle } from "react-native";
-import { PressableProps, ScrollView } from "react-native-gesture-handler";
+import {
+    ActivityIndicatorProps, ColorValue, DimensionValue, FlexAlignType, GestureResponderEvent, KeyboardTypeOptions,
+    NativeSyntheticEvent, ReturnKeyTypeOptions, ScaledSize, ScrollViewProps, StatusBarStyle, StyleProp, TextInputFocusEventData,
+    TextInputProps, TextInputSubmitEditingEventData, TextStyle, ViewStyle
+} from "react-native";
+import { PressableProps } from "react-native-gesture-handler";
 import { PressableAndroidRippleConfig } from "react-native-gesture-handler/lib/typescript/components/Pressable/PressableProps";
 import { AnimatedScrollViewProps, SharedValue } from "react-native-reanimated";
 import { TextProps } from "react-native-svg";
@@ -17,6 +21,7 @@ export type zuStandInitStoreType = {
     isAppStartFlow: boolean;
     appServices: appServicesType;
     posts: allTypesOfPostOBJType;
+    webStory: WebStoryObjType;
 }
 
 export type setZuStandInitStoreType = {
@@ -24,6 +29,7 @@ export type setZuStandInitStoreType = {
     setAppServices: (by: appServicesType) => void;
     setPosts: (by: allTypesOfPostOBJType) => void;
     setUpdatePosts: (by: allTypesOfPostOBJType) => void;
+    setWebStory: (by: WebStoryObjType) => void;
 }
 
 export type YoutubeIFramePlayerRefType = YoutubeIframeRef;
@@ -92,6 +98,7 @@ export type defStyObjType = {
     col: colorType;
     font: fontType;
     GRADIANTS_COLORS: typeof _GRADIANTS_COLORS[0];
+    windowDimention: ScaledSize;
 } & EdgeInsets;
 
 export type headerType = {
@@ -320,5 +327,31 @@ export type appServicesType = {
     appLogo?: string;
     placeholderLogo?: string;
     assetURL?: string;
+    liveStreamYoutubeId?: string;
+    baseURL?: string;
 }
 
+export type WebStoryObjType = { [key: string]: WebStoryItemType };
+
+export type WebStoryItemType = {
+    id?: number;
+    url?: string;
+    category?: string;
+    subcategory?: string | null;
+    image?: string;
+    main_image?: string;
+    status?: string;
+    title?: string;
+    seo_title?: string;
+    seo_des?: string | null;
+    seo_key?: string | null;
+    description?: string;
+    views?: number;
+    share_count?: number;
+    user_id?: number;
+    u_user_id?: number | null;
+    created_at?: string;
+    updated_at?: string;
+    category_name?: string;
+    subcategory_name?: string;
+};

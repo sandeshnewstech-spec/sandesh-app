@@ -8,10 +8,10 @@ import { Size } from "functions";
 export const _isDEV = true;
 export const _isPUBLISH_MODE = false;
 
-export const BOTTOM_TAB_HEIGHT = Size(70);
-
 export const _WIDTH = Dimensions.get('window').width;
 export const _HEIGHT = Dimensions.get('window').height;
+
+export const BOTTOM_TAB_HEIGHT = Size(70);
 
 export const AppStack = createNativeStackNavigator();
 export const BottomTabStack = createBottomTabNavigator();
@@ -32,8 +32,14 @@ export const onStateChange: any = React.createRef<any>();
 
 export const zuStandInitStore: zuStandInitStoreType = {
     isAppStartFlow: true,
-    appServices: {},
+    appServices: {
+        appLogo: "",
+        placeholderLogo: "",
+        assetURL: "",
+        liveStreamYoutubeId: "",
+    },
     posts: {},
+    webStory: {},
 };
 
 export const setZuStandInitStore: setZuStandInitStoreType = {
@@ -41,6 +47,7 @@ export const setZuStandInitStore: setZuStandInitStoreType = {
     setAppServices(by) { },
     setPosts(by) { },
     setUpdatePosts(by) { },
+    setWebStory(by) { },
 }
 
 export const zuStandStoreOBJ: zuStandStoreOBJType = { ...zuStandInitStore, ...setZuStandInitStore };
@@ -93,7 +100,9 @@ export const API_END_POINTS = {
     homeTopMenu: "menu/mobile-menu",
     videos: "videopage",
     setting: "setting",
-    postDetails: "post-details"
+    postDetails: "post-details",
+    homePageWebStory: "home-page-web-story",
+    latestWebStories: "latest-web-stories"
 }
 
 export const CUSTOM_USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36';

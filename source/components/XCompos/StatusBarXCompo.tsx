@@ -7,12 +7,12 @@ const StatusBarXCompo = ({ sbShow = true, sbColor, barStyle = 'light-content', s
     const { top, col } = useThemeX();
     return (
         <Fragment>
-            <StatusBar
+            {sbShow && <StatusBar
                 animated
                 translucent={true} // ANDROID::: when its true then us can use top Insets value, if false then u can not use its value. 
                 barStyle={barStyle}
                 backgroundColor={col.TRANSPARENT}
-                showHideTransition={sbTransition ?? 'fade'} />
+                showHideTransition={sbTransition ?? 'fade'} />}
             {sbShow && <SafeAreaView style={{ height: top, backgroundColor: sbColor ?? col.TRANSPARENT }} />}
         </Fragment>
     )

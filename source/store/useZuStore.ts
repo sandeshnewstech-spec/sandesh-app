@@ -16,6 +16,7 @@ const useZuStore = create<zuStandStoreOBJType>()(
         setAppServices: by => set((state) => ({ appServices: { ...state?.appServices, ...by } })),
         setPosts: by => set((state) => ({ posts: by })),
         setUpdatePosts: by => set((state) => ({ posts: updateOBJFN(state?.posts, by)?.obj })),
+        setWebStory: by => set((state) => ({ webStory: updateOBJFN(state?.webStory, by)?.obj })),
     }), {
         "name": '@AppForStore',
         "storage": createJSONStorage(() => zuStandStorage),

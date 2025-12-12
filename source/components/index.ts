@@ -20,10 +20,11 @@ import VideoItem from "./VideoItemCompo";
 import YoutubeIFramePlayer from "./YoutubeIFramePlayerCompo";
 import VideoFrame from "./VideoFrameCompo";
 import FooterLoader from "./FooterLoaderCompo";
+import HomeWebStoriesItem from "./Home/HomeWebStoriesItemCompo";
 
 export {
     PressX, MasterView, HeaderX, StatusBarX, TextX, TextInputX, ButtonX,
     ScrLoader, ToastAlert, SwitchX, VideoX, PressableScaleX, ButtonOne,
     SelectionItemCard, ImageX, HomeTopMenu, HomePage, LiveButton, VideoItem,
-    YoutubeIFramePlayer, VideoFrame, FooterLoader
+    YoutubeIFramePlayer, VideoFrame, FooterLoader, HomeWebStoriesItem
 }

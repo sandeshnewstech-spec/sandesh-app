@@ -1,5 +1,5 @@
-import { NativeScrollEvent, NativeSyntheticEvent, RefreshControl } from 'react-native'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { NativeScrollEvent, NativeSyntheticEvent, RefreshControl, View } from 'react-native'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { MasterView, VideoItem } from 'components'
 import { useAPIs, useGetPosts, useThemeX } from 'hooks'
 import useZuStore from 'store/useZuStore'
@@ -15,14 +15,15 @@ const VideosTabController = () => {
     const { getVideosAPI } = useAPIs();
     const { setUpdatePosts } = useZuStore();
     const [postIDs, setPostsIDs] = useState<Array<string>>([]);
-    const { postsData } = useGetPosts({ IDs: postIDs });
+    const { postsData } = useGetPosts({ _postsIDs: postIDs });
     const [curentIDx, setCurrentIDx] = useState<number>(0);
 
-    const SCR_HEIGHT = _HEIGHT - (BOTTOM_TAB_HEIGHT + top + bottom);
+    const SCR_HEIGHT = useMemo(() => _HEIGHT - (BOTTOM_TAB_HEIGHT + top + bottom), [_HEIGHT, BOTTOM_TAB_HEIGHT, top, bottom]);
 
     const [btmLoading, setBtmLoading] = useState(false);
     const [topLoading, setTopLoading] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [scrHeight, setScrHeight] = useState<number>(SCR_HEIGHT);
 
     const POST_PER_PAGE = 40;
     const isNextPage = useRef<boolean>(false);
@@ -71,8 +72,8 @@ const VideosTabController = () => {
 
     const renderItem = useCallback(({ item, index }: { item: VideoItemType, index: number }) => <VideoItem
         {...item} isPlaying={index === curentIDx && isFocused} index={index}
-        scr_height={SCR_HEIGHT}
-    />, [postIDs, postsData, curentIDx, top, bottom, SCR_HEIGHT, isFocused]);
+        scr_height={scrHeight}
+    />, [postIDs, postsData, curentIDx, top, bottom, scrHeight, isFocused]);
 
     useEffect(() => {
         getVideosFN({ _isLoading: true });
@@ -83,31 +84,32 @@ const VideosTabController = () => {
             barStyle='light-content'
             sbColor={col.BLACK} bgCol={col.BLACK}
             style={{ flex: 1 }} fixed scrLoader={isLoading} >
-            <FlashList
-                pagingEnabled
-                data={postsData}
-                keyExtractor={(_, index) => index.toString()}
-                renderItem={renderItem} onScroll={onScrolling}
-                extraData={[curentIDx, top, bottom, SCR_HEIGHT, isFocused]}
-                refreshControl={<RefreshControl
-                    refreshing={topLoading}
-                    onRefresh={() => getVideosFN({ _topLoading: true })}
-                    colors={[col.PRIMARY]}
-                    tintColor={col.WHITE}
-                    progressBackgroundColor={col.WHITE}
-                    progressViewOffset={10}
-                />}
-                onEndReached={() => {
-                    if (isNextPage.current) {
-                        getVideosFN({ _btmLoading: true });
-                    }
-                }}
-                getItemType={() => SCR_HEIGHT * _WIDTH}
-                pinchGestureEnabled
-                showsVerticalScrollIndicator={false}
-                initialScrollIndex={0}
-                scrollEventThrottle={16}
-            />
+            <View style={{ flex: 1 }} onLayout={(e) => { setScrHeight(e.nativeEvent.layout.height) }} >
+                <FlashList
+                    pagingEnabled
+                    data={postsData}
+                    keyExtractor={(_, index) => index.toString()}
+                    contentContainerStyle={{ flexGrow: 1 }}
+                    style={{ flex: 1, height: scrHeight }}
+                    renderItem={renderItem} onScroll={onScrolling}
+                    extraData={[curentIDx, top, bottom, scrHeight, isFocused]}
+                    refreshControl={<RefreshControl
+                        refreshing={topLoading}
+                        onRefresh={() => getVideosFN({ _topLoading: true })}
+                        colors={[col.PRIMARY]}
+                        tintColor={col.WHITE}
+                        progressBackgroundColor={col.WHITE}
+                        progressViewOffset={10}
+                    />}
+                    onEndReached={() => {
+                        if (isNextPage.current) {
+                            getVideosFN({ _btmLoading: true });
+                        }
+                    }}
+                    showsVerticalScrollIndicator={false}
+                    initialScrollIndex={0}
+                />
+            </View>
         </MasterView>
     )
 }
