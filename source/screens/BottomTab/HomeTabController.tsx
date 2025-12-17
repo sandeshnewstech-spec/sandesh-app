@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { HomePage, ImageX, LiveButton, MasterView, PressableScaleX } from 'components'
 import useZuStore from 'store/useZuStore'
 import { _HEIGHT, _WIDTH, bSpace, ICON_SIZE } from 'utils'
@@ -59,10 +59,10 @@ const HomeTabController = ({ navigation }: any) => {
                     </PressableScaleX>
                 </View>
             </Animated.View >
-            <TabsProvider defaultIndex={0}>
+            <TabsProvider defaultIndex={0} >
                 <Tabs
                     theme={{
-                        colors: { primary: col.HOME_TOP_TAB_SELECTED_ITEM_INDICATORE }
+                        colors: { primary: col.HOME_TOP_TAB_SELECTED_ITEM_INDICATORE },
                     } as MD3Theme}
                     mode='scrollable' uppercase
                     showLeadingSpace={false}
@@ -72,9 +72,9 @@ const HomeTabController = ({ navigation }: any) => {
                     <TabScreen label="Home" >
                         <HomePage />
                     </TabScreen>
-                    {Object.values(homeTopMenu).map((item, idx) => <TabScreen key={idx.toString()} label={item?.name || ""}  >
-                        <View style={{ flex: 1 }} />
-                    </TabScreen>)}
+                    {/* {Object.values(homeTopMenu).map((item, idx) => <TabScreen key={idx.toString()} label={item?.name || ""}  >
+                        <View style={{ flex: 1, width: "100%" }} />
+                    </TabScreen>)} */}
                 </Tabs>
             </TabsProvider>
         </MasterView >
@@ -117,10 +117,6 @@ const stylesFN = ({ top, col, font }: defStyObjType) => StyleSheet.create({
     },
     tab_header_mSty: {
         backgroundColor: col.HOME_TOP_TAB_BG,
-        marginLeft: 0,
-        marginHorizontal: 0,
-        paddingHorizontal: 0,
-        paddingLeft: 0
     },
     tab_header_title: {
         color: col.HOME_TOP_TAB_ITEM_TITLE,

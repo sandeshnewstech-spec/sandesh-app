@@ -121,6 +121,14 @@ const useAPIsHook = () => {
     });
   }
 
+  async function getLatestWebStoriesAPI() {
+    return fetchREQ({
+      method: 'GET',
+      apiURI: FINAL_BASE_URL,
+      endPath: API_END_POINTS.latestWebStories,
+    });
+  }
+
   function abortAPI() { try { abort(); } catch (e) { /* LOG(e, "ERROR :: abortAPI =>>"); */ } }
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { runOnJS(abortAPI)(); return false; });
@@ -130,7 +138,8 @@ const useAPIsHook = () => {
 
   return {
     abortAPI, getHomeSecondaryDataAPI, getHomeTopMenuAPI, getVideosAPI,
-    getSettingAPI, getPostDetailsAPI, getHomePageWebStoryAPI, BASE_URL
+    getSettingAPI, getPostDetailsAPI, getHomePageWebStoryAPI, BASE_URL,
+    getLatestWebStoriesAPI
   };
 
 }

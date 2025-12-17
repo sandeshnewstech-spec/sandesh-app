@@ -9,9 +9,10 @@ import VideosTabScreen from "./BottomTab/VideosTabController"
 import SearchTabScreen from "./BottomTab/SearchTabController"
 import ProfileTabScreen from "./BottomTab/ProfileTabController"
 import LiveTVScreen from "./LiveTVController"
+import WebStoriesListScreen from "./WebStoriesListController"
 
 export {
     HomeScreen, InterestScreen, LanguageSelectionScreen, LocationScreen,
     HomeTabScreen, ProfileTabScreen, SearchTabScreen, VideosTabScreen,
-    LiveTVScreen
+    LiveTVScreen, WebStoriesListScreen
 }
