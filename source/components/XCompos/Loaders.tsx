@@ -93,7 +93,7 @@ const SamsungLoader: React.FC<{ size: number; color: string }> = ({ size, color 
     });
   }, []);
 
-  const dotSize = size / 8 + 3;
+  const dotSize = size / 5.5;
   const radius = size / 2 - dotSize;
 
   return (

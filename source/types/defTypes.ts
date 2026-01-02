@@ -21,7 +21,9 @@ export type zuStandInitStoreType = {
     isAppStartFlow: boolean;
     appServices: appServicesType;
     posts: allTypesOfPostOBJType;
-    webStory: WebStoryObjType;
+    homeWebStory: WebStoryObjType;
+    latestWebStory: WebStoryObjType;
+    latestWebStoryMenu: Array<LatestWebstoriesCategoryItemType>
 }
 
 export type setZuStandInitStoreType = {
@@ -29,7 +31,9 @@ export type setZuStandInitStoreType = {
     setAppServices: (by: appServicesType) => void;
     setPosts: (by: allTypesOfPostOBJType) => void;
     setUpdatePosts: (by: allTypesOfPostOBJType) => void;
-    setWebStory: (by: WebStoryObjType) => void;
+    setHomeWebStory: (by: WebStoryObjType) => void;
+    setWebstoriesMenus: (by: Array<LatestWebstoriesCategoryItemType>) => void;
+    setLatestWebstories: (by: WebStoryObjType) => void;
 }
 
 export type YoutubeIFramePlayerRefType = YoutubeIframeRef;
@@ -355,3 +359,14 @@ export type WebStoryItemType = {
     category_name?: string;
     subcategory_name?: string;
 };
+
+export type LatestWebstoriesCategoryItemType = {
+    id?: string;
+    name?: string;
+}
+
+export type apiFuntionType = {
+    _isLoading?: boolean;
+    _isTopLoading?: boolean;
+    _isBottomLoading?: boolean;
+}

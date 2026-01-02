@@ -20,6 +20,7 @@ const LiveButtonCompo = () => {
                 style={{ flex: 1 }}
                 yt_video_id={appServices?.liveStreamYoutubeId || ""}
                 yt_params={{ autoplay: 1, mute: 1, controls: 0, rel: 1, iv_load_policy: 3, }}
+                loaderSize={35}
             />
             <View style={style.live_btn_cSty} >
                 <IC_MATERIAL

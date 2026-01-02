@@ -16,13 +16,13 @@ const useZuStore = create<zuStandStoreOBJType>()(
         setAppServices: by => set((state) => ({ appServices: { ...state?.appServices, ...by } })),
         setPosts: by => set((state) => ({ posts: by })),
         setUpdatePosts: by => set((state) => ({ posts: updateOBJFN(state?.posts, by)?.obj })),
-        setWebStory: by => set((state) => ({ webStory: updateOBJFN(state?.webStory, by)?.obj })),
+        setHomeWebStory: by => set((state) => ({ homeWebStory: updateOBJFN(state?.homeWebStory, by)?.obj })),
+        setLatestWebstories: by => set((state) => ({ latestWebStory: updateOBJFN(state?.latestWebStory, by)?.obj })),
+        setWebstoriesMenus: by => set((state) => ({ latestWebStoryMenu: by }))
     }), {
-        "name": '@AppForStore',
-        "storage": createJSONStorage(() => zuStandStorage),
-        partialize: (state) => <zuStandStoreOBJType>({
-            ...state,
-        }),
+        name: '@AppForStore@',
+        storage: createJSONStorage(() => zuStandStorage),
+        partialize: (state) => <zuStandStoreOBJType>({ ...state }),
         onRehydrateStorage: (_/* state */) => {
             return async (state, error) => {
                 if (error) { console.log('zustandError:: an error happened during hydration', error); }

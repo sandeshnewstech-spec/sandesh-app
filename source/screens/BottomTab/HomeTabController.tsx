@@ -1,8 +1,8 @@
-import { StyleSheet, View } from 'react-native'
+import { ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { HomePage, ImageX, LiveButton, MasterView, PressableScaleX } from 'components'
 import useZuStore from 'store/useZuStore'
-import { _HEIGHT, _WIDTH, bSpace, ICON_SIZE } from 'utils'
+import { _HEIGHT, _WIDTH, bSpace, ICON_SIZE, MaterialTopTabStack } from 'utils'
 import { defStyObjType, HomeSecondaryDataType, HomeTopMenuItemType } from 'types'
 import { useAPIs, useThemeX } from 'hooks'
 import Animated from 'react-native-reanimated'
@@ -15,7 +15,7 @@ const HomeTabController = ({ navigation }: any) => {
 
     const { getHomeSecondaryDataAPI, getHomeTopMenuAPI } = useAPIs();
     const { appServices } = useZuStore();
-    const { defStyOBJ, top, col } = useThemeX();
+    const { defStyOBJ, top, col, font } = useThemeX();
     const style = stylesFN(defStyOBJ);
 
     const [homeTopMenu, setHomeTopMenu] = useState<{ [key: string]: HomeTopMenuItemType }>({});
@@ -59,7 +59,36 @@ const HomeTabController = ({ navigation }: any) => {
                     </PressableScaleX>
                 </View>
             </Animated.View >
-            <TabsProvider defaultIndex={0} >
+            <MaterialTopTabStack.Navigator
+                overScrollMode={'never'}
+                style={{}}
+                screenOptions={{
+                    sceneStyle: { backgroundColor: 'green' },
+                    tabBarStyle: { backgroundColor: col.HOME_TOP_TAB_BG },
+                    tabBarItemStyle: {
+                        width: "auto",
+                    },
+                    tabBarLabelStyle: {
+                        color: col.HOME_TOP_TAB_ITEM_TITLE,
+                        fontFamily: font.BOLD,
+                        // width: "auto",
+                    },
+                    tabBarScrollEnabled: true,
+                    tabBarIndicatorStyle: { backgroundColor: col.HOME_TOP_TAB_SELECTED_ITEM_INDICATORE, height: Size(2), borderRadius: 100 },
+                    // tabBarContentContainerStyle: { backgroundColor: col.HOME_TOP_TAB_BG },
+                    // tabBarIndicatorContainerStyle: { backgroundColor: 'green', },
+                }}>
+                <MaterialTopTabStack.Screen key={String("-1")} name="Home" component={HomePage} />
+                {Object.values(homeTopMenu).length > 0 && Object.values(homeTopMenu).map((item, idx) => {
+                    return <MaterialTopTabStack.Screen key={idx.toString()} name={item?.name || ""} component={() => <>
+                        <ScrollView>
+                            {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((item, idx) => <View key={idx.toString()} style={{ width: "100%", height: Size(200), backgroundColor: 'red', marginVertical: 10 }} />)}
+                        </ScrollView>
+                    </>}
+                    />
+                })}
+            </MaterialTopTabStack.Navigator>
+            {/* <TabsProvider defaultIndex={0} >
                 <Tabs
                     theme={{
                         colors: { primary: col.HOME_TOP_TAB_SELECTED_ITEM_INDICATORE },
@@ -72,11 +101,11 @@ const HomeTabController = ({ navigation }: any) => {
                     <TabScreen label="Home" >
                         <HomePage />
                     </TabScreen>
-                    {/* {Object.values(homeTopMenu).map((item, idx) => <TabScreen key={idx.toString()} label={item?.name || ""}  >
+                    {Object.values(homeTopMenu).map((item, idx) => <TabScreen key={idx.toString()} label={item?.name || ""}  >
                         <View style={{ flex: 1, width: "100%" }} />
-                    </TabScreen>)} */}
+                    </TabScreen>)}
                 </Tabs>
-            </TabsProvider>
+            </TabsProvider> */}
         </MasterView >
     )
 }

@@ -1,10 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
 import React, { act, useEffect, useRef, useState } from 'react'
 import { useThemeX } from 'hooks'
 import { defStyObjType, HomeTopMenuItemType } from 'types';
 import { Size } from 'functions';
 import PressableScaleXCompo from 'components/XCompos/PressableScaleXCompo';
-import { FlatList } from 'react-native-gesture-handler';
 import TextXCompo from 'components/XCompos/TextXCompo';
 import { _WIDTH, bSpace } from 'utils';
 
@@ -39,6 +38,7 @@ const HomeTopMenuCompo = ({ data = {}, onPress = () => { }, activeScrPage }: P) 
             <FlatList
                 ref={flashListRef}
                 horizontal
+                renderToHardwareTextureAndroid
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={style.fl_cSty}
                 data={menu_data}

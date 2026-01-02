@@ -121,11 +121,14 @@ const useAPIsHook = () => {
     });
   }
 
-  async function getLatestWebStoriesAPI() {
+  async function getLatestWebStoriesAPI({ start = 0, limit = 50, category_name = undefined }: { start: number; limit: number; category_name?: string }) {
+    let params = `start=${start}&limit=${limit}`;
+    if (category_name) params = params + `&category_name=${category_name}`
     return fetchREQ({
       method: 'GET',
       apiURI: FINAL_BASE_URL,
       endPath: API_END_POINTS.latestWebStories,
+      params: params,
     });
   }
 

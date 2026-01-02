@@ -5,16 +5,17 @@ import { ShouldStartLoadRequest } from "react-native-webview/lib/WebViewTypes";
 import { CUSTOM_USER_AGENT, isIOS } from "utils";
 import ScrLoaderCompo from "./XCompos/ScrLoaderCompo";
 import { buildYouTubeUrl, YouTubeParamsType } from "types";
-import { pLOG } from "functions";
 
 type P = {
     yt_video_id: string;
     style?: ViewStyle;
     webViewStyle?: ViewStyle;
     yt_params?: YouTubeParamsType;
+    loaderSize?: number;
+    originWhitelist?: string[];
 }
 
-const VideoFrameCompo = ({ yt_video_id, style, webViewStyle, yt_params }: P) => {
+const VideoFrameCompo = ({ yt_video_id, style, webViewStyle, yt_params, loaderSize = 65, originWhitelist = [] }: P) => {
 
     const [loading, setLoading] = useState(true);
 
@@ -57,7 +58,7 @@ const VideoFrameCompo = ({ yt_video_id, style, webViewStyle, yt_params }: P) => 
                 indicatorStyle="white"
                 onShouldStartLoadWithRequest={onShouldStartLoadWithRequest}
                 userAgent={CUSTOM_USER_AGENT}
-                originWhitelist={[yt_url]}
+                originWhitelist={[yt_url, ...originWhitelist]}
                 onLoadEnd={() => setLoading(false)}
                 onLoadSubResourceError={() => setLoading(false)}
                 onError={() => setLoading(false)}
@@ -78,7 +79,7 @@ const VideoFrameCompo = ({ yt_video_id, style, webViewStyle, yt_params }: P) => 
                 allowsFullscreenVideo
                 cacheEnabled
             />
-            <ScrLoaderCompo loading={loading} />
+            <ScrLoaderCompo loading={loading} loaderSize={loaderSize} />
         </View>
     )
 }

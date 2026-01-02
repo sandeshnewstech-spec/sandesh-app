@@ -4,6 +4,7 @@ import { Dimensions, Platform, StatusBar } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Size } from "functions";
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 export const _isDEV = true;
 export const _isPUBLISH_MODE = false;
@@ -15,6 +16,7 @@ export const BOTTOM_TAB_HEIGHT = Size(70);
 
 export const AppStack = createNativeStackNavigator();
 export const BottomTabStack = createBottomTabNavigator();
+export const MaterialTopTabStack = createMaterialTopTabNavigator();
 
 export const isIOS = Platform.OS === 'ios' ? true : false;
 export const isANDROID = Platform.OS === 'android' ? true : false;
@@ -39,7 +41,9 @@ export const zuStandInitStore: zuStandInitStoreType = {
         liveStreamYoutubeId: "",
     },
     posts: {},
-    webStory: {},
+    homeWebStory: {},
+    latestWebStory: {},
+    latestWebStoryMenu: [],
 };
 
 export const setZuStandInitStore: setZuStandInitStoreType = {
@@ -47,7 +51,9 @@ export const setZuStandInitStore: setZuStandInitStoreType = {
     setAppServices(by) { },
     setPosts(by) { },
     setUpdatePosts(by) { },
-    setWebStory(by) { },
+    setHomeWebStory(by) { },
+    setWebstoriesMenus(by) { },
+    setLatestWebstories(by) { },
 }
 
 export const zuStandStoreOBJ: zuStandStoreOBJType = { ...zuStandInitStore, ...setZuStandInitStore };

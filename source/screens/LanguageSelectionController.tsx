@@ -15,7 +15,6 @@ export default function LanguageSelectionController({ navigation }: any) {
 
     const [selected, setSelected] = useState("EN");
     const theme = useTheme();
-    console.log("theme:", theme)
 
     return (
         <MasterView fixed hShow={false} style={{ flex: 1 }} sbShow={false}  >

@@ -20,7 +20,7 @@ type P = {
 const HomeWebStoriesListCompo = ({ showViewAll = true }: P) => {
     const navigation: any = useNavigation();
     const { getHomePageWebStoryAPI } = useAPIs();
-    const { appServices, webStory, setWebStory } = useZuStore();
+    const { appServices, homeWebStory, setHomeWebStory } = useZuStore();
     const { col, defStyOBJ } = useThemeX();
     const style = stylesFN(defStyOBJ);
     const [webStoriesIDs, setWebStoriesIDs] = useState<Array<string>>([]);
@@ -34,7 +34,7 @@ const HomeWebStoriesListCompo = ({ showViewAll = true }: P) => {
         getHomePageWebStoryAPI().then(({ res }) => {
             if (res?.data?.length) {
                 const temp = makeOBJFN(res?.data);
-                setWebStory(temp?.obj);
+                setHomeWebStory(temp?.obj);
                 setWebStoriesIDs(temp?.IDs);
             }
             setIsLoading(false);

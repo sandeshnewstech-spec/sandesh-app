@@ -8,9 +8,10 @@ import Loader from './Loaders';
 interface P {
     loading?: boolean;
     absolute?: boolean;
+    loaderSize?: number;
 }
 
-const ScrLoaderCompo = ({ absolute, loading = false }: P) => {
+const ScrLoaderCompo = ({ absolute, loading = false, loaderSize = 65 }: P) => {
 
     const { col } = useThemeXSty();
 
@@ -36,7 +37,7 @@ const ScrLoaderCompo = ({ absolute, loading = false }: P) => {
                     zIndex: 9999
                 }]}>
             {/* <ActivityIndicator color={absolute ? col.WHITE : col.PRIMARY} /> */}
-            <Loader type='samsung' size={65} color={absolute ? col.WHITE : col.PRIMARY} secondaryColor={col.SECONDARY} />
+            <Loader type='samsung' size={loaderSize} color={absolute ? col.WHITE : col.PRIMARY} secondaryColor={col.SECONDARY} />
         </Animated.View>
     )
 }
