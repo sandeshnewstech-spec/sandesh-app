@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native'
+import { ScrollView, StyleSheet, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { HomePage, ImageX, LiveButton, MasterView, PressableScaleX } from 'components'
 import useZuStore from 'store/useZuStore'
@@ -8,7 +8,6 @@ import { useAPIs, useThemeX } from 'hooks'
 import Animated from 'react-native-reanimated'
 import { Tabs, TabScreen, TabsProvider } from 'react-native-paper-tabs'
 import { IC_MATERIAL, SANDESH_LOGO_IMG } from 'assets'
-import type { MD3Theme } from 'react-native-paper';
 import { Size } from 'functions'
 
 const HomeTabController = ({ navigation }: any) => {
@@ -40,7 +39,8 @@ const HomeTabController = ({ navigation }: any) => {
     }, []);
 
     return (
-        <MasterView hShow={false} barStyle='dark-content' sbShow sbColor={col.HOME_TOP_TAB_BG} fixed >
+        <MasterView hShow={false} barStyle='dark-content'
+            sbShow sbColor={col.HOME_TOP_TAB_BG} fixed >
             <Animated.View style={[style.header_mSty]} >
                 <ImageX
                     noDefImg img={""}
@@ -63,8 +63,11 @@ const HomeTabController = ({ navigation }: any) => {
                 overScrollMode={'never'}
                 style={{}}
                 screenOptions={{
-                    sceneStyle: { backgroundColor: 'green' },
-                    tabBarStyle: { backgroundColor: col.HOME_TOP_TAB_BG },
+                    sceneStyle: { backgroundColor: col.TRANSPARENT },
+                    tabBarStyle: {
+                        backgroundColor: col.HOME_TOP_TAB_BG,
+                        shadowColor: col.TRANSPARENT
+                    },
                     tabBarItemStyle: {
                         width: "auto",
                     },
@@ -74,7 +77,10 @@ const HomeTabController = ({ navigation }: any) => {
                         // width: "auto",
                     },
                     tabBarScrollEnabled: true,
-                    tabBarIndicatorStyle: { backgroundColor: col.HOME_TOP_TAB_SELECTED_ITEM_INDICATORE, height: Size(2), borderRadius: 100 },
+                    tabBarIndicatorStyle: {
+                        height: Size(2), borderRadius: 100,
+                        backgroundColor: col.HOME_TOP_TAB_SELECTED_ITEM_INDICATORE,
+                    },
                     // tabBarContentContainerStyle: { backgroundColor: col.HOME_TOP_TAB_BG },
                     // tabBarIndicatorContainerStyle: { backgroundColor: 'green', },
                 }}>
@@ -82,7 +88,7 @@ const HomeTabController = ({ navigation }: any) => {
                 {Object.values(homeTopMenu).length > 0 && Object.values(homeTopMenu).map((item, idx) => {
                     return <MaterialTopTabStack.Screen key={idx.toString()} name={item?.name || ""} component={() => <>
                         <ScrollView>
-                            {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((item, idx) => <View key={idx.toString()} style={{ width: "100%", height: Size(200), backgroundColor: 'red', marginVertical: 10 }} />)}
+                            {/* {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((item, idx) => <View key={idx.toString()} style={{ width: "100%", height: Size(200), marginVertical: 10 }} />)} */}
                         </ScrollView>
                     </>}
                     />

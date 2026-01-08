@@ -16,7 +16,7 @@ interface Props extends FastImageProps {
 
 const ImageXCompo = ({ imgSource, sharedTransitionTag, img, noDefImg, defIMG = DEF1S_IMG, imgSty, ...imgProps }: Props) => {
 
-    const placeholder_image_base64 = undefined, placeholder_image = undefined;
+    const placeholder_image_base64 = undefined, placeholder_image = "https://sandesh.com/static/media/logoog.a1f01c9c8f8d47cde53a.webp";
     const imgUriSource = img && typeof img === 'string' ? img : "";
 
     const [shERR, setShERR] = useState<boolean | null>(null);

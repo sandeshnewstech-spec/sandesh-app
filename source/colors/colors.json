@@ -28,11 +28,11 @@
         "BTN_BGCOL": "#FF7F50",
         "BTN_TEXT_COL": "#FFFFFF",
         "SCR_BGCOL": "transparent",
-        "HEADER_BGCOL": "black",
-        "HEADER_TEXT_COL": "#FFFFFF",
+        "HEADER_BGCOL": "#FFFFFF",
+        "HEADER_TEXT_COL": "black",
         "HEADER_TEXT_BG_COL": "white",
         "HEADER_SVG_COL": "black",
-        "HEADER_SVG_BGCOL": "rgba(256,256,256,.3)",
+        "HEADER_SVG_BGCOL": "rgba(256,256,256,.1)",
         "SB_COL": "white",
         "INPUT_TEXT_LABLE_COL": "white",
         "INPUT_TEXT_PH_COL": "rgba(0,0,0,.5)",
@@ -54,7 +54,12 @@
         "HOME_TOP_TAB_ITEM_TITLE": "black",
         "HOME_TOP_TAB_SELECTED_ITEM_INDICATORE": "#FF416C",
         "NOTIFICATION_ICON": "black",
-        "NOTIFICATION_ICON_BG": "rgba(0,0,0,.05)"
+        "NOTIFICATION_ICON_BG": "rgba(0,0,0,.05)",
+        "LATEST_WEBSTORY_MENU_ITEM_TITLE": "rgba(0,0,0,1)",
+        "SELECTED_LATEST_WEBSTORY_MENU_ITEM_TITLE": "#ffffff",
+        "LATEST_WEBSTORY_MENU_ITEM_BG": "transparent",
+        "SELECTED_LATEST_WEBSTORY_MENU_ITEM_BG": "#FF416C",
+        "LATEST_WEBSTORY_MENU_ITEM_OUTLINE": "rgba(0,0,0,.1)",
     },
     {
         "TRANSPARENT": "transparent",
@@ -111,6 +116,11 @@
         "HOME_TOP_TAB_ITEM_TITLE": "white",
         "HOME_TOP_TAB_SELECTED_ITEM_INDICATORE": "#FF416C",
         "NOTIFICATION_ICON": "#64748B",
-        "NOTIFICATION_ICON_BG": "#1E293B"
+        "NOTIFICATION_ICON_BG": "#1E293B",
+        "LATEST_WEBSTORY_MENU_ITEM_TITLE": "#ffffff",
+        "SELECTED_LATEST_WEBSTORY_MENU_ITEM_TITLE": "#ffffff",
+        "LATEST_WEBSTORY_MENU_ITEM_BG": "transparent",
+        "SELECTED_LATEST_WEBSTORY_MENU_ITEM_BG": "#FF416C",
+        "LATEST_WEBSTORY_MENU_ITEM_OUTLINE": "rgba(256,256,256,.2)",
     }
 ]

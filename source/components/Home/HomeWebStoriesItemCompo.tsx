@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import ImageXCompo from 'components/XCompos/ImageXCompo';
 import PressableScaleXCompo from 'components/XCompos/PressableScaleXCompo';
 import TextXCompo from 'components/XCompos/TextXCompo';
@@ -9,11 +10,13 @@ import useZuStore from 'store/useZuStore';
 import { defStyObjType, WebStoryItemType } from 'types';
 import { _HEIGHT, bSpace, } from 'utils';
 
-const HomeWebStoriesItemCompo = ({ main_image, title }: WebStoryItemType) => {
+const HomeWebStoriesItemCompo = (item: WebStoryItemType) => {
+    const { main_image, title } = item;
+    const navigation: any = useNavigation();
     const { appServices } = useZuStore();
     const { defStyOBJ } = useThemeX();
     const style = styleFN(defStyOBJ);
-    return (<PressableScaleXCompo>
+    return (<PressableScaleXCompo onPress={() => navigation.navigate("WebStoryViewScreen", { item })} >
         <View style={style.mainSty} >
             <View style={style.inner_mainSty}>
                 <ImageXCompo img={(appServices?.assetURL || "") + (main_image || "")} />

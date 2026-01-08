@@ -33,7 +33,7 @@ const MasterViewCompo = ({
     // Memoized header props
     const headerProps = useMemo(() => ({
         title, bPress, backBtn, lSvg, rSvg, tSty, hHeight, hBgColor, alignText, lHeight, rHeight, hShow,
-        barStyle, sbColor, sbShow, sbTransition, bIcCol, bIcBgCol
+        barStyle: undefined, sbColor, sbShow, sbTransition, bIcCol, bIcBgCol
     }), [title, bPress, backBtn, lSvg, rSvg, tSty, hHeight, hBgColor, alignText, lHeight, rHeight, hShow,
         barStyle, sbColor, sbShow, sbTransition, bIcCol, bIcBgCol])
 

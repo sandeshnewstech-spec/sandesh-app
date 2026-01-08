@@ -17,7 +17,7 @@ import PressableScaleXCompo from './PressableScaleXCompo'
 const HeaderXCompo = ({
     title, bPress, backBtn = true, lSvg, rSvg, tSty, hHeight, hBgColor,
     alignText = 'center', lHeight, rHeight, hShow = true,
-    barStyle, sbColor, sbShow, sbTransition, bIcBgCol, bIcCol, hTextCol, hTextBgCol,
+    barStyle = undefined, sbColor, sbShow, sbTransition, bIcBgCol, bIcCol, hTextCol, hTextBgCol,
 }: headerType) => {
 
     const navigation = useNavigation()
@@ -90,7 +90,7 @@ const HeaderXCompo = ({
     return (
         <>
             <StatusBarXCompo
-                barStyle={barStyle ?? 'default'}
+                barStyle={barStyle}
                 sbColor={sbColor ?? col.SB_COL}
                 sbTransition={sbTransition ?? 'fade'}
                 sbShow={sbShow}
@@ -126,7 +126,7 @@ const HeaderXCompo = ({
                         },
                         titleAnimatedStyle,
                     ]} >
-                        <TextXCompo tSty={{
+                        <TextXCompo lines={1} tSty={{
                             ...tSty, ...hdSty?.textSty,
                             borderRadius: 10,
                             paddingVertical: 3,

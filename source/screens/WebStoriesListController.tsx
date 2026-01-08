@@ -2,7 +2,7 @@ import { FlashList } from "@shopify/flash-list";
 import { IC_MATERIAL_COMMUNITY } from "assets";
 import { HomeWebStoriesList, ImageX, MasterView, PressableScaleX, TextX } from "components"
 import Loaders from "components/XCompos/Loaders";
-import { makeOBJFN, pLOG, Size } from "functions";
+import { makeOBJFN, Size } from "functions";
 import { useAPIs, useGetPosts, useThemeX } from "hooks"
 import { useCallback, useEffect, useRef, useState } from "react";
 import { StyleSheet, View } from "react-native";
@@ -11,7 +11,7 @@ import useZuStore from "store/useZuStore"
 import { apiFuntionType, defStyObjType, LatestWebstoriesCategoryItemType, WebStoryItemType } from "types";
 import { _HEIGHT, bSpace, ICON_SIZE } from "utils";
 
-const WebStoriesListController = () => {
+const WebStoriesListController = ({ navigation }: any) => {
     const { col, font, str, defStyOBJ } = useThemeX();
     const { getLatestWebStoriesAPI } = useAPIs();
     const { setWebstoriesMenus, setLatestWebstories, appServices, latestWebStoryMenu } = useZuStore();
@@ -40,7 +40,7 @@ const WebStoriesListController = () => {
         isAPICallRef.current = true;
         getLatestWebStoriesAPI({
             limit: limitRef?.current, start: startNoRef?.current,
-            category_name: category_name == "all" ? undefined : category_name
+            category_name: (category_name == "all" || category_name == "All") ? undefined : category_name
         }).then(({ res }) => {
             if (Array.isArray(res?.data) && res?.data?.length > 0) {
                 const checkLength = latestWebStoryData.length + res?.data.length;
@@ -66,13 +66,13 @@ const WebStoriesListController = () => {
     }
 
     const renderItem = useCallback(({ item, index }: { item: WebStoryItemType; index: number }) => {
-        return (<PressableScaleX >
+        return (<PressableScaleX onPress={() => navigation.navigate("WebStoryViewScreen", { item })} >
             <View style={style.main} >
                 <ImageX
                     img={(appServices?.assetURL || "") + item?.main_image}
                     style={{ flex: 1 }}
                 />
-                <View style={style.abConver} >
+                <View style={style.abCover} >
                     <TextX text={item?.title} lines={3} tSty={style.title} />
                     {(item?.views && item?.views > 0) && <View style={style.right_arrow} >
                         <IC_MATERIAL_COMMUNITY name="eye" color={col.WHITE} size={ICON_SIZE * .8} />
@@ -83,9 +83,11 @@ const WebStoriesListController = () => {
         </PressableScaleX >)
     }, [latestWebStoryData]);
 
-    const Header = (<>
-        <HomeWebStoriesList showViewAll={false} />
-        <ScrollView ref={scrollViewRef} horizontal contentContainerStyle={style.menu_scroll_container} >
+    const Header = useCallback(() => (<>
+        <ScrollView
+            ref={scrollViewRef} horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={style.menu_scroll_container} >
             {[{ id: "all", name: "ALL" }, ...latestWebStoryMenu].map((item, index) => {
                 const isSelected = selectedMenuItem?.id == item?.id;
                 return <PressableScaleX
@@ -94,16 +96,16 @@ const WebStoriesListController = () => {
                         startNoRef.current = PAGE_NO;
                         isNextPageRef.current = true;
                         setSelectedMenuItem(item);
-                        getLatestWebStoriesFN({ _isLoading: true, category_name: item?.name, });
+                        getLatestWebStoriesFN({ _isLoading: true, category_name: item?.id === "all" ? undefined : item?.name, });
                     }} >
-                    <View style={[style.menu_cover, isSelected && style.selectedMenuItem]} >
+                    <View style={[style.menu_item_cover, isSelected && style.selectedMenuItem]} >
                         <TextX text={item?.name} tSty={isSelected ? style.selected_menu_title : style.menu_title} />
-                        {(isSelected && isLoading) && <View style={{ paddingLeft: 3 }} ><Loaders type="samsung" size={30} color={col.WHITE} /></View>}
+                        {(isSelected && isLoading) && <View style={{ paddingLeft: 3 }} ><Loaders type="samsung" size={30} color={col.SELECTED_LATEST_WEBSTORY_MENU_ITEM_TITLE} /></View>}
                     </View>
                 </PressableScaleX>
             })}
         </ScrollView>
-    </>);
+    </>), [selectedMenuItem, latestWebStoryMenu, isLoading, scrollViewRef.current]);
 
     useEffect(() => {
         getLatestWebStoriesFN({ _isLoading: true });
@@ -111,8 +113,9 @@ const WebStoriesListController = () => {
 
     return (<MasterView title="Web Stories" fixed >
         <FlashList
-            data={latestWebStoryData} numColumns={2}
-            ListHeaderComponent={Header}
+            numColumns={2}
+            data={latestWebStoryData}
+            ListHeaderComponent={<><HomeWebStoriesList showViewAll={false} /><Header /></>}
             contentContainerStyle={style.container}
             keyExtractor={(_, index) => index.toString()}
             renderItem={renderItem}
@@ -122,7 +125,7 @@ const WebStoriesListController = () => {
             onEndReachedThreshold={.8}
             onEndReached={() => {
                 if (latestWebStoryData.length >= PER_PAGE_ITEM) {
-                    getLatestWebStoriesFN({ _isBottomLoading: true, category_name: selectedMenuItem?.name });
+                    getLatestWebStoriesFN({ _isBottomLoading: true, category_name: selectedMenuItem?.id === "all" ? undefined : selectedMenuItem?.name });
                 }
             }}
         />
@@ -138,13 +141,13 @@ const styleFN = ({ col, font, bottom }: defStyObjType) => StyleSheet.create({
         paddingBottom: bottom + bSpace,
     },
     main: {
-        height: _HEIGHT * .25,
+        height: _HEIGHT * .27,
         flex: 1,
         borderRadius: 13,
         overflow: 'hidden',
         margin: bSpace / 2
     },
-    abConver: {
+    abCover: {
         position: 'absolute',
         bottom: 0,
         backgroundColor: col.BLACK05,
@@ -171,27 +174,33 @@ const styleFN = ({ col, font, bottom }: defStyObjType) => StyleSheet.create({
     },
     menu_title: {
         fontFamily: font.REGULAR,
-        color: col.WHITE,
+        color: col.LATEST_WEBSTORY_MENU_ITEM_TITLE,
         fontSize: Size(20),
     },
     selected_menu_title: {
         fontFamily: font.SEMI_BOLD,
-        color: col.WHITE,
+        color: col.SELECTED_LATEST_WEBSTORY_MENU_ITEM_TITLE,
         fontSize: Size(20),
     },
     menu_scroll_container: {
-        paddingHorizontal: bSpace,
+        paddingLeft: bSpace,
         paddingVertical: bSpace / 2
     },
-    menu_cover: {
+    menu_item_cover: {
         paddingHorizontal: 25,
-        height: Size(45),
+        height: Size(47),
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        borderWidth: .6,
+        marginRight: bSpace,
+        borderColor: col.LATEST_WEBSTORY_MENU_ITEM_OUTLINE,
+        borderRadius: 100,
+        backgroundColor: col.LATEST_WEBSTORY_MENU_ITEM_BG
     },
     selectedMenuItem: {
-        backgroundColor: col.PRIMARY,
-        borderRadius: 200
+        backgroundColor: col.SELECTED_LATEST_WEBSTORY_MENU_ITEM_BG,
+        borderRadius: 200,
+        borderWidth: undefined
     }
 })

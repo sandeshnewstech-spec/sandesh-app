@@ -23,6 +23,7 @@ import FooterLoader from "./FooterLoaderCompo";
 import HomeWebStoriesItem from "./Home/HomeWebStoriesItemCompo";
 import CubeListItem from "./CubeNavigationHorizontalCompo";
 import HomeWebStoriesList from "./Home/HomeWebStoriesListCompo";
+import WebViewX from "./XCompos/WebViewXCompo";
 
 
 export {
@@ -30,5 +31,5 @@ export {
     ScrLoader, ToastAlert, SwitchX, VideoX, PressableScaleX, ButtonOne,
     SelectionItemCard, ImageX, HomeTopMenu, HomePage, LiveButton, VideoItem,
     YoutubeIFramePlayer, VideoFrame, FooterLoader, HomeWebStoriesItem, CubeListItem,
-    HomeWebStoriesList
+    HomeWebStoriesList, WebViewX
 }

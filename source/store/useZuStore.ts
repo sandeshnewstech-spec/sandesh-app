@@ -20,7 +20,7 @@ const useZuStore = create<zuStandStoreOBJType>()(
         setLatestWebstories: by => set((state) => ({ latestWebStory: updateOBJFN(state?.latestWebStory, by)?.obj })),
         setWebstoriesMenus: by => set((state) => ({ latestWebStoryMenu: by }))
     }), {
-        name: '@AppForStore@',
+        name: '@sandesh@',
         storage: createJSONStorage(() => zuStandStorage),
         partialize: (state) => <zuStandStoreOBJType>({ ...state }),
         onRehydrateStorage: (_/* state */) => {

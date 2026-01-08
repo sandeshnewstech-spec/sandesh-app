@@ -51,6 +51,7 @@ const HomeWebStoriesListCompo = ({ showViewAll = true }: P) => {
         <FlashList
             horizontal
             data={data}
+            style={{ width: "100%" }}
             contentContainerStyle={{
                 paddingLeft: bSpace / 2,
                 paddingVertical: bSpace / 2,
