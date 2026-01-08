@@ -3,7 +3,7 @@ import React, { Fragment, memo } from 'react'
 import { useThemeX } from '../../hooks';
 import { statusBarType } from '../../types';
 
-const StatusBarXCompo = ({ sbShow = true, sbColor, barStyle = 'light-content', sbTransition }: statusBarType) => {
+const StatusBarXCompo = ({ sbShow = true, sbColor, barStyle = 'dark-content', sbTransition }: statusBarType) => {
     const { top, col } = useThemeX();
     return (
         <Fragment>
