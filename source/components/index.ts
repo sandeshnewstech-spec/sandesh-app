@@ -25,7 +25,6 @@ import CubeListItem from "./CubeNavigationHorizontalCompo";
 import HomeWebStoriesList from "./Home/HomeWebStoriesListCompo";
 import WebViewX from "./XCompos/WebViewXCompo";
 
-
 export {
     PressX, MasterView, HeaderX, StatusBarX, TextX, TextInputX, ButtonX,
     ScrLoader, ToastAlert, SwitchX, VideoX, PressableScaleX, ButtonOne,

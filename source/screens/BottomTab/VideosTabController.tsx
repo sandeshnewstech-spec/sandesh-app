@@ -51,7 +51,6 @@ const VideosTabController = () => {
             if (res?.data?.video && tempOBJ?.IDs.length > 0) {
                 if (_topLoading || _isLoading) { setPostsIDs(tempOBJ?.IDs); }
                 else { setPostsIDs(prev => ([...prev, ...tempOBJ?.IDs])); }
-                setUpdatePosts(tempOBJ?.obj);
                 isNextPage.current = true;
                 pageNO.current = pageNO.current + 1;
             } else {

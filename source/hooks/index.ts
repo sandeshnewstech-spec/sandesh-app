@@ -9,8 +9,9 @@ import useColors from "./useColorsHook"
 import useConnection from "./useConnectionHook"
 import useInit from "./useInitHook"
 import useGetPosts from "./useGetPostsHook"
+import useWebCache from "./useWebCacheHook"
 
 export {
     useThemeX, useAPIs, useDebounce, useMMKVStore, useColors, useConnection, useInit,
-    useGetPosts
+    useGetPosts, useWebCache
 }

@@ -6,6 +6,7 @@ import { IC_FONT_AWESOME6, IC_MATERIAL_COMMUNITY } from 'assets';
 import { defStyObjType } from 'types';
 import { _WIDTH, bSpace } from 'utils';
 import { Size } from 'functions';
+import SquircleView from 'react-native-fast-squircle';
 
 type P = {
     item: { code?: string; name?: string, icon?: any };
@@ -66,7 +67,7 @@ const SelectionItemCardCompo = ({ item, isSelected, onPress, selected = [], isIn
                     style={[styles.card, styles.cardSelected]}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}>
-                    <View style={styles.cardContent}>
+                    <SquircleView style={styles.cardContent} cornerSmoothing={1}>
                         {isInterestScreen && <View style={[styles.iconWrapper, styles.iconWrapperSelected]}>
                             <IC_MATERIAL_COMMUNITY
                                 name={item.icon} size={26}
@@ -91,7 +92,7 @@ const SelectionItemCardCompo = ({ item, isSelected, onPress, selected = [], isIn
                             />
                         </View>}
                         <View style={styles.glowEffect} />
-                    </View>
+                    </SquircleView>
                 </LinearGradient>
             ) : (
                 <LinearGradient
@@ -99,7 +100,7 @@ const SelectionItemCardCompo = ({ item, isSelected, onPress, selected = [], isIn
                     style={styles.card}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}>
-                    <View style={styles.cardContent}>
+                    <SquircleView style={styles.cardContent} cornerSmoothing={1}>
                         {(isInterestScreen) && <View style={[styles.iconWrapper]}>
                             <IC_MATERIAL_COMMUNITY
                                 name={item?.icon} size={26}
@@ -108,7 +109,7 @@ const SelectionItemCardCompo = ({ item, isSelected, onPress, selected = [], isIn
                         </View>}
                         {item?.code && <Text style={styles.code}>{item?.code}</Text>}
                         {item?.name && <Text style={styles.name}>{item?.name}</Text>}
-                    </View>
+                    </SquircleView>
                 </LinearGradient>
             )}
         </TouchableOpacity>
@@ -131,7 +132,7 @@ const stylesFN = ({ col, GRADIANTS_COLORS }: defStyObjType) => StyleSheet.create
     card: {
         width: _WIDTH / 2 - (bSpace + bSpace / 2),
         aspectRatio: 1,
-        borderRadius: 18,
+        borderRadius: 40,
         padding: 18,
         borderWidth: 2,
         borderColor: col.WHITE03,
@@ -146,6 +147,7 @@ const stylesFN = ({ col, GRADIANTS_COLORS }: defStyObjType) => StyleSheet.create
         shadowRadius: 25,
         elevation: 15,
         transform: [{ scale: 1.02 }],
+        overflow: 'hidden'
     },
 
     cardContent: {
@@ -153,6 +155,7 @@ const stylesFN = ({ col, GRADIANTS_COLORS }: defStyObjType) => StyleSheet.create
         justifyContent: "center",
         alignItems: "center",
         position: "relative",
+
     },
 
     code: {

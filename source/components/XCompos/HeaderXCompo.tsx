@@ -91,7 +91,7 @@ const HeaderXCompo = ({
         <>
             <StatusBarXCompo
                 barStyle={barStyle}
-                sbColor={sbColor ?? col.SB_COL}
+                sbColor={sbColor ?? col.STATUS_BAR}
                 sbTransition={sbTransition ?? 'fade'}
                 sbShow={sbShow}
             />

@@ -1,19 +1,9 @@
-import React, { useRef, useState, useCallback, useEffect } from 'react';
-import {
-  View,
-  StyleSheet,
-  ActivityIndicator,
-  Text,
-  Platform,
-} from 'react-native';
-import WebView, {
-  WebViewMessageEvent,
-  WebViewNavigation,
-} from 'react-native-webview';
-import { createMMKV } from 'react-native-mmkv';
+import React, { useRef, useCallback } from 'react';
+import { View, StyleSheet, Text, } from 'react-native';
+import WebView, { } from 'react-native-webview';
 import { CUSTOM_USER_AGENT, isIOS } from 'utils';
-import ScrLoaderCompo from './ScrLoaderCompo';
-import { useThemeX } from 'hooks';
+import { useThemeX, useWebCache } from 'hooks';
+import { OnShouldStartLoadWithRequest, WebViewSourceUri } from 'react-native-webview/lib/WebViewTypes';
 
 interface WebViewXCompoProps {
   url: string;
@@ -22,131 +12,45 @@ interface WebViewXCompoProps {
   storageId?: string; // custom storage ID for isolated caching
   originWhitelist?: string[];
   setLoading?: (i: boolean) => void;
+  cacheEnabled?: boolean;
+  headers?: Object;
+  onShouldStartLoadWithRequest?: OnShouldStartLoadWithRequest;
 }
-
-interface CacheData {
-  html: string;
-  timestamp: number;
-  loadTime: number;
-  resourceCount: number;
-  url: string;
-}
-
-// Initialize MMKV storage with custom configuration
-// MMKV is 30x faster than AsyncStorage!
-const storage = createMMKV({
-  id: 'webview-turbo-cache',
-  // Optional: Add encryption for secure caching
-  // encryptionKey: 'your-encryption-key-here'
-});
 
 const WebViewXCompo: React.FC<WebViewXCompoProps> = ({
   url, onLoadComplete, cacheExpiry = 3600000, storageId = '@webviewxcompo',
-  originWhitelist, setLoading = () => { }
+  originWhitelist, setLoading = () => { }, cacheEnabled = true, headers,
+  onShouldStartLoadWithRequest
 }) => {
+
+  const {
+    cachedContent, cacheHit, loadTime, cacheStats, handleMessage,
+    updateCacheStats, } = useWebCache({
+      url, cacheExpiry, storageId, cacheEnabled,
+    });
+
   const { col } = useThemeX();
   const webViewRef = useRef<WebView>(null);
-  const [cachedContent, setCachedContent] = useState<string | null>(null);
-  const [cacheHit, setCacheHit] = useState(false);
-  const [loadTime, setLoadTime] = useState<number>(0);
-  const [cacheStats, setCacheStats] = useState({ count: 0, size: '0 MB' });
+  //   try {
+  //     const allKeys = storage.getAllKeys();
+  //     const cacheKeys = allKeys.filter(key => key.includes('_cache_'));
 
-  // Generate cache key from URL
-  const getCacheKey = useCallback((url: string): string => {
-    const normalized = url.replace(/[^a-zA-Z0-9]/g, '_');
-    return `${storageId}_cache_${normalized}`;
-  }, [storageId]);
+  //     let totalSize = 0;
+  //     cacheKeys.forEach(key => {
+  //       const data = storage.getString(key);
+  //       if (data) {
+  //         totalSize += data.length;
+  //       }
+  //     });
 
-  // Load from MMKV cache on mount
-  useEffect(() => {
-    loadFromCache();
-  }, [url]);
-
-  const loadFromCache = useCallback(() => {
-    try {
-      const cacheKey = getCacheKey(url);
-
-      // MMKV's getString is synchronous and ULTRA FAST!
-      const cachedDataString = storage.getString(cacheKey);
-
-      if (cachedDataString) {
-        const parsed: CacheData = JSON.parse(cachedDataString);
-        const age = Date.now() - parsed.timestamp;
-
-        // Use cache if within expiry time
-        if (age < cacheExpiry) {
-          setCachedContent(parsed.html);
-          setCacheHit(true);
-          setLoadTime(parsed.loadTime);
-          setLoadingHere(false);
-
-          console.log(`⚡ CACHE HIT! Loaded in <1ms (Original: ${parsed.loadTime.toFixed(2)}ms)`);
-          console.log(`📦 Cache age: ${(age / 1000 / 60).toFixed(1)} minutes`);
-
-          return true;
-        } else {
-          // Cache expired, delete it
-          storage.remove(cacheKey);
-          console.log('🗑️ Cache expired and deleted');
-        }
-      }
-    } catch (error) {
-      console.error('❌ Cache load error:', error);
-    }
-    return false;
-  }, [url, cacheExpiry, getCacheKey]);
-
-  const handleMessage = useCallback((event: WebViewMessageEvent) => {
-    try {
-      const data = JSON.parse(event.nativeEvent.data);
-
-      if (data.type === 'cacheReady') {
-        const cacheData: CacheData = {
-          html: data.html,
-          timestamp: data.timestamp,
-          loadTime: data.loadTime,
-          resourceCount: data.resourceCount,
-          url: data.url
-        };
-
-        const cacheKey = getCacheKey(data.url);
-
-        // MMKV's set is synchronous and INSTANT!
-        storage.set(cacheKey, JSON.stringify(cacheData));
-
-        console.log(`✅ Cached to MMKV: ${data.url}`);
-        console.log(`📊 Load Time: ${data.loadTime.toFixed(2)}ms`);
-        console.log(`📦 Resources: ${data.resourceCount} (${data.fastResources} fast, ${data.slowResources} slow)`);
-
-        // Update cache stats
-        updateCacheStats();
-      }
-    } catch (error) {
-      console.error('❌ Message handling error:', error);
-    }
-  }, [getCacheKey]);
-
-  const updateCacheStats = useCallback(() => {
-    try {
-      const allKeys = storage.getAllKeys();
-      const cacheKeys = allKeys.filter(key => key.includes('_cache_'));
-
-      let totalSize = 0;
-      cacheKeys.forEach(key => {
-        const data = storage.getString(key);
-        if (data) {
-          totalSize += data.length;
-        }
-      });
-
-      setCacheStats({
-        count: cacheKeys.length,
-        size: `${(totalSize / 1024 / 1024).toFixed(2)} MB`
-      });
-    } catch (error) {
-      console.error('Stats error:', error);
-    }
-  }, []);
+  //     setCacheStats({
+  //       count: cacheKeys.length,
+  //       size: `${(totalSize / 1024 / 1024).toFixed(2)} MB`
+  //     });
+  //   } catch (error) {
+  //     console.error('Stats error:', error);
+  //   }
+  // }, []);
 
   const handleLoadEnd = useCallback(() => {
     setLoadingHere(false);
@@ -164,71 +68,70 @@ const WebViewXCompo: React.FC<WebViewXCompoProps> = ({
     setLoading(change);
   }
 
-  return (
-    <View style={styles.container}>
-      <WebView
-        ref={webViewRef}
-        source={
-          cachedContent
-            ? { html: cachedContent, baseUrl: url }
-            : { uri: url }
-        }
-        containerStyle={{ backgroundColor: col.TRANSPARENT }}
-        style={[{ flex: 1, backgroundColor: col.TRANSPARENT }]}
-        onMessage={handleMessage}
-        onLoadEnd={handleLoadEnd}
-        onLoadStart={handleLoadStart}
-        // injectedJavaScript={turboBoostScript}
-        // ============ MAXIMUM PERFORMANCE CONFIG ============
-        cacheEnabled={true}
-        cacheMode="LOAD_CACHE_ELSE_NETWORK"
-        domStorageEnabled={true}
-        javaScriptEnabled={true}
-        allowsBackForwardNavigationGestures={true}
-        // decelerationRate="normal" // this is cresh issue
-        incognito={false}
-        thirdPartyCookiesEnabled={true}
-        sharedCookiesEnabled={true}
-        startInLoadingState={false}
-        androidLayerType="hardware"
-        // androidHardwareAccelerationDisabled={false}
-        renderToHardwareTextureAndroid
-        allowsInlineMediaPlayback={true}
-        mediaPlaybackRequiresUserAction={false}
-        mixedContentMode="always"
-        allowFileAccess={true}
-        allowUniversalAccessFromFileURLs={true}
-        scalesPageToFit={true}
-        {...(isIOS && {
-          allowsLinkPreview: true,
-          dataDetectorTypes: 'none', // Faster rendering
-        })}
-        originWhitelist={originWhitelist}
-        userAgent={CUSTOM_USER_AGENT}
-      />
+  return (<View style={styles.container}>
+    <WebView
+      ref={webViewRef}
+      source={
+        cachedContent
+          ? { html: cachedContent, baseUrl: url, headers }
+          : { uri: url, headers }
+      }
+      containerStyle={{ backgroundColor: col.TRANSPARENT }}
+      style={[{ flex: 1, backgroundColor: col.TRANSPARENT }]}
+      onMessage={handleMessage}
+      onLoadEnd={handleLoadEnd}
+      onLoadStart={handleLoadStart}
+      onShouldStartLoadWithRequest={onShouldStartLoadWithRequest}
+      // injectedJavaScript={turboBoostScript}
+      // ============ MAXIMUM PERFORMANCE CONFIG ============
+      cacheEnabled={cacheEnabled}
+      cacheMode="LOAD_CACHE_ELSE_NETWORK"
+      domStorageEnabled={true}
+      javaScriptEnabled={true}
+      allowsBackForwardNavigationGestures={true}
+      // decelerationRate="normal" // this is cresh issue
+      incognito={false}
+      thirdPartyCookiesEnabled={true}
+      sharedCookiesEnabled={true}
+      startInLoadingState={false}
+      androidLayerType="hardware"
+      // androidHardwareAccelerationDisabled={false}
+      renderToHardwareTextureAndroid
+      allowsInlineMediaPlayback={true}
+      mediaPlaybackRequiresUserAction={false}
+      mixedContentMode="always"
+      allowFileAccess={true}
+      allowUniversalAccessFromFileURLs={true}
+      scalesPageToFit={true}
+      {...(isIOS && {
+        allowsLinkPreview: true,
+        dataDetectorTypes: 'none', // Faster rendering
+      })}
+      originWhitelist={originWhitelist}
+      userAgent={CUSTOM_USER_AGENT}
+    />
 
-      {/* Cache Hit Indicator */}
-      {cacheHit && (
-        <View style={styles.cacheIndicator}>
-          <Text style={styles.cacheText}>⚡ MMKV</Text>
-          <Text style={styles.cacheSubtext}>
-            {loadTime > 1000
-              ? `${(loadTime / 1000).toFixed(1)}s original`
-              : `${loadTime.toFixed(0)}ms original`}
-          </Text>
-        </View>
-      )}
+    {/* Cache Hit Indicator */}
+    {cacheHit && (
+      <View style={styles.cacheIndicator}>
+        <Text style={styles.cacheText}>⚡ MMKV</Text>
+        <Text style={styles.cacheSubtext}>
+          {loadTime > 1000
+            ? `${(loadTime / 1000).toFixed(1)}s original`
+            : `${loadTime.toFixed(0)}ms original`}
+        </Text>
+      </View>
+    )}
 
-      {/* Cache Stats Badge */}
-      {cacheStats.count > 0 && (
-        <View style={styles.statsIndicator}>
-          <Text style={styles.statsText}>
-            📦 {cacheStats.count} pages • {cacheStats.size}
-          </Text>
-        </View>
-      )}
-    </View>
-  );
+    {/* Cache Stats Badge */}
+    {cacheStats.count > 0 && (
+      <View style={styles.statsIndicator}>
+        <Text style={styles.statsText}>
+          📦 {cacheStats.count} pages • {cacheStats.size}
+        </Text>
+      </View>
+    )}
+  </View>);
 };
 
 const styles = StyleSheet.create({
@@ -281,85 +184,6 @@ const styles = StyleSheet.create({
 });
 
 export default WebViewXCompo;
-
-// ============ UTILITY FUNCTIONS ============
-
-/**
- * Clear all cached pages from MMKV storage
- * @param storageId - Optional storage ID to clear specific cache
- * @returns Number of pages cleared
- */
-export const clearWebViewCache = (storageId: string = 'default'): number => {
-  try {
-    const allKeys = storage.getAllKeys();
-    const cacheKeys = allKeys.filter(key => key.includes(`${storageId}_cache_`));
-
-    cacheKeys.forEach(key => storage.remove(key));
-
-    console.log(`🗑️ Cleared ${cacheKeys.length} cached pages`);
-    return cacheKeys.length;
-  } catch (error) {
-    console.error('Error clearing cache:', error);
-    return 0;
-  }
-};
-
-/**
- * Get statistics about cached pages
- * @param storageId - Optional storage ID to get specific cache stats
- * @returns Cache statistics
- */
-export const getCacheStats = (storageId: string = 'default') => {
-  try {
-    const allKeys = storage.getAllKeys();
-    const cacheKeys = allKeys.filter(key => key.includes(`${storageId}_cache_`));
-
-    let totalSize = 0;
-    const cacheDetails: Array<{ url: string; size: number; age: number }> = [];
-
-    cacheKeys.forEach(key => {
-      const data = storage.getString(key);
-      if (data) {
-        const size = data.length;
-        totalSize += size;
-
-        try {
-          const parsed: CacheData = JSON.parse(data);
-          cacheDetails.push({
-            url: parsed.url,
-            size: size,
-            age: Date.now() - parsed.timestamp
-          });
-        } catch (e) { }
-      }
-    });
-
-    return {
-      count: cacheKeys.length,
-      totalSizeBytes: totalSize,
-      totalSizeMB: (totalSize / 1024 / 1024).toFixed(2),
-      averageSizeKB: cacheKeys.length > 0 ? (totalSize / cacheKeys.length / 1024).toFixed(2) : '0',
-      details: cacheDetails
-    };
-  } catch (error) {
-    console.error('Error getting cache stats:', error);
-    return { count: 0, totalSizeBytes: 0, totalSizeMB: '0', averageSizeKB: '0', details: [] };
-  }
-};
-
-/**
- * Recrypt MMKV storage with a new encryption key
- * @param newKey - New encryption key (undefined to remove encryption)
- */
-export const recryptCache = (newKey?: string): void => {
-  try {
-    storage.recrypt(newKey);
-    console.log(newKey ? '🔐 Cache encrypted' : '🔓 Encryption removed');
-  } catch (error) {
-    console.error('Recrypt error:', error);
-  }
-};
-
 
 // Ultra-aggressive performance injection script
 const turboBoostScript = `

@@ -3,7 +3,7 @@ import React, { memo } from 'react'
 import { useThemeX } from 'hooks'
 import { defStyObjType } from 'types';
 import { IC_MATERIAL } from 'assets';
-import { pLOG, Size } from 'functions';
+import { Size } from 'functions';
 import PressableScaleXCompo from 'components/XCompos/PressableScaleXCompo';
 import { useNavigation } from '@react-navigation/native';
 import { VideoFrame } from 'components';

@@ -127,7 +127,7 @@ export type headerType = {
 export type statusBarType = {
     sbShow?: boolean;
     sbColor?: string | undefined;
-    barStyle?: StatusBarStyle;
+    barStyle?: StatusBarStyle | string;
     sbTransition?: "none" | "fade" | "slide" | null | undefined;
 }
 
