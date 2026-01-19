@@ -60,7 +60,7 @@ export type HomeSecondaryDataType = {
 
 export type HomeTopMenuItemType = {
     name?: string;
-    category?: string | false;
+    category?: string;
     url?: string;
     open?: number;
     title?: string;
@@ -148,3 +148,42 @@ export type postDetailType = {
     alsoread?: string;
     alsoread1?: number;
 };
+
+export type homeSecondaryGaneshItemType = {
+    media_title?: string;
+    media?: string;
+    id?: number;
+};
+
+export type homeSecondaryNewsDataType = {
+    Gujaratmetro?: Array<{
+        name?: string;
+        data?: NewsItemType[];
+    }>;
+    Mostviews?: NewsItemType;
+    Mostshare?: NewsItemType;
+    Gujarat?: NewsItemType[];
+    Videos?: NewsItemType[];
+    National?: NewsItemType[];
+    Election?: NewsItemType[];
+    Game?: any[];
+    Trending?: NewsItemType[];
+    World?: NewsItemType[];
+    Gallery?: NewsItemType[];
+    Spottedgallery?: NewsItemType[];
+    Entertainment?: NewsItemType[];
+    Lifestyle?: NewsItemType[];
+    Travel?: NewsItemType[];
+    Relationship?: NewsItemType[];
+    Food?: NewsItemType[];
+    Sportnews?: NewsItemType[];
+    Astrology?: NewsItemType[];
+    Supplement?: NewsItemType[];
+    Business?: NewsItemType[];
+    Technology?: NewsItemType[];
+    Columnist?: NewsItemType[];
+    Ganesh?: homeSecondaryGaneshItemType[];
+    GaneshEnabled?: number;
+};
+
+export type newsItemsObj = { [key: string]: NewsItemType };

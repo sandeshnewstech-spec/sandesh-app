@@ -140,11 +140,9 @@ const MasterViewCompo = ({
                     {bSvg && bSvg}
                     <ScrLoaderCompo loading={abLoader} absolute />
                 </KeyboardAvoidingView>
-                {
-                    (bottomBarColor) && <SafeAreaView
-                        style={{ backgroundColor: bottomBarColor ? bottomBarColor : 'black', height: bottom }}
-                    />
-                }
+                {(bottomBarColor) && <SafeAreaView
+                    style={{ backgroundColor: bottomBarColor ? bottomBarColor : 'black', height: bottom }}
+                />}
                 {modals && modals}
                 <ScrLoaderCompo loading={abScrLoader} absolute />
                 <ToastAlertCompo {...toast} setToast={setToast} />

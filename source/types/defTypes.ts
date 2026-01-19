@@ -14,7 +14,7 @@ import { FONT } from "../assets";
 import { ReactNode } from "react";
 import { StackScreenProps } from "@react-navigation/stack";
 import { AndroidPermission, IOSPermission } from "react-native-permissions";
-import { allTypesOfPostOBJType } from "./apiTypes";
+import { allTypesOfPostOBJType, homeSecondaryNewsDataType, HomeTopMenuItemType, newsItemsObj } from "./apiTypes";
 import { YoutubeIframeRef } from "react-native-youtube-iframe";
 
 export type zuStandInitStoreType = {
@@ -22,8 +22,11 @@ export type zuStandInitStoreType = {
     appServices: appServicesType;
     posts: allTypesOfPostOBJType;
     homeWebStory: WebStoryObjType;
+    homeSecondaryData: homeSecondaryNewsDataType;
     latestWebStory: WebStoryObjType;
-    latestWebStoryMenu: Array<LatestWebstoriesCategoryItemType>
+    latestWebStoryMenu: Array<LatestWebstoriesCategoryItemType>;
+    newsItems: newsItemsObj;
+    homeTopMenu: Array<HomeTopMenuItemType>;
 }
 
 export type setZuStandInitStoreType = {
@@ -34,6 +37,9 @@ export type setZuStandInitStoreType = {
     setHomeWebStory: (by: WebStoryObjType) => void;
     setWebstoriesMenus: (by: Array<LatestWebstoriesCategoryItemType>) => void;
     setLatestWebstories: (by: WebStoryObjType) => void;
+    setHomeSecondaryData: (by: homeSecondaryNewsDataType) => void;
+    setNewsItems: (by: newsItemsObj) => void;
+    setHomeTopMenu: (by: Array<HomeTopMenuItemType>) => void;
 }
 
 export type YoutubeIFramePlayerRefType = YoutubeIframeRef;
@@ -324,7 +330,6 @@ export type PressableScaleXCompoProps = {
     rippleColor?: ColorValue
     springConfig?: any
     activeOpacity?: number
-    feedbackMode?: 'scale' | 'opacity' | 'both'
 }
 
 export type appServicesType = {

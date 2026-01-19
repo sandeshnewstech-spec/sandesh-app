@@ -6,6 +6,7 @@ import { defStyObjType } from 'types';
 import { IC_MATERIAL, IC_MATERIAL_COMMUNITY } from 'assets';
 import { Size } from 'functions';
 import { BOTTOM_TAB_HEIGHT, ICON_SIZE } from 'utils';
+import FastSquircleView from 'react-native-fast-squircle';
 
 const CustomizeBottomTabBar = ({ state, descriptors, navigation }: any) => {
 
@@ -61,22 +62,22 @@ const CustomizeBottomTabBar = ({ state, descriptors, navigation }: any) => {
             };
             const item = getIcon(route?.name);
             return (
-                <PressableScaleX key={item?.title || ""} disabled={isFocused}
-                    style={isFocused ? sty.item_selected_cnt : sty.item_cnt}
-                    feedbackMode='scale' activeOpacity={0} rippleColor={'translate'}
-                    onPress={onPress} >
-                    {item?.svg}
-                    {isFocused && <TextX text={item?.title} tSty={isFocused ? sty.tab_item_selected_title : sty.tab_item_title} />}
-                </PressableScaleX>
+                <FastSquircleView key={item?.title || ""} style={[sty.item_smooth_corner, isFocused && sty.item_smooth_corner_selected]} cornerSmoothing={1} >
+                    <PressableScaleX disabled={isFocused}
+                        style={isFocused ? sty.item_selected_cnt : sty.item_cnt}
+                        activeOpacity={1} rippleColor={'translate'} onPress={onPress} >
+                        {item?.svg}
+                        {isFocused && <TextX text={String(item?.title)} tSty={isFocused ? sty.tab_item_selected_title : sty.tab_item_title} />}
+                    </PressableScaleX>
+                </FastSquircleView>
+
             );
         });
     }, [state, navigation, descriptors, col.WHITE, col.BLACK]);
 
     return (
         <View style={[sty.mainContainer]}>
-            <View style={sty.iconContainer}>
-                {getTabs()} {/* Render the generated tab buttons */}
-            </View>
+            <View style={sty.iconContainer}>{getTabs()}{/* Render the generated tab buttons */}</View>
         </View>
     );
 };
@@ -103,10 +104,16 @@ const styFN = ({ col, font, bottom }: defStyObjType) => StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center'
     },
-    item_selected_cnt: {
-        backgroundColor: col.BOTTOM_TAB_SELECTED_ITEM_BG,
-        padding: 10,
+    item_smooth_corner: {
         borderRadius: 200,
+        overflow: 'hidden'
+    },
+    item_smooth_corner_selected: {
+        backgroundColor: col.BOTTOM_TAB_SELECTED_ITEM_BG,
+    },
+    item_selected_cnt: {
+        // backgroundColor: col.BOTTOM_TAB_SELECTED_ITEM_BG,
+        padding: 10,
         flexDirection: 'row',
         alignItems: 'center'
     },

@@ -1,38 +1,106 @@
 import { ScrollView, StyleSheet, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { defStyObjType } from 'types'
-import { useAPIs, useGetPosts, useThemeX } from 'hooks'
-import { pLOG, Size } from 'functions'
+import React, { useCallback, useEffect, useState } from 'react'
+import { defStyObjType, NewsItemType } from 'types'
+import { useAPIs, useModifyData, useThemeX } from 'hooks'
 import useZuStore from 'store/useZuStore'
-import { HomeWebStoriesList } from 'components'
+import { ContentListCoverWithTitle, HomeImageCouresole, HomeWebStoriesList, NewsItem } from 'components'
+import { _WIDTH, bSpace } from 'utils'
+import { useNavigation } from '@react-navigation/native'
 
 const HomePageCompo = () => {
     const { defStyOBJ } = useThemeX();
+    const navigation: any = useNavigation();
     const style = styleFN(defStyOBJ);
-    const { appServices, homeWebStory, setHomeWebStory } = useZuStore();
+    const { appServices, homeWebStory, homeSecondaryData, setHomeSecondaryData } = useZuStore();
+    const { getHomeSecondaryDataAPI, getHomeTopMenuAPI } = useAPIs();
+    const {
+        GujaratmetroData, MostviewsData, MostshareData, GujaratData, VideosData, NationalData, ElectionData, GameData,
+        TrendingData, WorldData, GalleryData, SpottedgalleryData, EntertainmentData, LifestyleData, TravelData,
+        RelationshipData, FoodData, SportnewsData, AstrologyData, SupplementData, BusinessData, TechnologyData,
+        ColumnistData, GaneshData, GaneshEnabledData,
+    } = useModifyData({});
 
     const [webStoriesIDs, setWebStoriesIDs] = useState<Array<string>>([]);
-    const { webStoryData } = useGetPosts({ _webStoryIDs: webStoriesIDs });
+    const { webStoryData } = useModifyData({ _webStoryIDs: webStoriesIDs, });
 
-    pLOG("homeWebStory", homeWebStory);
-    pLOG("appServices", appServices);
-    pLOG("webStoryData", { webStoryData });
-    pLOG("webStoriesIDs", { webStoriesIDs });
+    const getHomeSecondaryDataFN = () => {
+        getHomeSecondaryDataAPI().then(({ res }) => {
+            if (res?.data) {
+                setHomeSecondaryData(res?.data);
+            }
+        }).catch((e) => {
+        })
+    }
+
+    const newsRenderItem = useCallback((item: NewsItemType, index: number) => (<NewsItem {...item} />), [homeSecondaryData]);
 
     useEffect(() => {
-
+        getHomeSecondaryDataFN();
     }, []);
 
     return (<View style={style.mainSty} >
         <ScrollView
             stickyHeaderIndices={[0]}
             renderToHardwareTextureAndroid
-            stickyHeaderHiddenOnScroll
-        >
+            contentContainerStyle={{ width: "100%" }}
+            stickyHeaderHiddenOnScroll>
             <View key={"HomeWebStoriesList"}>
                 <HomeWebStoriesList />
             </View>
-            {/* {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((item, idx) => <View key={idx.toString()} style={{ width: "100%", height: Size(200), backgroundColor: 'red', marginVertical: 10 }} />)} */}
+            <HomeImageCouresole data={EntertainmentData} />
+            {EntertainmentData?.length > 0 && <ContentListCoverWithTitle
+                title='Entertainment' style={{ marginHorizontal: bSpace / 2 }}
+                readMore={() => {
+                    navigation?.navigate("CategoryItemsListingScreen",
+                        { categoryName: "Entertainment", categoryId: "entertainment" })
+                }}>
+                {EntertainmentData?.map(newsRenderItem)}
+            </ContentListCoverWithTitle>}
+            {/* {TrendingData?.length > 0 && <ContentListCoverWithTitle
+                title='Trending' style={{ marginHorizontal: bSpace / 2 }}
+                readMore={() => {
+                    navigation?.navigate("CategoryItemsListingScreen",
+                        { categoryName: "Trending", categoryId: "trending" })
+                }}>
+                {TrendingData?.map(newsRenderItem)}
+            </ContentListCoverWithTitle>}
+            
+            {NationalData?.length > 0 && <ContentListCoverWithTitle
+                title='National' style={{ marginHorizontal: bSpace / 2 }}>
+                {NationalData?.map(newsRenderItem)}
+            </ContentListCoverWithTitle>}
+            {EntertainmentData?.length > 0 && <ContentListCoverWithTitle
+                title='Entertainment' style={{ marginHorizontal: bSpace / 2 }}>
+                {EntertainmentData?.map(newsRenderItem)}
+            </ContentListCoverWithTitle>}
+            {WorldData?.length > 0 && <ContentListCoverWithTitle
+                title='World' style={{ marginHorizontal: bSpace / 2 }}>
+                {WorldData?.map(newsRenderItem)}
+            </ContentListCoverWithTitle>}
+            {BusinessData?.length > 0 && <ContentListCoverWithTitle
+                title='Business' style={{ marginHorizontal: bSpace / 2 }}>
+                {BusinessData?.map(newsRenderItem)}
+            </ContentListCoverWithTitle>}
+            {AstrologyData?.length > 0 && <ContentListCoverWithTitle
+                title='Astrology' style={{ marginHorizontal: bSpace / 2 }}>
+                {AstrologyData?.map(newsRenderItem)}
+            </ContentListCoverWithTitle>}
+            {SportnewsData?.length > 0 && <ContentListCoverWithTitle
+                title='Sportnews' style={{ marginHorizontal: bSpace / 2 }}>
+                {SportnewsData?.map(newsRenderItem)}
+            </ContentListCoverWithTitle>}
+            {TechnologyData?.length > 0 && <ContentListCoverWithTitle
+                title='Technology' style={{ marginHorizontal: bSpace / 2 }}>
+                {TechnologyData?.map(newsRenderItem)}
+            </ContentListCoverWithTitle>}
+            {LifestyleData?.length > 0 && <ContentListCoverWithTitle
+                title='Lifestyle' style={{ marginHorizontal: bSpace / 2 }}>
+                {LifestyleData?.map(newsRenderItem)}
+            </ContentListCoverWithTitle>}
+            {SupplementData?.length > 0 && <ContentListCoverWithTitle
+                title='Supplement' style={{ marginHorizontal: bSpace / 2 }}>
+                {SupplementData?.map(newsRenderItem)}
+            </ContentListCoverWithTitle>} */}
         </ScrollView>
     </View>)
 }

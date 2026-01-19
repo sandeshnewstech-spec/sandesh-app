@@ -241,7 +241,7 @@ export type LocaleCode = string;
  * // Returns: 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&start=30&controls=0'
  */
 export function buildYouTubeUrl(
-    videoId: YouTubeVideoId,
+    videoId?: YouTubeVideoId,
     params?: YouTubeParamsType
 ): string {
     const baseUrl = `https://www.youtube.com/embed/${parseVideoId(videoId)}`;

@@ -1,20 +1,21 @@
 import React, { useCallback, useState } from 'react'
-import FastImage, { FastImageProps } from 'react-native-fast-image';
+import FastImage, { FastImageProps, Source } from 'react-native-fast-image';
 import { DEF1S_IMG } from '../../assets/images';
 import { ImageBackground, ImageStyle, StyleProp } from 'react-native';
 import { isValidUrl, regex } from '../../functions';
 
 interface Props extends FastImageProps {
     img: string | any;
-    imgSource?: any;
+    imgSource?: Source;
     imgSty?: ImageStyle | StyleProp<any>;
     defIMG?: any;
     noDefImg?: boolean;
     imgProps?: FastImageProps;
     sharedTransitionTag?: string;
+    headers?: Source['headers'];
 }
 
-const ImageXCompo = ({ imgSource, sharedTransitionTag, img, noDefImg, defIMG = DEF1S_IMG, imgSty, ...imgProps }: Props) => {
+const ImageXCompo = ({ headers, imgSource, sharedTransitionTag, img, noDefImg, defIMG = DEF1S_IMG, imgSty, ...imgProps }: Props) => {
 
     const placeholder_image_base64 = undefined, placeholder_image = "https://sandesh.com/static/media/logoog.a1f01c9c8f8d47cde53a.webp";
     const imgUriSource = img && typeof img === 'string' ? img : "";
@@ -24,7 +25,7 @@ const ImageXCompo = ({ imgSource, sharedTransitionTag, img, noDefImg, defIMG = D
 
     const Image = useCallback(() => {
         return (<FastImage
-            source={imgSource ? imgSource : { uri: img, cache: 'immutable' }}
+            source={imgSource ? imgSource : { uri: img, cache: 'immutable', headers }}
             style={{
                 width: "100%", height: "100%",
                 // backgroundColor: (imgERR == null || imgERR == true) ? undefined : col.WHITE,
@@ -46,6 +47,7 @@ const ImageXCompo = ({ imgSource, sharedTransitionTag, img, noDefImg, defIMG = D
                 source={{
                     cache: 'force-cache',
                     uri: imgERR == false ? undefined : (placeholder_image_base64 || placeholder_image || ""),
+                    headers
                 }}
                 onError={() => { setShERR(true); }}
                 onLoadEnd={() => { !shERR && setShERR(false); }}

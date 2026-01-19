@@ -1,7 +1,7 @@
 import { NativeScrollEvent, NativeSyntheticEvent, RefreshControl, View } from 'react-native'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { MasterView, VideoItem } from 'components'
-import { useAPIs, useGetPosts, useThemeX } from 'hooks'
+import { useAPIs, useModifyData, useThemeX } from 'hooks'
 import useZuStore from 'store/useZuStore'
 import { makeOBJFN } from 'functions'
 import { VideoItemType } from 'types'
@@ -15,7 +15,7 @@ const VideosTabController = () => {
     const { getVideosAPI } = useAPIs();
     const { setUpdatePosts } = useZuStore();
     const [postIDs, setPostsIDs] = useState<Array<string>>([]);
-    const { postsData } = useGetPosts({ _postsIDs: postIDs });
+    const { postsData } = useModifyData({ _postsIDs: postIDs });
     const [curentIDx, setCurrentIDx] = useState<number>(0);
 
     const SCR_HEIGHT = useMemo(() => _HEIGHT - (BOTTOM_TAB_HEIGHT + top + bottom), [_HEIGHT, BOTTOM_TAB_HEIGHT, top, bottom]);
@@ -49,6 +49,7 @@ const VideosTabController = () => {
         getVideosAPI(pageNO.current, POST_PER_PAGE).then(({ res }) => {
             const tempOBJ = makeOBJFN(res?.data?.video);
             if (res?.data?.video && tempOBJ?.IDs.length > 0) {
+                setUpdatePosts(tempOBJ?.obj);
                 if (_topLoading || _isLoading) { setPostsIDs(tempOBJ?.IDs); }
                 else { setPostsIDs(prev => ([...prev, ...tempOBJ?.IDs])); }
                 isNextPage.current = true;

@@ -24,11 +24,19 @@ import HomeWebStoriesItem from "./Home/HomeWebStoriesItemCompo";
 import CubeListItem from "./CubeNavigationHorizontalCompo";
 import HomeWebStoriesList from "./Home/HomeWebStoriesListCompo";
 import WebViewX from "./XCompos/WebViewXCompo";
+import ContentListCoverWithTitle from "./ContentListCoverWithTitleCompo";
+import GujaratMetro from "./Home/GujaratMetroCompo";
+import NewsItem from "./NewsItemCompo";
+import DynamicHomeTabPages from "./Home/DynamicHomeTabPagesCompo";
+import ScrollToTop from "./ScrollToTopCompo";
+import HomeImageCouresole from "./HomeImageCouresoleCompo";
+import ImageCourasoleItem from "./Home/ImageCourasoleItemCompo";
 
 export {
     PressX, MasterView, HeaderX, StatusBarX, TextX, TextInputX, ButtonX,
     ScrLoader, ToastAlert, SwitchX, VideoX, PressableScaleX, ButtonOne,
     SelectionItemCard, ImageX, HomeTopMenu, HomePage, LiveButton, VideoItem,
     YoutubeIFramePlayer, VideoFrame, FooterLoader, HomeWebStoriesItem, CubeListItem,
-    HomeWebStoriesList, WebViewX
+    HomeWebStoriesList, WebViewX, ContentListCoverWithTitle, GujaratMetro,
+    NewsItem, DynamicHomeTabPages, ScrollToTop, HomeImageCouresole, ImageCourasoleItem
 }

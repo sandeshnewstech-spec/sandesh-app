@@ -11,9 +11,10 @@ import ProfileTabScreen from "./BottomTab/ProfileTabController"
 import LiveTVScreen from "./LiveTVController"
 import WebStoriesListScreen from "./WebStoriesListController"
 import WebStoryViewScreen from "./WebStoryViewController"
+import CategoryItemsListingScreen from "./CategoryItemsListingController"
 
 export {
     HomeScreen, InterestScreen, LanguageSelectionScreen, LocationScreen,
     HomeTabScreen, ProfileTabScreen, SearchTabScreen, VideosTabScreen,
-    LiveTVScreen, WebStoriesListScreen, WebStoryViewScreen
+    LiveTVScreen, WebStoriesListScreen, WebStoryViewScreen, CategoryItemsListingScreen
 }

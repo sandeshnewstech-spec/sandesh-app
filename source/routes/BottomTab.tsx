@@ -6,7 +6,7 @@ import { HomeTabScreen, ProfileTabScreen, SearchTabScreen, VideosTabScreen } fro
 
 const BottomTab = ({ }: StackProps<'BottomTab'>) => {
     return (<BottomTabStack.Navigator
-        screenOptions={{ headerShown: false, animation: 'shift' }}
+        screenOptions={{ headerShown: false, animation: 'none' }}
         tabBar={props => <CustomizeBottomTabBar {...props} />}>
         <BottomTabStack.Screen name='HomeTabScreen' component={HomeTabScreen} />
         <BottomTabStack.Screen name='VideosTabScreen' component={VideosTabScreen} />

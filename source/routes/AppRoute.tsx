@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { AppStack, } from 'utils';
 import { ToastAlert } from 'components';
 import { useInit, useMMKVStore } from '../hooks';
-import { InterestScreen, LanguageSelectionScreen, LiveTVScreen, LocationScreen, WebStoriesListScreen, WebStoryViewScreen } from 'screens';
+import { CategoryItemsListingScreen, InterestScreen, LanguageSelectionScreen, LiveTVScreen, LocationScreen, WebStoriesListScreen, WebStoryViewScreen } from 'screens';
 import useZuStore from 'store/useZuStore';
 import BottomTab from './BottomTab';
 import { StatusBar } from 'react-native';
@@ -27,6 +27,7 @@ const AppRoute = () => {
                     <AppStack.Screen name="LiveTVScreen" component={LiveTVScreen} options={{ animation: 'fade_from_bottom' }} />
                     <AppStack.Screen name="WebStoriesListScreen" component={WebStoriesListScreen} options={{ animation: 'slide_from_right' }} />
                     <AppStack.Screen name="WebStoryViewScreen" component={WebStoryViewScreen} options={{ animation: 'slide_from_bottom' }} />
+                    <AppStack.Screen name="CategoryItemsListingScreen" component={CategoryItemsListingScreen} options={{ animation: 'slide_from_right' }} />
                 </AppStack.Navigator>)}
             <ToastAlert {...toast} setToast={setToast} />
         </Fragment>

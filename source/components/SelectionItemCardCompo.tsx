@@ -6,7 +6,7 @@ import { IC_FONT_AWESOME6, IC_MATERIAL_COMMUNITY } from 'assets';
 import { defStyObjType } from 'types';
 import { _WIDTH, bSpace } from 'utils';
 import { Size } from 'functions';
-import SquircleView from 'react-native-fast-squircle';
+import FastSquircleView from 'react-native-fast-squircle';
 
 type P = {
     item: { code?: string; name?: string, icon?: any };
@@ -67,7 +67,7 @@ const SelectionItemCardCompo = ({ item, isSelected, onPress, selected = [], isIn
                     style={[styles.card, styles.cardSelected]}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}>
-                    <SquircleView style={styles.cardContent} cornerSmoothing={1}>
+                    <FastSquircleView style={styles.cardContent} cornerSmoothing={1}>
                         {isInterestScreen && <View style={[styles.iconWrapper, styles.iconWrapperSelected]}>
                             <IC_MATERIAL_COMMUNITY
                                 name={item.icon} size={26}
@@ -92,7 +92,7 @@ const SelectionItemCardCompo = ({ item, isSelected, onPress, selected = [], isIn
                             />
                         </View>}
                         <View style={styles.glowEffect} />
-                    </SquircleView>
+                    </FastSquircleView>
                 </LinearGradient>
             ) : (
                 <LinearGradient
@@ -100,7 +100,7 @@ const SelectionItemCardCompo = ({ item, isSelected, onPress, selected = [], isIn
                     style={styles.card}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}>
-                    <SquircleView style={styles.cardContent} cornerSmoothing={1}>
+                    <FastSquircleView style={styles.cardContent} cornerSmoothing={1}>
                         {(isInterestScreen) && <View style={[styles.iconWrapper]}>
                             <IC_MATERIAL_COMMUNITY
                                 name={item?.icon} size={26}
@@ -109,7 +109,7 @@ const SelectionItemCardCompo = ({ item, isSelected, onPress, selected = [], isIn
                         </View>}
                         {item?.code && <Text style={styles.code}>{item?.code}</Text>}
                         {item?.name && <Text style={styles.name}>{item?.name}</Text>}
-                    </SquircleView>
+                    </FastSquircleView>
                 </LinearGradient>
             )}
         </TouchableOpacity>

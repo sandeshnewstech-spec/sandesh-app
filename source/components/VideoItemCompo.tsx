@@ -1,11 +1,11 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { memo } from 'react'
 import { useThemeX } from 'hooks'
-import { defStyObjType, VideoItemType } from 'types';
+import { buildYouTubeUrl, defStyObjType, VideoItemType } from 'types';
 import { _WIDTH, bSpace, ICON_SIZE } from 'utils';
 import { VideoFrame } from 'components';
 import TextXCompo from './XCompos/TextXCompo';
-import { Size } from 'functions';
+import { copyToClipboard, Size } from 'functions';
 import PressableScaleXCompo from './XCompos/PressableScaleXCompo';
 import { IC_FONT_AWESOME6, IC_MATERIAL } from 'assets';
 
@@ -19,7 +19,7 @@ type P = {
 const VideoItemCompo = ({ video_yt, isPlaying, index, title, tagline, scr_height, tags = [] }: P) => {
     const { defStyOBJ, col, str, font } = useThemeX();
     const style = styleFN(defStyOBJ);
-
+    const yt_url = buildYouTubeUrl(video_yt || "");
     return (<View style={[style.mainSty, { height: scr_height }]} >
         <View>
             <TextXCompo text={title} tSty={style.titleSty} lines={3} />
@@ -39,12 +39,7 @@ const VideoItemCompo = ({ video_yt, isPlaying, index, title, tagline, scr_height
             style={{ backgroundColor: col.BLACK, flex: 1, width: _WIDTH }}
             yt_params={{ autoplay: isPlaying ? 1 : 0, controls: 1, rel: 1, iv_load_policy: 3, fs: 0 }} />
         <View>
-
             <View style={style.buttonContainer} >
-                <PressableScaleXCompo style={style.icBtn}>
-                    <IC_FONT_AWESOME6 name='whatsapp' color={col.BTN_TEXT_COL} size={ICON_SIZE} />
-                </PressableScaleXCompo>
-                <View style={{ width: bSpace / 2 }} />
                 <PressableScaleXCompo
                     style={style.readNewsBtn}
                     tSty={style.readNewsBtnTitle}>
@@ -53,7 +48,15 @@ const VideoItemCompo = ({ video_yt, isPlaying, index, title, tagline, scr_height
                 </PressableScaleXCompo>
                 <View style={{ width: bSpace / 2 }} />
                 <PressableScaleXCompo style={style.icBtn}>
+                    <IC_FONT_AWESOME6 name='whatsapp' color={col.BTN_TEXT_COL} size={ICON_SIZE} />
+                </PressableScaleXCompo>
+                <View style={{ width: bSpace / 2 }} />
+                <PressableScaleXCompo style={style.icBtn}>
                     <IC_MATERIAL name='send' color={col.BTN_TEXT_COL} size={ICON_SIZE} />
+                </PressableScaleXCompo>
+                <View style={{ width: bSpace / 2 }} />
+                <PressableScaleXCompo style={style.icBtn} onPress={() => { copyToClipboard(yt_url); }}>
+                    <IC_MATERIAL name='link' color={col.BTN_TEXT_COL} size={ICON_SIZE} />
                 </PressableScaleXCompo>
             </View>
         </View>

@@ -2,6 +2,7 @@ import { Dimensions } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { _isDEV, _isPUBLISH_MODE } from "../utils";
 import { allTypesOfPostOBJType, allTypesOfPostItemType, postDetailTopTenNewsType } from "types";
+import Clipboard from '@react-native-clipboard/clipboard';
 
 export const _HEIGHT = Dimensions.get('window').height;
 export const _WIDTH = Dimensions.get('window').width;
@@ -113,6 +114,7 @@ export const formatDurationFN = (secondsInput: number) => {
 };
 
 export const updateOBJFN = (state: { [key: string]: any } = {}, updatedState: { [key: string]: any }): { obj: { [key: string]: any }, IDs: Array<string> } => {
+    `worklet`
     const tempOBJ: { [key: string]: any } = state;
     const tempIDs: Array<string> = [];
     for (let item of (Array.isArray(updatedState) ? updatedState : Object.values(updatedState))) {
@@ -130,6 +132,7 @@ export const updateOBJFN = (state: { [key: string]: any } = {}, updatedState: { 
 }
 
 export const makeOBJFN = (updatedState: { [key: string]: any } = {}): { obj: { [key: string]: any }, IDs: Array<string> } => {
+    `worklet`
     const tempOBJ: { [key: string]: any } = {};
     const tempIDs: Array<string> = [];
     for (let item of Object.values(updatedState)) {
@@ -139,4 +142,13 @@ export const makeOBJFN = (updatedState: { [key: string]: any } = {}): { obj: { [
         tempOBJ[ID] = item;
     };
     return { IDs: tempIDs, obj: tempOBJ };
+}
+
+export const copyToClipboard = (text?: string): boolean => {
+    try {
+        Clipboard.setString(text || "https://sandesh.com");
+        return true;
+    } catch (e) {
+        return false;
+    }
 }

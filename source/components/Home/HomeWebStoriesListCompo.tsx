@@ -1,7 +1,7 @@
 import { FlashList } from "@shopify/flash-list"
-import { useAPIs, useGetPosts, useThemeX } from "hooks";
+import { useAPIs, useModifyData, useThemeX } from "hooks";
 import { useEffect, useState } from "react";
-import { _HEIGHT, bSpace, ICON_SIZE } from "utils"
+import { _HEIGHT, _WIDTH, bSpace, ICON_SIZE } from "utils"
 import HomeWebStoriesItemCompo from "./HomeWebStoriesItemCompo";
 import { makeOBJFN, Size } from "functions";
 import useZuStore from "store/useZuStore";
@@ -25,9 +25,10 @@ const HomeWebStoriesListCompo = ({ showViewAll = true }: P) => {
     const style = stylesFN(defStyOBJ);
     const [webStoriesIDs, setWebStoriesIDs] = useState<Array<string>>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const { webStoryData } = useGetPosts({ _webStoryIDs: webStoriesIDs });
+    const { webStoryData } = useModifyData({ _webStoryIDs: webStoriesIDs });
 
-    const data = webStoryData;
+    const homeWebStoryData = Object.values(homeWebStory);
+    const data = webStoryData.length > 0 ? webStoryData : homeWebStoryData.splice(0, (homeWebStoryData.length > 8) ? 9 : (homeWebStoryData.length - 1));
 
     const getHomePageWebStoriesFN = () => {
         setIsLoading(true);
@@ -51,7 +52,7 @@ const HomeWebStoriesListCompo = ({ showViewAll = true }: P) => {
         <FlashList
             horizontal
             data={data}
-            style={{ width: "100%" }}
+            style={{ width: "100%", backgroundColor: col.HOME_TOP_TAB_BG }}
             contentContainerStyle={{
                 paddingLeft: bSpace / 2,
                 paddingVertical: bSpace / 2,

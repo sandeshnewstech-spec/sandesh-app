@@ -8,10 +8,10 @@ import useMMKVStore from "./useMMKVStoreHook"
 import useColors from "./useColorsHook"
 import useConnection from "./useConnectionHook"
 import useInit from "./useInitHook"
-import useGetPosts from "./useGetPostsHook"
 import useWebCache from "./useWebCacheHook"
+import useModifyData from "./useModifyDataHook"
 
 export {
     useThemeX, useAPIs, useDebounce, useMMKVStore, useColors, useConnection, useInit,
-    useGetPosts, useWebCache
+    useModifyData, useWebCache
 }

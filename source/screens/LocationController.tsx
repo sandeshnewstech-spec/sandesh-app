@@ -1,12 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import {
     View,
-    Text,
     TouchableOpacity,
     FlatList,
     Animated,
-    Easing,
-    StatusBar,
     StyleSheet
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
@@ -17,6 +14,7 @@ import { ButtonOne, MasterView, TextX } from "components";
 import { IC_MATERIAL_COMMUNITY } from "assets";
 import { Size } from "functions";
 import useZuStore from "store/useZuStore";
+import FastSquircleView from "react-native-fast-squircle";
 
 const states = [
     {
@@ -75,11 +73,12 @@ export default function LocationController({ navigation }: any) {
 
     const renderLocationCard = ({ item }: { item: { name: string; icon: string; subtitle: string } }) => {
         const isSelected = selectedState === item?.name;
-
         return (
-            <Animated.View style={[{}]}>
+            <FastSquircleView
+                cornerSmoothing={1}
+                style={[styles.cornerSmootherCover, styles.cardShadow]}>
                 <TouchableOpacity
-                    activeOpacity={1} style={styles.cardShadow}
+                    activeOpacity={1}
                     onPress={() => handleStateSelect(item?.name)}>
                     {isSelected ? (
                         <LinearGradient
@@ -124,7 +123,7 @@ export default function LocationController({ navigation }: any) {
                         </LinearGradient>
                     )}
                 </TouchableOpacity>
-            </Animated.View>
+            </FastSquircleView>
         );
     };
 
@@ -157,6 +156,7 @@ export default function LocationController({ navigation }: any) {
             showsVerticalScrollIndicator={false}
             keyExtractor={(item) => item?.name}
             renderItem={renderLocationCard}
+            ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
         />
 
         {/* FLOATING ACTION BUTTON */}
@@ -231,15 +231,17 @@ const styleFN = ({ col, font, GRADIANTS_COLORS, bottom }: defStyObjType) => Styl
         shadowOffset: { width: 0, height: 6 },
         shadowOpacity: 0.1,
         elevation: 5,
-        marginBottom: 16,
+    },
+
+    cornerSmootherCover: {
+        borderRadius: 30,
+        overflow: 'hidden'
     },
 
     locationCard: {
-        borderRadius: 18,
         padding: 20,
         borderWidth: 1,
         borderColor: col.WHITE03,
-        overflow: "hidden",
         shadowColor: col.PRIMARY,
         shadowOffset: { width: 0, height: 12 },
         shadowOpacity: 0.2,

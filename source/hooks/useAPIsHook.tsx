@@ -132,6 +132,15 @@ const useAPIsHook = () => {
     });
   }
 
+  async function getCategoryListAPI({ start = 0, limit = 50, category_name = undefined }: { start: number; limit: number; category_name?: string }) {
+    return fetchREQ({
+      method: 'GET',
+      apiURI: FINAL_BASE_URL,
+      endPath: `${API_END_POINTS.getCategoryList}/${category_name}`,
+      params: `start=${start}&limit=${limit}`,
+    });
+  }
+
   function abortAPI() { try { abort(); } catch (e) { /* LOG(e, "ERROR :: abortAPI =>>"); */ } }
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { runOnJS(abortAPI)(); return false; });
@@ -142,7 +151,7 @@ const useAPIsHook = () => {
   return {
     abortAPI, getHomeSecondaryDataAPI, getHomeTopMenuAPI, getVideosAPI,
     getSettingAPI, getPostDetailsAPI, getHomePageWebStoryAPI, BASE_URL,
-    getLatestWebStoriesAPI
+    getLatestWebStoriesAPI, getCategoryListAPI
   };
 
 }

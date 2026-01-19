@@ -1,0 +1,22 @@
+{
+    "APP_NAME": "TennisPAL",
+    "NO": "ના",
+    "YES": "હા",
+    "PERMISSIONS_UNAVAILABLE": "પરવાનગી ઉપલબ્ધ નથી",
+    "PERMISSIONS_UNAVAILABLE_MSG": "આ ઉપકરણ પર પરવાનગી ઉપલબ્ધ નથી. અપગ્રેડ કરવાનો સમય આવી ગયો છે? 📱✨",
+    "PERMISSIONS_DENIED": "પરવાનગી નકારી",
+    "PERMISSIONS_DENIED_MSG": "પરવાનગી નકારી. 🚫 સંપૂર્ણ ક્ષમતાને અનલૉક કરવા માટે સેટિંગ્સમાં તેને સક્ષમ કરો.",
+    "PERMISSIONS_LIMITED": "મર્યાદિત પરવાનગી",
+    "PERMISSIONS_LIMITED_MSG": "એક્સેસ મર્યાદિત. કેટલીક સુવિધાઓ ઉપલબ્ધ ન હોઈ શકે. 🌟 વધુ માટે સેટિંગ્સનું અન્વેષણ કરો!",
+    "PERMISSIONS_BLOCKED": "પરવાનગી અવરોધિત",
+    "PERMISSIONS_BLOCKED_MSG": "પરવાનગી અવરોધિત. 🛑 ઍક્સેસ આપવા માટે સેટિંગ્સ પર જાઓ.",
+    "OPEN_SETTING": "સેટિંગ્સ ખોલો",
+    "NOTIFICATION_PERMISSION_REQUIRED_MSG": "અમારી એપ્લિકેશનમાંથી નવીનતમ અપડેટ્સ સાથે અપડેટ રહેવા માટે સૂચનાઓ સક્ષમ કરો.",
+    "LOCATION_PERMISSION_REQUIRED_MSG": "તમને નજીકના વપરાશકર્તાઓ સાથે કનેક્ટ કરવા સહિત, વધુ સારો વપરાશકર્તા અનુભવ પ્રદાન કરવા માટે, અમને તમારી સ્થાન પરવાનગીની જરૂર છે.",
+    "SOMETHING_ITS_WRONG": "કંઈક ખોટું છે!!!",
+    "SOMETHING_ITS_WRONG_PLZ_TRY_AGAIN": "કંઈક ખોટું છે, કૃપા કરીને ફરી પ્રયાસ કરો!",
+    "YOUR_INTERNET_CONNCTIONS_IS_NOT_CONNECTED": "તમારું ઉપકરણ ઇન્ટરનેટ સાથે કનેક્ટ થયેલ નથી!!",
+    "OKAY": "ઠીક છે",
+    "READ_NEWS": "સમાચાર વાંચો",
+    "READ_MORE": "વધુ વાંચો"
+}

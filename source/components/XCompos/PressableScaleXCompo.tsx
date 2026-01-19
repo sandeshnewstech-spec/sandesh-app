@@ -9,7 +9,7 @@ import { PressableScaleXCompoProps } from 'types'
 const PressableScaleXCompo = memo(({
     children, text, disabled = false, loading = false, lCol, lSize = 'small', style, tSty, tProps,
     lProps, onPress, onPressIn, onPressOut, onLongPress, hitSlop = 8, activeScale = 0.94, rippleRadius = _WIDTH / 2,
-    rippleColor, springConfig = { damping: 0.8, mass: 1, stiffness: 100 }, activeOpacity = 0.7, feedbackMode = 'scale',
+    rippleColor, springConfig = { damping: 0.8, mass: 1, stiffness: 100 }, activeOpacity = 0.7,
 }: PressableScaleXCompoProps) => {
 
     const { col } = useThemeX()

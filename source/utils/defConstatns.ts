@@ -42,8 +42,11 @@ export const zuStandInitStore: zuStandInitStoreType = {
     },
     posts: {},
     homeWebStory: {},
+    homeTopMenu: [],
     latestWebStory: {},
     latestWebStoryMenu: [],
+    homeSecondaryData: {},
+    newsItems: {},
 };
 
 export const setZuStandInitStore: setZuStandInitStoreType = {
@@ -54,6 +57,9 @@ export const setZuStandInitStore: setZuStandInitStoreType = {
     setHomeWebStory(by) { },
     setWebstoriesMenus(by) { },
     setLatestWebstories(by) { },
+    setHomeSecondaryData(by) { },
+    setNewsItems(by) { },
+    setHomeTopMenu(by) { },
 }
 
 export const zuStandStoreOBJ: zuStandStoreOBJType = { ...zuStandInitStore, ...setZuStandInitStore };
@@ -108,7 +114,8 @@ export const API_END_POINTS = {
     setting: "setting",
     postDetails: "post-details",
     homePageWebStory: "home-page-web-story",
-    latestWebStories: "latest-web-stories"
+    latestWebStories: "latest-web-stories",
+    getCategoryList: "category",
 }
 
 export const WEB_STORY_DETAIL_URL = "https://sandesh.com/webstory/";

@@ -3,7 +3,7 @@ import { IC_MATERIAL_COMMUNITY } from "assets";
 import { HomeWebStoriesList, ImageX, MasterView, PressableScaleX, TextX } from "components"
 import Loaders from "components/XCompos/Loaders";
 import { makeOBJFN, Size } from "functions";
-import { useAPIs, useGetPosts, useThemeX } from "hooks"
+import { useAPIs, useModifyData, useThemeX } from "hooks"
 import { useCallback, useEffect, useRef, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -22,7 +22,7 @@ const WebStoriesListController = ({ navigation }: any) => {
     const [isBottomLoading, setIsBottomLoading] = useState<boolean>(false);
     const [latestWebstoryIDs, setLatestWebstoryIDs] = useState<string[]>([]);
     const [selectedMenuItem, setSelectedMenuItem] = useState<LatestWebstoriesCategoryItemType>({ id: "all", name: "all" });
-    const { latestWebStoryData } = useGetPosts({ _webStoryIDs: latestWebstoryIDs });
+    const { latestWebStoryData } = useModifyData({ _webStoryIDs: latestWebstoryIDs });
 
     const PER_PAGE_ITEM = 50;
     const PAGE_NO = 1;
@@ -69,7 +69,7 @@ const WebStoriesListController = ({ navigation }: any) => {
         return (<PressableScaleX onPress={() => navigation.navigate("WebStoryViewScreen", { item })} >
             <View style={style.main} >
                 <ImageX
-                    img={(appServices?.assetURL || "") + item?.main_image}
+                    img={(appServices?.baseURL || "") + item?.main_image}
                     style={{ flex: 1 }}
                 />
                 <View style={style.abCover} >
