@@ -117,17 +117,24 @@ export const updateOBJFN = (state: { [key: string]: any } = {}, updatedState: { 
     `worklet`
     const tempOBJ: { [key: string]: any } = state;
     const tempIDs: Array<string> = [];
-    for (let item of (Array.isArray(updatedState) ? updatedState : Object.values(updatedState))) {
-        const ID = item?.id;
-        if (!ID) continue;
-        tempIDs.push(ID);
-        if (state[ID]?.id) {
-            const tempItem: { [key: string]: any } = state[ID];
-            tempOBJ[ID] = { ...tempItem, ...item };
-        } else {
-            tempOBJ[ID] = item;
-        }
-    };
+    try {
+        for (let item of (Array.isArray(updatedState) ? updatedState : Object.values(updatedState))) {
+            const ID = item?.id;
+            if (!ID) continue;
+            tempIDs.push(ID);
+            if (state[ID]?.id) {
+                const tempItem: { [key: string]: any } = state[ID];
+                tempOBJ[ID] = { ...tempItem, ...item };
+            } else {
+                tempOBJ[ID] = item;
+            }
+        };
+    }
+    catch (e) {
+        pLOG("updateOBJFN", [e], 'e');
+        return { IDs: tempIDs, obj: tempOBJ };
+    }
+    pLOG("updateOBJFN::tempIDs", [tempIDs, tempOBJ]);
     return { IDs: tempIDs, obj: tempOBJ };
 }
 

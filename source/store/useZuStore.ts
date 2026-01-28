@@ -17,6 +17,7 @@ const useZuStore = create<zuStandStoreOBJType>()(
         setIsAppStartFlow: by => set((state) => ({ isAppStartFlow: by })),
         setAppServices: by => set((state) => ({ appServices: { ...state?.appServices, ...by } })),
         setPosts: by => set((state) => ({ posts: by })),
+        setHomeTopMenu: by => set((state) => ({ homeTopMenu: by })),
         setUpdatePosts: by => set((state) => ({ posts: updateOBJFN(state?.posts, by)?.obj })),
         setHomeWebStory: by => set((state) => ({ homeWebStory: updateOBJFN(state?.homeWebStory, by)?.obj })),
         setLatestWebstories: by => set((state) => ({ latestWebStory: updateOBJFN(state?.latestWebStory, by)?.obj })),

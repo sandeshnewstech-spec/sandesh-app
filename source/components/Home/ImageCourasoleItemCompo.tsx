@@ -10,26 +10,37 @@ import { defStyObjType, NewsItemType } from 'types';
 import { _WIDTH, bSpace } from 'utils';
 import { Size } from 'functions/defFunctions';
 
-const ImageCourasoleItemCompo = (item: NewsItemType) => {
+type P = {
+    onPress?: () => void;
+    title?: string;
+    categoryTitle?: string;
+    imageMediaUrl?: string;
+    onCategoryPress?: () => void;
+};
+
+const ImageCourasoleItemCompo = ({
+    title, categoryTitle, imageMediaUrl, onPress = () => { }, onCategoryPress = () => { }
+}: P) => {
+
     const { defStyOBJ, col } = useThemeX();
     const style = styleFN(defStyOBJ);
     const { appServices } = useZuStore();
     return (
-        <TouchableOpacity activeOpacity={1} >
+        <TouchableOpacity activeOpacity={1} onPress={onPress}>
             <FastSquircleView style={style.item_main} >
                 <FastSquircleView style={style.item_image_main} >
                     <ImageXCompo
                         // img={`${appServices?.assetURL}${item?.media}`}
-                        imgSource={{ uri: `${appServices?.assetURL}${item?.media}` }}
+                        imgSource={{ uri: `${appServices?.assetURL}${imageMediaUrl}` }}
                         imgSty={style.item_image} resizeMode="cover"
                     />
                 </FastSquircleView>
-                <TextXCompo text={item?.title} tSty={style.title} lines={3} />
-                <View style={style.catagory_and_btn_cover} >
+                <TextXCompo text={title} tSty={style.title} lines={3} />
+                {categoryTitle && <View style={style.catagory_and_btn_cover} >
                     <PressableScaleXCompo style={style.categotyCover} >
-                        <TextXCompo text={String(item?.category || "")} tSty={style.categotyTitle} onPress={() => { }} />
+                        <TextXCompo text={String(categoryTitle || "")} tSty={style.categotyTitle} onPress={onCategoryPress} />
                     </PressableScaleXCompo>
-                </View>
+                </View>}
             </FastSquircleView>
         </TouchableOpacity >
     )
@@ -51,7 +62,7 @@ const styleFN = ({ font, col }: defStyObjType) => StyleSheet.create({
     item_image_main: {
         height: Size(250),
         width: "100%",
-        borderRadius: 10,
+        borderRadius: 20,
         overflow: 'hidden',
     },
     item_image: {

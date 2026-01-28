@@ -17,11 +17,8 @@ const HomePageCompo = () => {
         GujaratmetroData, MostviewsData, MostshareData, GujaratData, VideosData, NationalData, ElectionData, GameData,
         TrendingData, WorldData, GalleryData, SpottedgalleryData, EntertainmentData, LifestyleData, TravelData,
         RelationshipData, FoodData, SportnewsData, AstrologyData, SupplementData, BusinessData, TechnologyData,
-        ColumnistData, GaneshData, GaneshEnabledData,
+        ColumnistData, GaneshData, GaneshEnabledData, HomeTopNewsData
     } = useModifyData({});
-
-    const [webStoriesIDs, setWebStoriesIDs] = useState<Array<string>>([]);
-    const { webStoryData } = useModifyData({ _webStoryIDs: webStoriesIDs, });
 
     const getHomeSecondaryDataFN = () => {
         getHomeSecondaryDataAPI().then(({ res }) => {
@@ -47,16 +44,19 @@ const HomePageCompo = () => {
             <View key={"HomeWebStoriesList"}>
                 <HomeWebStoriesList />
             </View>
-            <HomeImageCouresole data={EntertainmentData} />
+            <HomeImageCouresole
+                data={HomeTopNewsData}
+                onCategoryPress={(item) => {
+                    navigation?.navigate("CategoryItemsListingScreen", { categoryName: item?.category });
+                }} />
             {EntertainmentData?.length > 0 && <ContentListCoverWithTitle
                 title='Entertainment' style={{ marginHorizontal: bSpace / 2 }}
                 readMore={() => {
-                    navigation?.navigate("CategoryItemsListingScreen",
-                        { categoryName: "Entertainment", categoryId: "entertainment" })
+                    navigation?.navigate("CategoryItemsListingScreen", { categoryName: "Entertainment" })
                 }}>
-                {EntertainmentData?.map(newsRenderItem)}
+                {(EntertainmentData)?.map(newsRenderItem)}
             </ContentListCoverWithTitle>}
-            {/* {TrendingData?.length > 0 && <ContentListCoverWithTitle
+            {TrendingData?.length > 0 && <ContentListCoverWithTitle
                 title='Trending' style={{ marginHorizontal: bSpace / 2 }}
                 readMore={() => {
                     navigation?.navigate("CategoryItemsListingScreen",
@@ -64,7 +64,7 @@ const HomePageCompo = () => {
                 }}>
                 {TrendingData?.map(newsRenderItem)}
             </ContentListCoverWithTitle>}
-            
+
             {NationalData?.length > 0 && <ContentListCoverWithTitle
                 title='National' style={{ marginHorizontal: bSpace / 2 }}>
                 {NationalData?.map(newsRenderItem)}
@@ -100,7 +100,7 @@ const HomePageCompo = () => {
             {SupplementData?.length > 0 && <ContentListCoverWithTitle
                 title='Supplement' style={{ marginHorizontal: bSpace / 2 }}>
                 {SupplementData?.map(newsRenderItem)}
-            </ContentListCoverWithTitle>} */}
+            </ContentListCoverWithTitle>}
         </ScrollView>
     </View>)
 }

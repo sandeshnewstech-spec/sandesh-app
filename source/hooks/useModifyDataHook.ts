@@ -34,6 +34,10 @@ const useModifyDataHook = ({ _postsIDs = [], _webStoryIDs = [], _categoryNewsItm
     const GaneshData = homeSecondaryData["Ganesh"] || [];
     const GaneshEnabledData = homeSecondaryData["GaneshEnabled"] || [];
 
+    const HomeTopNewsData = [
+        TrendingData[0], EntertainmentData[0], ElectionData[0], NationalData[0],
+        WorldData[0], LifestyleData[0], TravelData[0]].filter(item => item !== undefined);
+
     const postsData = useMemo(() => {
         const tempOBJ: Array<allTypesOfPostItemType> = [];
         for (let id of _postsIDs) {
@@ -82,7 +86,7 @@ const useModifyDataHook = ({ _postsIDs = [], _webStoryIDs = [], _categoryNewsItm
         TrendingData, WorldData, GalleryData, SpottedgalleryData, EntertainmentData, LifestyleData, TravelData,
         RelationshipData, FoodData, SportnewsData, AstrologyData, SupplementData, BusinessData, TechnologyData,
         ColumnistData, GaneshData, GaneshEnabledData,
-        homeTopTabCategoryNews,
+        homeTopTabCategoryNews, HomeTopNewsData
     });
 }
 

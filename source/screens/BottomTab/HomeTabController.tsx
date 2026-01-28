@@ -22,12 +22,8 @@ const HomeTabController = ({ navigation }: any) => {
         getHomeTopMenuAPI().then(({ res }) => {
             if (res?.data) {
                 setHomeTopMenu(res?.data);
+                pLOG("HomeTopMenuAPI res:", [res?.data]);
             }
-        })
-        getHomeSecondaryDataAPI().then(({ res }) => {
-            pLOG("getHomeSecondaryDataAPI", res, 'l');
-
-        }).catch((e) => {
         })
     }
 
@@ -35,10 +31,12 @@ const HomeTabController = ({ navigation }: any) => {
         getHomeSecondaryDataFN();
     }, []);
 
+    pLOG("homeTopMenu:", [homeTopMenu]);
+
     return (
         <MasterView hShow={false} barStyle='dark-content'
             sbShow sbColor={col.HOME_TOP_TAB_BG} fixed >
-            <Animated.View style={[style.header_mSty]} >
+            {/* <Animated.View style={[style.header_mSty]} >
                 <ImageX
                     noDefImg img={""}
                     // img={appServices?.appLogo}
@@ -54,8 +52,8 @@ const HomeTabController = ({ navigation }: any) => {
                             size={ICON_SIZE} color={col.NOTIFICATION_ICON} />
                     </PressableScaleX>
                 </View>
-            </Animated.View >
-            {/* <TabsProvider defaultIndex={0} >
+            </Animated.View > */}
+            <TabsProvider defaultIndex={0} >
                 <Tabs
                     theme={{
                         colors: { primary: col.HOME_TOP_TAB_SELECTED_ITEM_INDICATORE },
@@ -68,18 +66,26 @@ const HomeTabController = ({ navigation }: any) => {
                     <TabScreen label="Home" >
                         <HomePage />
                     </TabScreen>
+                    <TabScreen label="Dynamic" >
+                        <DynamicHomeTabPages
+                            {...Object.values(homeTopMenu)[1]} />
+                    </TabScreen>
+
                     {/* {Object.values(homeTopMenu).map((item, idx) => <TabScreen key={idx.toString()} label={item?.name || ""}  >
-                        <View style={{ flex: 1, width: "100%" }} />
+                        <DynamicHomeTabPages
+                            // ParamList={ParamList}
+                            // RouteName={RouteName}
+                            {...item} />
                     </TabScreen>)} */}
-            {/* <TabScreen label={"Business"}  >
+                    {/* <TabScreen label={"Business"}  >
                         <DynamicHomeTabPages category='Business' />
                     </TabScreen> */}
-            {/* </Tabs>
-            </TabsProvider > */}
+                </Tabs>
+            </TabsProvider >
 
 
 
-            <MaterialTopTabStack.Navigator
+            {/* <MaterialTopTabStack.Navigator
                 overScrollMode={'never'}
                 style={{}}
                 screenOptions={{
@@ -105,26 +111,16 @@ const HomeTabController = ({ navigation }: any) => {
                     // tabBarIndicatorContainerStyle: { backgroundColor: 'green', },
                 }}>
                 <MaterialTopTabStack.Screen key={String("-1")} name="Home" component={HomePage} />
-                {/* <MaterialTopTabStack.Screen
-                    name={"Business"}
-                    component={(ParamList, RouteName) => <DynamicHomeTabPages
-                        ParamList={ParamList}
-                        RouteName={RouteName}
-                        category={"Business"}
-                    // {...Object.values(homeTopMenu)[0]}
-                    />}
-                /> */}
-                {/* {Object.values(homeTopMenu).length > 0 && Object.values(homeTopMenu).map((item, idx) => {
-                    return <MaterialTopTabStack.Screen key={idx.toString()}
-                        name={item?.name || ""}
-                        component={(ParamList, RouteName) => <DynamicHomeTabPages
-                            key={idx.toString()}
-                            ParamList={ParamList}
-                            RouteName={RouteName}
-                            {...item} />}
-                    />
-                })} */}
-            </MaterialTopTabStack.Navigator>
+                    {Object.values(homeTopMenu).length > 0 && Object.values(homeTopMenu).map((item, idx) => {
+                        return <MaterialTopTabStack.Screen key={idx.toString()}
+                            name={item?.name || ""}
+                            component={(ParamList, RouteName) => <DynamicHomeTabPages
+                                ParamList={ParamList}
+                                RouteName={RouteName}
+                                {...item} />}
+                        />
+                    })}
+                </MaterialTopTabStack.Navigator> */}
 
         </MasterView >
     )
