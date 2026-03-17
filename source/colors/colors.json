@@ -72,7 +72,11 @@
         "SELECTED_LATEST_WEBSTORY_MENU_ITEM_BG": "#FF416C",
         "LATEST_WEBSTORY_MENU_ITEM_OUTLINE": "rgba(0,0,0,.1)",
         "SCROLL_TO_TOP_BTN_BG": "rgba(0,0,0,.7)",
-        "SCROLL_TO_TOP_BTN_IC": "#ffffff"
+        "SCROLL_TO_TOP_BTN_IC": "#ffffff",
+        "NEWS_ITEM_BG": "rgba(0,0,0,.1)",
+        "NEWS_ITEM_TEXT_COL": "black",
+        "NEWS_CONTENT_ICONS_COL": "black",
+        "NEWS_CONTENT_BG": "rgba(256,256,256,.9)"
     },
     {
         "TRANSPARENT": "transparent",
@@ -147,6 +151,10 @@
         "SELECTED_LATEST_WEBSTORY_MENU_ITEM_BG": "#FF416C",
         "LATEST_WEBSTORY_MENU_ITEM_OUTLINE": "rgba(256,256,256,.2)",
         "SCROLL_TO_TOP_BTN_BG": "rgba(0,0,0,7)",
-        "SCROLL_TO_TOP_BTN_IC": "#ffffff"
+        "SCROLL_TO_TOP_BTN_IC": "#ffffff",
+        "NEWS_ITEM_BG": "rgba(0,0,0)",
+        "NEWS_ITEM_TEXT_COL": "white",
+        "NEWS_CONTENT_ICONS_COL": "white",
+        "NEWS_CONTENT_BG": "rgba(0,0,0,.2)"
     }
 ]

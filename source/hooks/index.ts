@@ -1,5 +1,6 @@
 
 import useAPIs from "./useAPIsHook"
+import useAxios from "./useAxiosHook"
 // import useCompressor from "./useCompressorHook"
 // import usePermission from "./usePermissionHook"
 import useDebounce from "./useDebounce"
@@ -12,6 +13,6 @@ import useWebCache from "./useWebCacheHook"
 import useModifyData from "./useModifyDataHook"
 
 export {
-    useThemeX, useAPIs, useDebounce, useMMKVStore, useColors, useConnection, useInit,
+    useThemeX, useAPIs, useAxios, useDebounce, useMMKVStore, useColors, useConnection, useInit,
     useModifyData, useWebCache
 }

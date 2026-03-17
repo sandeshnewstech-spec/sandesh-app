@@ -14,7 +14,7 @@ const App = () => {
 
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-      <GestureHandlerRootView style={{ flex: 1, backgroundColor: col.ROOT_SCR_BG }}>
+      <GestureHandlerRootView style={{ flex: 1, backgroundColor: col?.ROOT_SCR_BG }}>
         <NavigationContainer
           onStateChange={() => {
             if (!isConnected) {

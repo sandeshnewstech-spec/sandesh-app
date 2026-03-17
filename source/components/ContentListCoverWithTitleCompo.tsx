@@ -40,16 +40,16 @@ const ContentListCoverWithTitleCompo = ({ readMore = () => { }, linkCategoryTitl
         {isTitleOutline && <View style={{ height: .5, backgroundColor: col.OUTLINE02 }} />}
         <View style={cstyle.cover3} >
             <PressableScaleXCompo style={cstyle.btnCSty} onPress={() => { }} >
-                <IC_FONT_AWESOME6 name='whatsapp' size={ICON_SIZE} color={col.WHITE} />
+                <IC_FONT_AWESOME6 name='whatsapp' size={ICON_SIZE} color={col.NEWS_CONTENT_ICONS_COL} />
             </PressableScaleXCompo>
             <PressableScaleXCompo style={cstyle.btnCSty} onPress={() => { }} >
-                <IC_FONT_AWESOME6 name='facebook' size={ICON_SIZE} color={col.WHITE} />
+                <IC_FONT_AWESOME6 name='facebook' size={ICON_SIZE} color={col.NEWS_CONTENT_ICONS_COL} />
             </PressableScaleXCompo>
             <PressableScaleXCompo style={cstyle.btnCSty} onPress={() => { }} >
-                <IC_MATERIAL name='share' size={ICON_SIZE} color={col.WHITE} />
+                <IC_MATERIAL name='share' size={ICON_SIZE} color={col.NEWS_CONTENT_ICONS_COL} />
             </PressableScaleXCompo>
             <PressableScaleXCompo style={cstyle.btnCSty} onPress={() => { setISCopy(copyToClipboard(`${appServices?.baseURL}/${linkCategoryTitle}`)); }} >
-                <IC_MATERIAL name='link' size={ICON_SIZE} color={isCopy ? col.PRIMARY : col.WHITE} />
+                <IC_MATERIAL name='link' size={ICON_SIZE} color={isCopy ? col.PRIMARY : col.NEWS_CONTENT_ICONS_COL} />
             </PressableScaleXCompo>
         </View>
     </FastSquircleView>);
@@ -59,7 +59,7 @@ export default ContentListCoverWithTitleCompo;
 
 const stylesFN = ({ col, font }: defStyObjType) => StyleSheet.create({
     cover: {
-        backgroundColor: col.WHITE01,
+        backgroundColor: col.NEWS_CONTENT_BG,
         paddingBottom: bSpace / 2,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,

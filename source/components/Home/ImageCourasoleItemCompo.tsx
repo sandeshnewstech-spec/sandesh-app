@@ -56,7 +56,7 @@ const styleFN = ({ font, col }: defStyObjType) => StyleSheet.create({
         padding: bSpace,
         borderRadius: 30,
         overflow: 'hidden',
-        backgroundColor: col.SECONDARY,
+        backgroundColor: col.NEWS_ITEM_BG,
         marginVertical: bSpace / 2
     },
     item_image_main: {
@@ -71,7 +71,7 @@ const styleFN = ({ font, col }: defStyObjType) => StyleSheet.create({
     title: {
         fontFamily: font.BOLD,
         fontSize: Size(20),
-        color: col.TEXT_COL,
+        color: col.NEWS_ITEM_TEXT_COL,
         paddingTop: Size(5),
         lineHeight: Size(30),
     },

@@ -2,7 +2,7 @@ import { FlashList } from "@shopify/flash-list";
 import { IC_MATERIAL_COMMUNITY } from "assets";
 import { HomeWebStoriesList, ImageX, MasterView, PressableScaleX, TextX } from "components"
 import Loaders from "components/XCompos/Loaders";
-import { makeOBJFN, Size } from "functions";
+import { makeOBJFN, pLOG, Size } from "functions";
 import { useAPIs, useModifyData, useThemeX } from "hooks"
 import { useCallback, useEffect, useRef, useState } from "react";
 import { StyleSheet, View } from "react-native";
@@ -66,6 +66,7 @@ const WebStoriesListController = ({ navigation }: any) => {
     }
 
     const renderItem = useCallback(({ item, index }: { item: WebStoryItemType; index: number }) => {
+        pLOG("renderItem::", (appServices?.baseURL || "") + item?.main_image);
         return (<PressableScaleX onPress={() => navigation.navigate("WebStoryViewScreen", { item })} >
             <View style={style.main} >
                 <ImageX

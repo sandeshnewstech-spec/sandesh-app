@@ -43,7 +43,7 @@ const styleFN = ({ col, font }: defStyObjType) => StyleSheet.create({
         borderRadius: 10,
         height: _HEIGHT * .155,
         flex: 1,
-        backgroundColor: col.SECONDARY,
+        backgroundColor: col.NEWS_ITEM_BG,
         marginVertical: bSpace / 2,
         marginHorizontal: bSpace / 2,
         paddingHorizontal: bSpace / 2
@@ -57,7 +57,7 @@ const styleFN = ({ col, font }: defStyObjType) => StyleSheet.create({
     title: {
         fontFamily: font.BOLD,
         fontSize: Size(17),
-        color: col.WHITE,
+        color: col.NEWS_ITEM_TEXT_COL,
         lineHeight: Size(25),
     },
     textCover: {

@@ -36,7 +36,7 @@ const HomeTabController = ({ navigation }: any) => {
     return (
         <MasterView hShow={false} barStyle='dark-content'
             sbShow sbColor={col.HOME_TOP_TAB_BG} fixed >
-            {/* <Animated.View style={[style.header_mSty]} >
+            <Animated.View style={[style.header_mSty]} >
                 <ImageX
                     noDefImg img={""}
                     // img={appServices?.appLogo}
@@ -52,7 +52,7 @@ const HomeTabController = ({ navigation }: any) => {
                             size={ICON_SIZE} color={col.NOTIFICATION_ICON} />
                     </PressableScaleX>
                 </View>
-            </Animated.View > */}
+            </Animated.View >
             <TabsProvider defaultIndex={0} >
                 <Tabs
                     theme={{

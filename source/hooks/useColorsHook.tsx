@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { colorType } from 'types';
 import { _COL, _GRADIANTS_COLORS } from 'colors';
-import { useTheme } from '@react-navigation/native';
+// import { useTheme } from '@react-navigation/native';
 
 const useColorsHook = () => {
     // const isDark = useTheme()?.dark ? 1 : 0;
