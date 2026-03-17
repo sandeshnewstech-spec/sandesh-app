@@ -48,7 +48,7 @@ const ToastAlertCompo = ({ msg, show, showIC = true, setToast = () => { },
 
 }
 
-export default React.memo(ToastAlertCompo)
+export default ToastAlertCompo;
 
 const styFN = ({ font, col, bottom }: defStyObjType) => StyleSheet.create({
 

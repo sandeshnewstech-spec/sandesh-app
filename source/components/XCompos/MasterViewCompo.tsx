@@ -1,5 +1,5 @@
 import { KeyboardAvoidingView, SafeAreaView, View, } from 'react-native'
-import React, { memo, useCallback } from 'react'
+import React, { useCallback } from 'react'
 import { ScrollView as ScrollViewG } from 'react-native-gesture-handler'
 import HeaderXCompo from './HeaderXCompo'
 import { useMemoX, useThemeX } from '../../hooks'
@@ -153,4 +153,4 @@ const MasterViewCompo = ({
     )
 }
 
-export default memo(MasterViewCompo);
+export default MasterViewCompo;

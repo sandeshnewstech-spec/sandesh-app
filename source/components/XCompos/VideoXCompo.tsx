@@ -90,7 +90,7 @@ const VideoXCompo = ({ showDuration, showOnlyImageFrame, vRef, playInBackground 
     )
 }
 
-export default React.memo(VideoXCompo);
+export default VideoXCompo;
 
 const styFn = ({ font, col }: defStyObjType) => StyleSheet.create({
     container: {

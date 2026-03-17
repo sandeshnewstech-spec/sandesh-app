@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
-import React, { memo } from 'react'
+import React from 'react'
 import { useThemeX } from 'hooks'
 import { buildYouTubeUrl, defStyObjType, VideoItemType } from 'types';
 import { _WIDTH, bSpace, ICON_SIZE } from 'utils';
@@ -63,7 +63,7 @@ const VideoItemCompo = ({ video_yt, isPlaying, index, title, tagline, scr_height
     </View>)
 }
 
-export default memo(VideoItemCompo);
+export default VideoItemCompo;
 
 const styleFN = ({ bottom, top, font, col }: defStyObjType) => StyleSheet.create({
 

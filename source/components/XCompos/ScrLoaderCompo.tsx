@@ -43,4 +43,4 @@ const ScrLoaderCompo = ({ absolute, loading = false, loaderSize = 65, color }: P
     )
 }
 
-export default React.memo(ScrLoaderCompo);
+export default ScrLoaderCompo;

@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native'
-import React, { memo } from 'react'
+import React from 'react'
 import { useThemeX } from 'hooks'
 import { defStyObjType } from 'types';
 import { IC_MATERIAL } from 'assets';
@@ -31,7 +31,7 @@ const LiveButtonCompo = () => {
     </PressableScaleXCompo>)
 }
 
-export default memo(LiveButtonCompo)
+export default LiveButtonCompo
 
 const styleFN = ({ col }: defStyObjType) => StyleSheet.create({
     mSty: {

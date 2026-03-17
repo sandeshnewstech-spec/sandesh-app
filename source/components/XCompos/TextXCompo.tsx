@@ -1,5 +1,5 @@
 import { TextProps } from 'react-native'
-import React, { memo } from 'react'
+import React from 'react'
 import Animated from 'react-native-reanimated';
 import { useThemeX } from '../../hooks';
 import { Size } from '../../functions';
@@ -33,4 +33,4 @@ const TextXCompo = ({
     )
 }
 
-export default memo(TextXCompo)
+export default TextXCompo

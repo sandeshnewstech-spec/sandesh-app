@@ -63,4 +63,4 @@ const ImageXCompo = ({ headers, imgSource, sharedTransitionTag, img, noDefImg, d
     </ImageBackground>);
 }
 
-export default React.memo(ImageXCompo);
+export default ImageXCompo;

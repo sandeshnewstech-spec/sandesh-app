@@ -1,5 +1,5 @@
 import { Pressable, Platform, PressableAndroidRippleConfig, ActivityIndicator, TouchableOpacity } from 'react-native'
-import React, { memo, useCallback, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { PressXType, } from '../../Types'
 import { useThemeX } from '../../hooks';
 import Animated, { Easing, useAnimatedStyle, useDerivedValue, withTiming } from 'react-native-reanimated';
@@ -90,4 +90,4 @@ const PressXCompo = ({
     </Animated.View >
 }
 
-export default memo(PressXCompo);
+export default PressXCompo;

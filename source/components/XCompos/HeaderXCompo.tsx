@@ -1,5 +1,5 @@
 import { View } from 'react-native'
-import React, { memo, useCallback, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { headerType } from '../../types'
 import StatusBarXCompo from './StatusBarXCompo'
@@ -144,4 +144,4 @@ const HeaderXCompo = ({
     )
 }
 
-export default memo(HeaderXCompo);
+export default HeaderXCompo;

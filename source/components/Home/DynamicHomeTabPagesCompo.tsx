@@ -37,6 +37,8 @@ const DynamicHomeTabPagesCompo = ({ category, name, title, open, submenu, url, P
     pLOG("newsItems:", [newsItems]);
     pLOG("homeTopTabCategoryNews:", [cateListData]);
 
+    return <></>
+
     const PER_PAGE_ITEM = 50;
     const PAGE_NO = 1;
     const startNoRef = useRef<number>(1);

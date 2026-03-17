@@ -11,12 +11,19 @@ const useMemoXHook = <T>(onBack = () => ({} as T), updater: any[]) => {
     const [value, setValue] = useState<T>(onBack());
     const holder = useRef<boolean>(false);
 
-    const callMeBack = useCallback(() => {
+    // const callMeBack = useCallback(() => {
+    //     setTimeout(() => {
+    //         holder.current = false;
+    //         setValue(onBack());
+    //     }, 700);
+    // }, [updater]);
+
+    const callMeBack = () => {
         setTimeout(() => {
             holder.current = false;
             setValue(onBack());
-        }, 100);
-    }, [updater]);
+        }, 700);
+    }
 
     useEffect(() => {
         if (holder.current) { return; }

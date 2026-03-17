@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React from 'react'
 import { PressableScaleXCompoProps } from '../../Types'
 import { useThemeX } from '../../hooks'
 import { Size } from '../../functions'
@@ -30,4 +30,4 @@ const ButtonXCompo = (porps: PressableScaleXCompoProps & { transparent?: boolean
     />)
 }
 
-export default memo(ButtonXCompo);
+export default ButtonXCompo;

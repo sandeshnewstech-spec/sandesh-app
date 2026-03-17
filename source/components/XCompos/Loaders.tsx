@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, ViewStyle } from 'react-native';
 import Animated, {
   useSharedValue,
@@ -586,4 +586,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(Loader);
+export default Loader;

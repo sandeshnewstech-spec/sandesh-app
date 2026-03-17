@@ -176,7 +176,7 @@ const TextInputXCompo = ({
     )
 }
 
-export default React.memo(TextInputXCompo);
+export default TextInputXCompo;
 
 const styFN = ({ col, font }: defStyObjType) => StyleSheet.create({
 

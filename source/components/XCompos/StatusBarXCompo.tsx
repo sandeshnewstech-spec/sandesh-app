@@ -1,5 +1,5 @@
 import { StatusBar, SafeAreaView } from 'react-native'
-import React, { Fragment, memo } from 'react'
+import React, { Fragment } from 'react'
 import { useThemeX } from '../../hooks';
 import { statusBarType } from '../../types';
 
@@ -18,4 +18,4 @@ const StatusBarXCompo = ({ sbShow = true, sbColor, barStyle = 'dark-content', sb
     )
 }
 
-export default memo(StatusBarXCompo)
+export default StatusBarXCompo;
