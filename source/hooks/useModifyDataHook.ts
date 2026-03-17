@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemoX } from '.';
 import useZuStore from 'store/useZuStore';
 import { allTypesOfPostItemType, NewsItemType, WebStoryItemType } from 'types';
 
@@ -38,7 +38,7 @@ const useModifyDataHook = ({ _postsIDs = [], _webStoryIDs = [], _categoryNewsItm
         TrendingData[0], EntertainmentData[0], ElectionData[0], NationalData[0],
         WorldData[0], LifestyleData[0], TravelData[0]].filter(item => item !== undefined);
 
-    const postsData = useMemo(() => {
+    const postsData = useMemoX(() => {
         const tempOBJ: Array<allTypesOfPostItemType> = [];
         for (let id of _postsIDs) {
             if (posts[id]?.id) {
@@ -48,7 +48,7 @@ const useModifyDataHook = ({ _postsIDs = [], _webStoryIDs = [], _categoryNewsItm
         return tempOBJ;
     }, [posts, _postsIDs]);
 
-    const webStoryData = useMemo((): Array<WebStoryItemType> => {
+    const webStoryData = useMemoX((): Array<WebStoryItemType> => {
         const tempOBJ: Array<WebStoryItemType> = [];
         for (let id of _webStoryIDs) {
             if (homeWebStory[id]?.id) {
@@ -58,7 +58,7 @@ const useModifyDataHook = ({ _postsIDs = [], _webStoryIDs = [], _categoryNewsItm
         return tempOBJ;
     }, [homeWebStory, _webStoryIDs]);
 
-    const latestWebStoryData = useMemo((): Array<WebStoryItemType> => {
+    const latestWebStoryData = useMemoX((): Array<WebStoryItemType> => {
         const tempOBJ: Array<WebStoryItemType> = [];
         for (let id of _webStoryIDs) {
             if (latestWebStory[id]?.id) {
@@ -68,7 +68,7 @@ const useModifyDataHook = ({ _postsIDs = [], _webStoryIDs = [], _categoryNewsItm
         return tempOBJ;
     }, [latestWebStory, _webStoryIDs]);
 
-    const homeTopTabCategoryNews = useMemo(() => {
+    const homeTopTabCategoryNews = useMemoX(() => {
         const tempOBJ: Array<NewsItemType> = [];
         // console.log("_categoryNewsItmeIDs::", _categoryNewsItmeIDs);
         for (let id of _categoryNewsItmeIDs) {
@@ -79,6 +79,7 @@ const useModifyDataHook = ({ _postsIDs = [], _webStoryIDs = [], _categoryNewsItm
         // console.log("tempOBJ::", tempOBJ)
         return tempOBJ;
     }, [newsItems]);
+
 
     return ({
         postsData, webStoryData, latestWebStoryData,

@@ -1,10 +1,10 @@
 import { View } from 'react-native'
-import React, { memo, useMemo, useCallback, useState } from 'react'
+import React, { memo, useCallback, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { headerType } from '../../types'
 import StatusBarXCompo from './StatusBarXCompo'
 import { headerHeight } from '../../utils'
-import { useThemeX } from '../../hooks'
+import { useMemoX, useThemeX } from '../../hooks'
 import TextXCompo from './TextXCompo'
 import { BACK_IC } from '../../assets'
 import Animated, {
@@ -32,20 +32,21 @@ const HeaderXCompo = ({
     const titleOpacity = useSharedValue(1)
 
     // Compute margins for center alignment
-    const lM = useMemo((): number => {
+    const lM = useMemoX((): number => {
         if (alignText === 'center') {
             if (rH > lH) return rH - lH
         }
         return 0
     }, [lH, rH])
 
-    const rM = useMemo((): number => {
+    const rM = useMemoX((): number => {
         if (alignText === 'center') {
             if (lH > rH) return lH - rH
             return 0
         }
         return 0
     }, [lH, rH])
+
 
     // Memoized back button handler with animation
     const handleBackPress = useCallback(() => {

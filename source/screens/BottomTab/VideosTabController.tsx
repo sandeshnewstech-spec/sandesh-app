@@ -1,7 +1,7 @@
 import { NativeScrollEvent, NativeSyntheticEvent, RefreshControl, View } from 'react-native'
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { MasterView, VideoItem } from 'components'
-import { useAPIs, useModifyData, useThemeX } from 'hooks'
+import { useAPIs, useMemoX, useModifyData, useThemeX } from 'hooks'
 import useZuStore from 'store/useZuStore'
 import { makeOBJFN } from 'functions'
 import { VideoItemType } from 'types'
@@ -18,7 +18,8 @@ const VideosTabController = () => {
     const { postsData } = useModifyData({ _postsIDs: postIDs });
     const [curentIDx, setCurrentIDx] = useState<number>(0);
 
-    const SCR_HEIGHT = useMemo(() => _HEIGHT - (BOTTOM_TAB_HEIGHT + top + bottom), [_HEIGHT, BOTTOM_TAB_HEIGHT, top, bottom]);
+    const SCR_HEIGHT = useMemoX(() => _HEIGHT - (BOTTOM_TAB_HEIGHT + top + bottom), [_HEIGHT, BOTTOM_TAB_HEIGHT, top, bottom]);
+
 
     const [btmLoading, setBtmLoading] = useState(false);
     const [topLoading, setTopLoading] = useState(false);

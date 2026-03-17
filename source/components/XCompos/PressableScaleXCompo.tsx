@@ -1,7 +1,7 @@
 import { ActivityIndicator } from 'react-native'
-import React, { memo, useCallback, useMemo } from 'react'
+import React, { memo, useCallback } from 'react'
 import { PressableScale } from 'pressto'
-import { useThemeX } from '../../hooks'
+import { useMemoX, useThemeX } from '../../hooks'
 import TextXCompo from './TextXCompo'
 import { _WIDTH } from '../../functions'
 import { PressableScaleXCompoProps } from 'types'
@@ -21,17 +21,18 @@ const PressableScaleXCompo = memo(({
         </TextXCompo>
     ), [text, tProps, tSty])
 
-    const loadingView = useMemo(() => (
+    const loadingView = useMemoX(() => (
         <ActivityIndicator
             color={lCol ?? col.WHITE01 ?? 'white'}
             size={lSize ?? 'small'}
             {...lProps} />
     ), [lCol, lSize, lProps, col.WHITE01])
 
-    const computedSpringConfig = useMemo(
+    const computedSpringConfig = useMemoX(
         () => springConfig || { damping: 0.8, mass: 1, stiffness: 100 },
         [springConfig]
     )
+
 
     const handlePress = useCallback(() => {
         if (isDisabled) return

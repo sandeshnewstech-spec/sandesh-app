@@ -11,8 +11,9 @@ import useConnection from "./useConnectionHook"
 import useInit from "./useInitHook"
 import useWebCache from "./useWebCacheHook"
 import useModifyData from "./useModifyDataHook"
+import useMemoX from "./useMemoXHook"
 
 export {
     useThemeX, useAPIs, useAxios, useDebounce, useMMKVStore, useColors, useConnection, useInit,
-    useModifyData, useWebCache
+    useModifyData, useWebCache, useMemoX
 }

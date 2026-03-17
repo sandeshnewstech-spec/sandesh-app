@@ -1,8 +1,8 @@
 import { KeyboardAvoidingView, SafeAreaView, View, } from 'react-native'
-import React, { memo, useCallback, useMemo } from 'react'
+import React, { memo, useCallback } from 'react'
 import { ScrollView as ScrollViewG } from 'react-native-gesture-handler'
 import HeaderXCompo from './HeaderXCompo'
-import { useThemeX } from '../../hooks'
+import { useMemoX, useThemeX } from '../../hooks'
 import { MasterViewType } from '../../types'
 import ToastAlertCompo from './ToastAlertCompo'
 import ScrLoaderCompo from './ScrLoaderCompo'
@@ -31,11 +31,12 @@ const MasterViewCompo = ({
     const contentScale = useSharedValue(1)
 
     // Memoized header props
-    const headerProps = useMemo(() => ({
+    const headerProps = useMemoX(() => ({
         title, bPress, backBtn, lSvg, rSvg, tSty, hHeight, hBgColor, alignText, lHeight, rHeight, hShow,
         barStyle: col.STATUS_BAR_STYLE, sbColor, sbShow, sbTransition, bIcCol, bIcBgCol
     }), [title, bPress, backBtn, lSvg, rSvg, tSty, hHeight, hBgColor, alignText, lHeight, rHeight, hShow,
         barStyle, sbColor, sbShow, sbTransition, bIcCol, bIcBgCol])
+
 
     // Scroll event handler for smooth animations
     const scrollHandler = useAnimatedScrollHandler({
