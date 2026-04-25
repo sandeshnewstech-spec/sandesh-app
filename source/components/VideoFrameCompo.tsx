@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { Linking, View, ViewStyle } from "react-native";
 import { WebView } from "react-native-webview";
 import { ShouldStartLoadRequest } from "react-native-webview/lib/WebViewTypes";
@@ -23,19 +23,19 @@ const VideoFrameCompo = ({ yt_video_id, style, webViewStyle, yt_params, loaderSi
     const onShouldStartLoadWithRequest = useCallback((request: ShouldStartLoadRequest) => {
         try {
             const url = request.mainDocumentURL || request.url;
-            if (isIOS) {
-                const iosFirstLoad = url === 'about:blank';
-                if (iosFirstLoad) {
-                    return true;
-                }
-                const isYouTubeLink = url.startsWith('https://www.youtube.com/');
-                if (isYouTubeLink) {
-                    Linking.openURL(url).catch(error => {
-                        console.warn('Error opening URL:', error);
-                    });
-                    return false;
-                }
-            }
+            // if (isIOS) {
+            //     const iosFirstLoad = url === 'about:blank';
+            //     if (iosFirstLoad) {
+            //         return true;
+            //     }
+            //     const isYouTubeLink = url.startsWith('https://www.youtube.com/');
+            //     if (isYouTubeLink) {
+            //         Linking.openURL(url).catch(error => {
+            //             console.warn('Error opening URL:', error);
+            //         });
+            //         return false;
+            //     }
+            // }
             return url.startsWith('https://www.youtube.com/');
         } catch (error) {
             // defaults to true in case of error
@@ -60,4 +60,4 @@ const VideoFrameCompo = ({ yt_video_id, style, webViewStyle, yt_params, loaderSi
     )
 }
 
-export default memo(VideoFrameCompo);
+export default (VideoFrameCompo);

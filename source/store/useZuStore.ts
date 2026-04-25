@@ -20,9 +20,8 @@ const useZuStore = create<zuStandStoreOBJType>()(
         setHomeTopMenu: by => set((state) => ({ homeTopMenu: by })),
         setUpdatePosts: by => set((state) => ({ posts: updateOBJFN(state?.posts, by)?.obj })),
         setHomeWebStory: by => set((state) => ({ homeWebStory: updateOBJFN(state?.homeWebStory, by)?.obj })),
-        setLatestWebstories: by => set((state) => ({ latestWebStory: updateOBJFN(state?.latestWebStory, by)?.obj })),
-        setWebstoriesMenus: by => set((state) => ({ latestWebStoryMenu: by })),
         setHomeSecondaryData: by => set((state) => ({ homeSecondaryData: by })),
+
     }), {
         name: '@sandesh@',
         storage: createJSONStorage(() => zuStandStorage),

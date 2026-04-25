@@ -43,8 +43,6 @@ export const zuStandInitStore: zuStandInitStoreType = {
     posts: {},
     homeWebStory: {},
     homeTopMenu: [],
-    latestWebStory: {},
-    latestWebStoryMenu: [],
     homeSecondaryData: {},
     newsItems: {},
 };
@@ -55,8 +53,6 @@ export const setZuStandInitStore: setZuStandInitStoreType = {
     setPosts(by) { },
     setUpdatePosts(by) { },
     setHomeWebStory(by) { },
-    setWebstoriesMenus(by) { },
-    setLatestWebstories(by) { },
     setHomeSecondaryData(by) { },
     setNewsItems(by) { },
     setHomeTopMenu(by) { },

@@ -5,7 +5,7 @@ import Loaders from "components/XCompos/Loaders";
 import { makeOBJFN, pLOG, Size } from "functions";
 import { useAPIs, useModifyData, useThemeX } from "hooks"
 import { useCallback, useEffect, useRef, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import useZuStore from "store/useZuStore"
 import { apiFuntionType, defStyObjType, LatestWebstoriesCategoryItemType, WebStoryItemType } from "types";
@@ -14,15 +14,15 @@ import { _HEIGHT, bSpace, ICON_SIZE } from "utils";
 const WebStoriesListController = ({ navigation }: any) => {
     const { col, font, str, defStyOBJ } = useThemeX();
     const { getLatestWebStoriesAPI } = useAPIs();
-    const { setWebstoriesMenus, setLatestWebstories, appServices, latestWebStoryMenu } = useZuStore();
+    const { appServices } = useZuStore();
     const style = styleFN(defStyOBJ);
 
     const [isTopLoding, setIsTopLoading] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isBottomLoading, setIsBottomLoading] = useState<boolean>(false);
-    const [latestWebstoryIDs, setLatestWebstoryIDs] = useState<string[]>([]);
+    const [latestWebstory, setLatestWebstory] = useState<WebStoryItemType[]>([]);
     const [selectedMenuItem, setSelectedMenuItem] = useState<LatestWebstoriesCategoryItemType>({ id: "all", name: "all" });
-    const { latestWebStoryData } = useModifyData({ _webStoryIDs: latestWebstoryIDs });
+    const [latestWebStoryMenu, setWebstoriesMenus] = useState<LatestWebstoriesCategoryItemType[]>([]);
 
     const PER_PAGE_ITEM = 50;
     const PAGE_NO = 1;
@@ -43,14 +43,12 @@ const WebStoriesListController = ({ navigation }: any) => {
             category_name: (category_name == "all" || category_name == "All") ? undefined : category_name
         }).then(({ res }) => {
             if (Array.isArray(res?.data) && res?.data?.length > 0) {
-                const checkLength = latestWebStoryData.length + res?.data.length;
+                const checkLength = latestWebstory.length + res?.data.length;
                 if (res?.total >= checkLength) { isNextPageRef.current == false }
-                const temp = makeOBJFN(res?.data);
-                setLatestWebstories(temp?.obj);
                 if (_isBottomLoading) {
-                    setLatestWebstoryIDs(prev => ([...prev, ...temp?.IDs]));
+                    setLatestWebstory(prev => ([...prev, ...res?.data]));
                 } else {
-                    setLatestWebstoryIDs(temp?.IDs);
+                    setLatestWebstory(res?.data);
                 }
                 startNoRef.current = PAGE_NO + startNoRef.current;
             }
@@ -82,7 +80,7 @@ const WebStoriesListController = ({ navigation }: any) => {
                 </View>
             </View>
         </PressableScaleX >)
-    }, [latestWebStoryData]);
+    }, [latestWebstory]);
 
     const Header = useCallback(() => (<>
         <ScrollView
@@ -113,9 +111,9 @@ const WebStoriesListController = ({ navigation }: any) => {
     }, []);
 
     return (<MasterView title="Web Stories" fixed >
-        <FlashList
+        <FlatList
             numColumns={2}
-            data={latestWebStoryData}
+            data={latestWebstory}
             ListHeaderComponent={<><HomeWebStoriesList showViewAll={false} /><Header /></>}
             contentContainerStyle={style.container}
             keyExtractor={(_, index) => index.toString()}
@@ -125,7 +123,7 @@ const WebStoriesListController = ({ navigation }: any) => {
             </View>}
             onEndReachedThreshold={.8}
             onEndReached={() => {
-                if (latestWebStoryData.length >= PER_PAGE_ITEM) {
+                if (latestWebstory.length >= PER_PAGE_ITEM) {
                     getLatestWebStoriesFN({ _isBottomLoading: true, category_name: selectedMenuItem?.id === "all" ? undefined : selectedMenuItem?.name });
                 }
             }}

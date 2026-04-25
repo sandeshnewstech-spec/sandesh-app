@@ -6,7 +6,7 @@ const useModifyDataHook = ({ _postsIDs = [], _webStoryIDs = [], _categoryNewsItm
     _postsIDs?: Array<string>; _webStoryIDs?: Array<string>, _categoryNewsItmeIDs?: Array<string>,
 }) => {
 
-    const { posts, homeWebStory, latestWebStory, homeSecondaryData, newsItems } = useZuStore();
+    const { posts, homeWebStory, homeSecondaryData, newsItems } = useZuStore();
 
     const GujaratmetroData = homeSecondaryData["Gujaratmetro"] || [];
     const MostviewsData = homeSecondaryData["Mostviews"] || [];
@@ -58,16 +58,6 @@ const useModifyDataHook = ({ _postsIDs = [], _webStoryIDs = [], _categoryNewsItm
         return tempOBJ;
     }, [homeWebStory, _webStoryIDs]);
 
-    const latestWebStoryData = useMemoX((): Array<WebStoryItemType> => {
-        const tempOBJ: Array<WebStoryItemType> = [];
-        for (let id of _webStoryIDs) {
-            if (latestWebStory[id]?.id) {
-                tempOBJ.push(latestWebStory[id]);
-            }
-        };
-        return tempOBJ;
-    }, [latestWebStory, _webStoryIDs]);
-
     const homeTopTabCategoryNews = useMemoX(() => {
         const tempOBJ: Array<NewsItemType> = [];
         // console.log("_categoryNewsItmeIDs::", _categoryNewsItmeIDs);
@@ -82,7 +72,7 @@ const useModifyDataHook = ({ _postsIDs = [], _webStoryIDs = [], _categoryNewsItm
 
 
     return ({
-        postsData, webStoryData, latestWebStoryData,
+        postsData, webStoryData,
         GujaratmetroData, MostviewsData, MostshareData, GujaratData, VideosData, NationalData, ElectionData, GameData,
         TrendingData, WorldData, GalleryData, SpottedgalleryData, EntertainmentData, LifestyleData, TravelData,
         RelationshipData, FoodData, SportnewsData, AstrologyData, SupplementData, BusinessData, TechnologyData,

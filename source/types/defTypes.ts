@@ -23,8 +23,6 @@ export type zuStandInitStoreType = {
     posts: allTypesOfPostOBJType;
     homeWebStory: WebStoryObjType;
     homeSecondaryData: homeSecondaryNewsDataType;
-    latestWebStory: WebStoryObjType;
-    latestWebStoryMenu: Array<LatestWebstoriesCategoryItemType>;
     newsItems: newsItemsObj;
     homeTopMenu: Array<HomeTopMenuItemType>;
 }
@@ -35,8 +33,6 @@ export type setZuStandInitStoreType = {
     setPosts: (by: allTypesOfPostOBJType) => void;
     setUpdatePosts: (by: allTypesOfPostOBJType) => void;
     setHomeWebStory: (by: WebStoryObjType) => void;
-    setWebstoriesMenus: (by: Array<LatestWebstoriesCategoryItemType>) => void;
-    setLatestWebstories: (by: WebStoryObjType) => void;
     setHomeSecondaryData: (by: homeSecondaryNewsDataType) => void;
     setNewsItems: (by: newsItemsObj) => void;
     setHomeTopMenu: (by: Array<HomeTopMenuItemType>) => void;

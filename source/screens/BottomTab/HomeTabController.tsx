@@ -66,10 +66,10 @@ const HomeTabController = ({ navigation }: any) => {
                     <TabScreen label="Home" >
                         <HomePage />
                     </TabScreen>
-                    <TabScreen label="Dynamic" >
+                    {/* <TabScreen label="Dynamic" >
                         <DynamicHomeTabPages
                             {...Object.values(homeTopMenu)[1]} />
-                    </TabScreen>
+                    </TabScreen> */}
 
                     {/* {Object.values(homeTopMenu).map((item, idx) => <TabScreen key={idx.toString()} label={item?.name || ""}  >
                         <DynamicHomeTabPages
